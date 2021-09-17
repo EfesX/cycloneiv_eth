@@ -1,0 +1,285 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "ram_addr[0]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_addr[1]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_addr[2]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_addr[3]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_addr[4]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_addr[5]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_addr[6]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_addr[7]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_addr[8]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_addr[9]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_addr[10]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_addr[11]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_bs[0]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_bs[1]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_dm[0]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_dm[1]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_clk",
+					"strict" : false
+				},
+				{
+					"name" : "ram_cs",
+					"strict" : false
+				},
+				{
+					"name" : "ram_ras",
+					"strict" : false
+				},
+				{
+					"name" : "ram_cas",
+					"strict" : false
+				},
+				{
+					"name" : "ram_we",
+					"strict" : false
+				},
+				{
+					"name" : "led[0]",
+					"strict" : false
+				},
+				{
+					"name" : "led[1]",
+					"strict" : false
+				},
+				{
+					"name" : "led[2]",
+					"strict" : false
+				},
+				{
+					"name" : "led[3]",
+					"strict" : false
+				},
+				{
+					"name" : "dt_dig[0]",
+					"strict" : false
+				},
+				{
+					"name" : "dt_dig[1]",
+					"strict" : false
+				},
+				{
+					"name" : "dt_dig[2]",
+					"strict" : false
+				},
+				{
+					"name" : "dt_dig[3]",
+					"strict" : false
+				},
+				{
+					"name" : "dt_seg[0]",
+					"strict" : false
+				},
+				{
+					"name" : "dt_seg[1]",
+					"strict" : false
+				},
+				{
+					"name" : "dt_seg[2]",
+					"strict" : false
+				},
+				{
+					"name" : "dt_seg[3]",
+					"strict" : false
+				},
+				{
+					"name" : "dt_seg[4]",
+					"strict" : false
+				},
+				{
+					"name" : "dt_seg[5]",
+					"strict" : false
+				},
+				{
+					"name" : "dt_seg[6]",
+					"strict" : false
+				},
+				{
+					"name" : "dt_seg[7]",
+					"strict" : false
+				},
+				{
+					"name" : "enc_spi_MOSI",
+					"strict" : false
+				},
+				{
+					"name" : "enc_spi_SCLK",
+					"strict" : false
+				},
+				{
+					"name" : "enc_spi_SS_n",
+					"strict" : false
+				},
+				{
+					"name" : "enc_rst",
+					"strict" : false
+				},
+				{
+					"name" : "ram_data[0]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_data[1]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_data[2]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_data[3]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_data[4]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_data[5]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_data[6]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_data[7]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_data[8]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_data[9]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_data[10]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_data[11]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_data[12]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_data[13]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_data[14]",
+					"strict" : false
+				},
+				{
+					"name" : "ram_data[15]",
+					"strict" : false
+				},
+				{
+					"name" : "clock",
+					"strict" : false
+				},
+				{
+					"name" : "btn[0]",
+					"strict" : false
+				},
+				{
+					"name" : "btn[1]",
+					"strict" : false
+				},
+				{
+					"name" : "btn[2]",
+					"strict" : false
+				},
+				{
+					"name" : "btn[3]",
+					"strict" : false
+				},
+				{
+					"name" : "enc_irq",
+					"strict" : false
+				},
+				{
+					"name" : "reset",
+					"strict" : false
+				},
+				{
+					"name" : "enc_spi_MISO",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tms",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tck",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tdi",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tdo",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,18 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity device is
+	port(
+		clock : in std_logic := '0'
+	);
+end entity device;
+
+
+architecture arch_dev of device is
+
+
+begin
+
+
+
+end architecture arch_dev;
