@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "freertos.h": "c",
+        "stdio.h": "c",
+        "system.h": "c",
+        "altera_avalon_timer_regs.h": "c"
+    }
+}

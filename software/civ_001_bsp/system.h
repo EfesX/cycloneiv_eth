@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_qsys_0' in SOPC Builder design 'qsys'
  * SOPC Builder design path: ../../qsys.sopcinfo
  *
- * Generated: Fri Sep 17 20:14:15 YEKT 2021
+ * Generated: Mon Sep 20 01:12:14 YEKT 2021
  */
 
 /*
@@ -148,7 +148,7 @@
  */
 
 #define ALT_DEVICE_FAMILY "Cyclone IV E"
-#define ALT_ENHANCED_INTERRUPT_API_PRESENT
+#define ALT_LEGACY_INTERRUPT_API_PRESENT
 #define ALT_IRQ_BASE NULL
 #define ALT_LOG_PORT "/dev/null"
 #define ALT_LOG_PORT_BASE 0x0
@@ -186,7 +186,7 @@
 #define ALT_INCLUDE_INSTRUCTION_RELATED_EXCEPTION_API
 #define ALT_MAX_FD 32
 #define ALT_SYS_CLK TIMER_0
-#define ALT_TIMESTAMP_CLK none
+#define ALT_TIMESTAMP_CLK TIMER_1
 
 
 /*
@@ -370,7 +370,7 @@
 #define SYSID_QSYS_0_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_QSYS_0_NAME "/dev/sysid_qsys_0"
 #define SYSID_QSYS_0_SPAN 8
-#define SYSID_QSYS_0_TIMESTAMP 1631879034
+#define SYSID_QSYS_0_TIMESTAMP 1632071347
 #define SYSID_QSYS_0_TYPE "altera_avalon_sysid_qsys"
 
 

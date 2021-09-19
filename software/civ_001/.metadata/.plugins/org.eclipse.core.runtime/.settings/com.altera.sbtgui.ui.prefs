@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+newSoftwareExampleWizardPage.defaultLocation=/home/efesxzc/projects/fpga/cycloneiv_eth/software/test
+newSoftwareExampleWizardPage.sopcinfoFile=/home/efesxzc/projects/fpga/cycloneiv_eth/qsys.sopcinfo
+newSoftwareExampleWizardPage2.newBspLocation=/home/efesxzc/projects/fpga/cycloneiv_eth/software/test_bsp
