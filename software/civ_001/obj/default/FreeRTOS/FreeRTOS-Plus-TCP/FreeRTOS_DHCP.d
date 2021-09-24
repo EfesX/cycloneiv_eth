@@ -33,9 +33,7 @@ obj/default/FreeRTOS/FreeRTOS-Plus-TCP/FreeRTOS_DHCP.o: \
  FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOS_TCP_IP.h \
  FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOS_UDP_IP.h \
  FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOS_DHCP.h \
- FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOS_ARP.h \
- FreeRTOS/FreeRTOS-Plus-TCP/include/NetworkInterface.h \
- FreeRTOS/FreeRTOS-Plus-TCP/include/NetworkBufferManagement.h
+ FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOS_ARP.h
 
 FreeRTOS/FreeRTOS-Kernel/include/FreeRTOS.h:
 
@@ -108,7 +106,3 @@ FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOS_UDP_IP.h:
 FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOS_DHCP.h:
 
 FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOS_ARP.h:
-
-FreeRTOS/FreeRTOS-Plus-TCP/include/NetworkInterface.h:
-
-FreeRTOS/FreeRTOS-Plus-TCP/include/NetworkBufferManagement.h:

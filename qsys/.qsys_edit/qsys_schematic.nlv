@@ -1,0 +1,30 @@
+# # File gsaved with Nlview version 6.3.8  2013-12-19 bk=1.2992 VDI=34 GEI=35
+# 
+preplace inst qsys.JTAG_UART -pg 1 -lvl 3 -y 150
+preplace inst qsys -pg 1 -lvl 1 -y 40 -regy -20
+preplace inst qsys.NIOSII.cpu -pg 1
+preplace inst qsys.SPI_MASTER -pg 1 -lvl 3 -y 350
+preplace inst qsys.SYSID -pg 1 -lvl 3 -y 470
+preplace inst qsys.PIO_LED -pg 1 -lvl 3 -y 650
+preplace inst qsys.NIOSII.clock_bridge -pg 1
+preplace inst qsys.clk_0 -pg 1 -lvl 1 -y 510
+preplace inst qsys.PIO_BTN -pg 1 -lvl 3 -y 30
+preplace inst qsys.NIOSII -pg 1 -lvl 2 -y 490
+preplace inst qsys.TS_TIMER -pg 1 -lvl 3 -y 550
+preplace inst qsys.NIOSII.reset_bridge -pg 1
+preplace inst qsys.RAM -pg 1 -lvl 3 -y 750
+preplace inst qsys.SYS_TIMER -pg 1 -lvl 3 -y 250
+preplace inst qsys.PIO_D7SEG -pg 1 -lvl 3 -y 850
+preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)RAM.wire,(SLAVE)qsys.ram) 1 0 3 NJ 820 NJ 820 NJ
+preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)SPI_MASTER.external,(SLAVE)qsys.enc_spi) 1 0 3 NJ 380 NJ 380 NJ
+preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)PIO_D7SEG.external_connection,(SLAVE)qsys.d7seg) 1 0 3 NJ 880 NJ 880 NJ
+preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)qsys.led,(SLAVE)PIO_LED.external_connection) 1 0 3 NJ 680 NJ 680 NJ
+preplace netloc INTERCONNECT<net_container>qsys</net_container>(SLAVE)NIOSII.debug_mem_slave,(SLAVE)SPI_MASTER.spi_control_port,(MASTER)NIOSII.instruction_master,(SLAVE)SYS_TIMER.s1,(SLAVE)PIO_D7SEG.s1,(MASTER)NIOSII.data_master,(SLAVE)RAM.s1,(SLAVE)PIO_BTN.s1,(SLAVE)PIO_LED.s1,(SLAVE)TS_TIMER.s1,(SLAVE)JTAG_UART.avalon_jtag_slave,(SLAVE)SYSID.control_slave) 1 1 2 310 450 730
+preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)PIO_BTN.external_connection,(SLAVE)qsys.btn) 1 0 3 NJ 60 NJ 60 NJ
+preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)clk_0.clk_in,(SLAVE)qsys.clk) 1 0 1 NJ
+preplace netloc FAN_OUT<net_container>qsys</net_container>(SLAVE)TS_TIMER.irq,(SLAVE)SYS_TIMER.irq,(SLAVE)PIO_BTN.irq,(SLAVE)JTAG_UART.irq,(MASTER)NIOSII.irq) 1 2 1 670
+preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)qsys.reset,(SLAVE)clk_0.clk_in_reset) 1 0 1 NJ
+preplace netloc FAN_OUT<net_container>qsys</net_container>(SLAVE)TS_TIMER.reset,(MASTER)clk_0.clk_reset,(SLAVE)RAM.reset,(SLAVE)PIO_LED.reset,(SLAVE)SYSID.reset,(SLAVE)JTAG_UART.reset,(SLAVE)NIOSII.reset,(SLAVE)PIO_D7SEG.reset,(SLAVE)PIO_BTN.reset,(SLAVE)SYS_TIMER.reset,(SLAVE)SPI_MASTER.reset) 1 1 2 290 430 710
+preplace netloc FAN_OUT<net_container>qsys</net_container>(SLAVE)RAM.clk,(SLAVE)JTAG_UART.clk,(SLAVE)SYS_TIMER.clk,(SLAVE)NIOSII.clk,(SLAVE)PIO_LED.clk,(MASTER)clk_0.clk,(SLAVE)PIO_BTN.clk,(SLAVE)SPI_MASTER.clk,(SLAVE)TS_TIMER.clk,(SLAVE)SYSID.clk,(SLAVE)PIO_D7SEG.clk) 1 1 2 270 410 690
+levelinfo -pg 1 0 60 920
+levelinfo -hier qsys 70 100 430 760 910

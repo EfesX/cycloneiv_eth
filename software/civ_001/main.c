@@ -29,9 +29,9 @@
 #include "altera_avalon_timer_regs.h"
 
 
-uint8_t my_ip[4] = {192, 168, 0, 70};
+uint8_t my_ip[4] = {192, 168, 1, 70};
 uint8_t mymask[4] = {255, 255, 255, 0};
-uint8_t mygate[4] = {192, 168, 0, 100};
+uint8_t mygate[4] = {192, 168, 1, 1};
 volatile uint8_t mymac[6] = {0x54, 0x55, 0x58, 0x11, 0x00, 0x24};
 
 #define mainQUEUE_SEND_FREQUENCY_MS			( 250 / portTICK_RATE_MS )
@@ -43,6 +43,7 @@ void vApplicationStackOverflowHook(TaskHandle_t  pxCurrentTCB, char *pcTaskName 
 
 int main()
 {
+	
 	vRegisterCLICommands();
 
 	FreeRTOS_IPInit(my_ip, mymask, mygate, NULL, mymac);
@@ -55,8 +56,8 @@ int main()
 
 void vApplicationIPNetworkEventHook(eIPCallbackEvent_t ev){
 	printf("vApplicationIPNetworkEventHook\n");
-	vStartSimpleTCPServerTasks(configMINIMAL_STACK_SIZE, 9);
-	vStartHTTPServer(configMINIMAL_STACK_SIZE, 9);
+	vStartTelnetServer(configMINIMAL_STACK_SIZE * 2, 5);
+	//vStartHTTPServer(configMINIMAL_STACK_SIZE, 9);
 }
 
 void vApplicationMallocFailedHook(){

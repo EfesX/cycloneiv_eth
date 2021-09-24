@@ -11,10 +11,10 @@ obj/default/FreeRTOS/FreeRTOS-Plus-TCP/portable/NetworkInterface/ENC28J60/Networ
  ../civ_001_bsp//HAL/inc/alt_types.h \
  ../civ_001_bsp//HAL/inc/priv/alt_legacy_irq.h \
  FreeRTOS/FreeRTOS-Kernel/include/mpu_wrappers.h \
- FreeRTOS/FreeRTOS-Kernel/include/list.h \
- FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOS_IP.h \
  FreeRTOS/FreeRTOS-Kernel/include/task.h \
  FreeRTOS/FreeRTOS-Kernel/include/list.h \
+ FreeRTOS/FreeRTOS-Kernel/include/list.h \
+ FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOS_IP.h \
  FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOSIPConfig.h \
  FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOSIPConfigDefaults.h \
  FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOS_errno_TCP.h \
@@ -69,13 +69,13 @@ FreeRTOS/FreeRTOS-Kernel/portable/GCC/NiosII/portmacro.h:
 
 FreeRTOS/FreeRTOS-Kernel/include/mpu_wrappers.h:
 
-FreeRTOS/FreeRTOS-Kernel/include/list.h:
-
-FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOS_IP.h:
-
 FreeRTOS/FreeRTOS-Kernel/include/task.h:
 
 FreeRTOS/FreeRTOS-Kernel/include/list.h:
+
+FreeRTOS/FreeRTOS-Kernel/include/list.h:
+
+FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOS_IP.h:
 
 FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOSIPConfig.h:
 

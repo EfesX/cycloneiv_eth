@@ -1,8 +1,9 @@
 {
     "files.associations": {
-        "freertos.h": "c",
-        "stdio.h": "c",
-        "system.h": "c",
-        "altera_avalon_timer_regs.h": "c"
+        "freertos_ip_private.h": "c",
+        "freertos_ip.h": "c",
+        "freertosipconfig.h": "c",
+        "alt_irq.h": "c",
+        "alt_legacy_irq.h": "c"
     }
 }

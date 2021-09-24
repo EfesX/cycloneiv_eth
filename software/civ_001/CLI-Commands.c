@@ -12,14 +12,25 @@
 /* FreeRTOS+CLI includes. */
 #include "FreeRTOS_CLI.h"
 
+
+extern uint8_t close_flag;
+
 static HeapStats_t hs;
 
 static BaseType_t prvTaskStatsCommand( char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString );
 static BaseType_t prvHeapStatsCommand( char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString );
 static BaseType_t prvTaskTimeStatCommand( char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString );
 static BaseType_t prvTaskNetbufCount( char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString );
+static BaseType_t prvCloseConnect( char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString );
 
 /* Structure that defines the "task-stats" command line command. */
+static const CLI_Command_Definition_t xClose =
+{
+	"close", /* The command string to type. */
+	"\r\nclose:\r\n Closing connection\r\n\r\n",
+	prvCloseConnect, /* The function to run. */
+	0 /* No parameters are expected. */
+};
 static const CLI_Command_Definition_t xTaskStats =
 {
 	"task-stats", /* The command string to type. */
@@ -37,14 +48,14 @@ static const CLI_Command_Definition_t xHeapStats =
 static const CLI_Command_Definition_t xTaskTimeStats =
 {
 	"task-timestats", /* The command string to type. */
-	"\r\nheap-stats:\r\n Displays time statistic for each task\r\n\r\n",
+	"\r\ntask-timestats:\r\n Displays time statistic for each task\r\n\r\n",
 	prvTaskTimeStatCommand, /* The function to run. */
 	0 /* No parameters are expected. */
 };
 static const CLI_Command_Definition_t xNetBuf =
 {
 	"netbuf", /* The command string to type. */
-	"\r\nheap-stats:\r\n Displays count of network buffers\r\n\r\n",
+	"\r\nnetbuf:\r\n Displays count of network buffers\r\n\r\n",
 	prvTaskNetbufCount, /* The function to run. */
 	0 /* No parameters are expected. */
 };
@@ -91,7 +102,14 @@ static BaseType_t prvHeapStatsCommand( char *pcWriteBuffer, size_t xWriteBufferL
 static BaseType_t prvTaskTimeStatCommand( char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString ){
 	const char *const pcHeader = "Tasks Time Statistic:\r\n************************************************\r\n";
 	strcpy( pcWriteBuffer, pcHeader );
-	vTaskGetRunTimeStats(pcWriteBuffer + strlen(pcWriteBuffer));
+	//vTaskGetRunTimeStats(pcWriteBuffer + strlen(pcWriteBuffer));
+	return pdFALSE;
+}
+
+static BaseType_t prvCloseConnect( char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString ){
+	close_flag = 1;
+	const char *const pcHeader = "Connection Closed:\r\n************************************************\r\n";
+	strcpy( pcWriteBuffer, pcHeader );
 	return pdFALSE;
 }
 
@@ -101,6 +119,7 @@ void vRegisterCLICommands( void ){
 	FreeRTOS_CLIRegisterCommand( &xHeapStats );
 	FreeRTOS_CLIRegisterCommand( &xTaskTimeStats );
 	FreeRTOS_CLIRegisterCommand( &xNetBuf );
+	FreeRTOS_CLIRegisterCommand( &xClose );
 }
 
 

@@ -1,10 +1,10 @@
 /*
  * alt_sys_init.c - HAL initialization source
  *
- * Machine generated for CPU 'nios2_qsys_0' in SOPC Builder design 'qsys'
- * SOPC Builder design path: ../../qsys.sopcinfo
+ * Machine generated for CPU 'NIOSII' in SOPC Builder design 'qsys'
+ * SOPC Builder design path: ../../qsys/qsys.sopcinfo
  *
- * Generated: Fri Sep 17 20:14:15 YEKT 2021
+ * Generated: Thu Sep 23 23:09:43 YEKT 2021
  */
 
 /*
@@ -68,12 +68,12 @@
  * Allocate the device storage
  */
 
-ALTERA_NIOS2_GEN2_IRQ_INSTANCE ( NIOS2_QSYS_0, nios2_qsys_0);
-ALTERA_AVALON_JTAG_UART_INSTANCE ( JTAG_UART_0, jtag_uart_0);
-ALTERA_AVALON_SPI_INSTANCE ( SPI_0, spi_0);
-ALTERA_AVALON_SYSID_QSYS_INSTANCE ( SYSID_QSYS_0, sysid_qsys_0);
-ALTERA_AVALON_TIMER_INSTANCE ( TIMER_0, timer_0);
-ALTERA_AVALON_TIMER_INSTANCE ( TIMER_1, timer_1);
+ALTERA_NIOS2_GEN2_IRQ_INSTANCE ( NIOSII, NIOSII);
+ALTERA_AVALON_JTAG_UART_INSTANCE ( JTAG_UART, JTAG_UART);
+ALTERA_AVALON_SPI_INSTANCE ( SPI_MASTER, SPI_MASTER);
+ALTERA_AVALON_SYSID_QSYS_INSTANCE ( SYSID, SYSID);
+ALTERA_AVALON_TIMER_INSTANCE ( SYS_TIMER, SYS_TIMER);
+ALTERA_AVALON_TIMER_INSTANCE ( TS_TIMER, TS_TIMER);
 
 /*
  * Initialize the interrupt controller devices
@@ -85,7 +85,7 @@ ALTERA_AVALON_TIMER_INSTANCE ( TIMER_1, timer_1);
 
 void alt_irq_init ( const void* base )
 {
-    ALTERA_NIOS2_GEN2_IRQ_INIT ( NIOS2_QSYS_0, nios2_qsys_0);
+    ALTERA_NIOS2_GEN2_IRQ_INIT ( NIOSII, NIOSII);
     alt_irq_cpu_enable_interrupts();
 }
 
@@ -96,9 +96,9 @@ void alt_irq_init ( const void* base )
 
 void alt_sys_init( void )
 {
-    ALTERA_AVALON_TIMER_INIT ( TIMER_0, timer_0);
-    ALTERA_AVALON_TIMER_INIT ( TIMER_1, timer_1);
-    ALTERA_AVALON_JTAG_UART_INIT ( JTAG_UART_0, jtag_uart_0);
-    ALTERA_AVALON_SPI_INIT ( SPI_0, spi_0);
-    ALTERA_AVALON_SYSID_QSYS_INIT ( SYSID_QSYS_0, sysid_qsys_0);
+    ALTERA_AVALON_TIMER_INIT ( SYS_TIMER, SYS_TIMER);
+    ALTERA_AVALON_TIMER_INIT ( TS_TIMER, TS_TIMER);
+    ALTERA_AVALON_JTAG_UART_INIT ( JTAG_UART, JTAG_UART);
+    ALTERA_AVALON_SPI_INIT ( SPI_MASTER, SPI_MASTER);
+    ALTERA_AVALON_SYSID_QSYS_INIT ( SYSID, SYSID);
 }

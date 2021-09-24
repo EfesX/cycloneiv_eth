@@ -1,10 +1,10 @@
 /*
  * system.h - SOPC Builder system and BSP software package information
  *
- * Machine generated for CPU 'nios2_qsys_0' in SOPC Builder design 'qsys'
- * SOPC Builder design path: ../../qsys.sopcinfo
+ * Machine generated for CPU 'NIOSII' in SOPC Builder design 'qsys'
+ * SOPC Builder design path: ../../qsys/qsys.sopcinfo
  *
- * Generated: Mon Sep 20 01:12:14 YEKT 2021
+ * Generated: Fri Sep 24 00:33:23 YEKT 2021
  */
 
 /*
@@ -88,7 +88,7 @@
 #define ALT_CPU_ICACHE_LINE_SIZE_LOG2 0
 #define ALT_CPU_ICACHE_SIZE 0
 #define ALT_CPU_INST_ADDR_WIDTH 0x19
-#define ALT_CPU_NAME "nios2_qsys_0"
+#define ALT_CPU_NAME "NIOSII"
 #define ALT_CPU_OCI_VERSION 1
 #define ALT_CPU_RESET_ADDR 0x00800000
 
@@ -143,6 +143,217 @@
 
 
 /*
+ * JTAG_UART configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_JTAG_UART altera_avalon_jtag_uart
+#define JTAG_UART_BASE 0x1001090
+#define JTAG_UART_IRQ 9
+#define JTAG_UART_IRQ_INTERRUPT_CONTROLLER_ID 0
+#define JTAG_UART_NAME "/dev/JTAG_UART"
+#define JTAG_UART_READ_DEPTH 64
+#define JTAG_UART_READ_THRESHOLD 8
+#define JTAG_UART_SPAN 8
+#define JTAG_UART_TYPE "altera_avalon_jtag_uart"
+#define JTAG_UART_WRITE_DEPTH 64
+#define JTAG_UART_WRITE_THRESHOLD 8
+
+
+/*
+ * PIO_BTN configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_PIO_BTN altera_avalon_pio
+#define PIO_BTN_BASE 0x1001070
+#define PIO_BTN_BIT_CLEARING_EDGE_REGISTER 1
+#define PIO_BTN_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define PIO_BTN_CAPTURE 1
+#define PIO_BTN_DATA_WIDTH 8
+#define PIO_BTN_DO_TEST_BENCH_WIRING 0
+#define PIO_BTN_DRIVEN_SIM_VALUE 0
+#define PIO_BTN_EDGE_TYPE "FALLING"
+#define PIO_BTN_FREQ 50000000
+#define PIO_BTN_HAS_IN 1
+#define PIO_BTN_HAS_OUT 0
+#define PIO_BTN_HAS_TRI 0
+#define PIO_BTN_IRQ 5
+#define PIO_BTN_IRQ_INTERRUPT_CONTROLLER_ID 0
+#define PIO_BTN_IRQ_TYPE "EDGE"
+#define PIO_BTN_NAME "/dev/PIO_BTN"
+#define PIO_BTN_RESET_VALUE 0
+#define PIO_BTN_SPAN 16
+#define PIO_BTN_TYPE "altera_avalon_pio"
+
+
+/*
+ * PIO_D7SEG configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_PIO_D7SEG altera_avalon_pio
+#define PIO_D7SEG_BASE 0x1001060
+#define PIO_D7SEG_BIT_CLEARING_EDGE_REGISTER 0
+#define PIO_D7SEG_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define PIO_D7SEG_CAPTURE 0
+#define PIO_D7SEG_DATA_WIDTH 16
+#define PIO_D7SEG_DO_TEST_BENCH_WIRING 0
+#define PIO_D7SEG_DRIVEN_SIM_VALUE 0
+#define PIO_D7SEG_EDGE_TYPE "NONE"
+#define PIO_D7SEG_FREQ 50000000
+#define PIO_D7SEG_HAS_IN 0
+#define PIO_D7SEG_HAS_OUT 1
+#define PIO_D7SEG_HAS_TRI 0
+#define PIO_D7SEG_IRQ -1
+#define PIO_D7SEG_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define PIO_D7SEG_IRQ_TYPE "NONE"
+#define PIO_D7SEG_NAME "/dev/PIO_D7SEG"
+#define PIO_D7SEG_RESET_VALUE 0
+#define PIO_D7SEG_SPAN 16
+#define PIO_D7SEG_TYPE "altera_avalon_pio"
+
+
+/*
+ * PIO_LED configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_PIO_LED altera_avalon_pio
+#define PIO_LED_BASE 0x1001080
+#define PIO_LED_BIT_CLEARING_EDGE_REGISTER 0
+#define PIO_LED_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define PIO_LED_CAPTURE 0
+#define PIO_LED_DATA_WIDTH 4
+#define PIO_LED_DO_TEST_BENCH_WIRING 0
+#define PIO_LED_DRIVEN_SIM_VALUE 0
+#define PIO_LED_EDGE_TYPE "NONE"
+#define PIO_LED_FREQ 50000000
+#define PIO_LED_HAS_IN 0
+#define PIO_LED_HAS_OUT 1
+#define PIO_LED_HAS_TRI 0
+#define PIO_LED_IRQ -1
+#define PIO_LED_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define PIO_LED_IRQ_TYPE "NONE"
+#define PIO_LED_NAME "/dev/PIO_LED"
+#define PIO_LED_RESET_VALUE 0
+#define PIO_LED_SPAN 16
+#define PIO_LED_TYPE "altera_avalon_pio"
+
+
+/*
+ * RAM configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_RAM altera_avalon_new_sdram_controller
+#define RAM_BASE 0x800000
+#define RAM_CAS_LATENCY 2
+#define RAM_CONTENTS_INFO
+#define RAM_INIT_NOP_DELAY 0.0
+#define RAM_INIT_REFRESH_COMMANDS 2
+#define RAM_IRQ -1
+#define RAM_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define RAM_IS_INITIALIZED 1
+#define RAM_NAME "/dev/RAM"
+#define RAM_POWERUP_DELAY 100.0
+#define RAM_REFRESH_PERIOD 31.25
+#define RAM_REGISTER_DATA_IN 1
+#define RAM_SDRAM_ADDR_WIDTH 0x16
+#define RAM_SDRAM_BANK_WIDTH 2
+#define RAM_SDRAM_COL_WIDTH 8
+#define RAM_SDRAM_DATA_WIDTH 16
+#define RAM_SDRAM_NUM_BANKS 4
+#define RAM_SDRAM_NUM_CHIPSELECTS 1
+#define RAM_SDRAM_ROW_WIDTH 12
+#define RAM_SHARED_DATA 0
+#define RAM_SIM_MODEL_BASE 0
+#define RAM_SPAN 8388608
+#define RAM_STARVATION_INDICATOR 0
+#define RAM_TRISTATE_BRIDGE_SLAVE ""
+#define RAM_TYPE "altera_avalon_new_sdram_controller"
+#define RAM_T_AC 5.4
+#define RAM_T_MRD 3
+#define RAM_T_RCD 20.0
+#define RAM_T_RFC 70.0
+#define RAM_T_RP 20.0
+#define RAM_T_WR 14.0
+
+
+/*
+ * SPI_MASTER configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_SPI_MASTER altera_avalon_spi
+#define SPI_MASTER_BASE 0x1001000
+#define SPI_MASTER_CLOCKMULT 1
+#define SPI_MASTER_CLOCKPHASE 0
+#define SPI_MASTER_CLOCKPOLARITY 0
+#define SPI_MASTER_CLOCKUNITS "Hz"
+#define SPI_MASTER_DATABITS 8
+#define SPI_MASTER_DATAWIDTH 16
+#define SPI_MASTER_DELAYMULT "1.0E-9"
+#define SPI_MASTER_DELAYUNITS "ns"
+#define SPI_MASTER_EXTRADELAY 0
+#define SPI_MASTER_INSERT_SYNC 0
+#define SPI_MASTER_IRQ -1
+#define SPI_MASTER_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define SPI_MASTER_ISMASTER 1
+#define SPI_MASTER_LSBFIRST 0
+#define SPI_MASTER_NAME "/dev/SPI_MASTER"
+#define SPI_MASTER_NUMSLAVES 1
+#define SPI_MASTER_PREFIX "spi_"
+#define SPI_MASTER_SPAN 32
+#define SPI_MASTER_SYNC_REG_DEPTH 2
+#define SPI_MASTER_TARGETCLOCK 20000000u
+#define SPI_MASTER_TARGETSSDELAY "0.0"
+#define SPI_MASTER_TYPE "altera_avalon_spi"
+
+
+/*
+ * SYSID configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_SYSID altera_avalon_sysid_qsys
+#define SYSID_BASE 0x1001098
+#define SYSID_ID 233492483
+#define SYSID_IRQ -1
+#define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define SYSID_NAME "/dev/SYSID"
+#define SYSID_SPAN 8
+#define SYSID_TIMESTAMP 1632425476
+#define SYSID_TYPE "altera_avalon_sysid_qsys"
+
+
+/*
+ * SYS_TIMER configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_SYS_TIMER altera_avalon_timer
+#define SYS_TIMER_ALWAYS_RUN 0
+#define SYS_TIMER_BASE 0x1001040
+#define SYS_TIMER_COUNTER_SIZE 32
+#define SYS_TIMER_FIXED_PERIOD 0
+#define SYS_TIMER_FREQ 50000000
+#define SYS_TIMER_IRQ 1
+#define SYS_TIMER_IRQ_INTERRUPT_CONTROLLER_ID 0
+#define SYS_TIMER_LOAD_VALUE 49999
+#define SYS_TIMER_MULT 0.001
+#define SYS_TIMER_NAME "/dev/SYS_TIMER"
+#define SYS_TIMER_PERIOD 1
+#define SYS_TIMER_PERIOD_UNITS "ms"
+#define SYS_TIMER_RESET_OUTPUT 0
+#define SYS_TIMER_SNAPSHOT 1
+#define SYS_TIMER_SPAN 32
+#define SYS_TIMER_TICKS_PER_SEC 1000
+#define SYS_TIMER_TIMEOUT_PULSE_OUTPUT 0
+#define SYS_TIMER_TYPE "altera_avalon_timer"
+
+
+/*
  * System configuration
  *
  */
@@ -157,25 +368,51 @@
 #define ALT_NUM_EXTERNAL_INTERRUPT_CONTROLLERS 0
 #define ALT_NUM_INTERNAL_INTERRUPT_CONTROLLERS 1
 #define ALT_NUM_INTERRUPT_CONTROLLERS 1
-#define ALT_STDERR "/dev/jtag_uart_0"
-#define ALT_STDERR_BASE 0x1001098
-#define ALT_STDERR_DEV jtag_uart_0
+#define ALT_STDERR "/dev/JTAG_UART"
+#define ALT_STDERR_BASE 0x1001090
+#define ALT_STDERR_DEV JTAG_UART
 #define ALT_STDERR_IS_JTAG_UART
 #define ALT_STDERR_PRESENT
 #define ALT_STDERR_TYPE "altera_avalon_jtag_uart"
-#define ALT_STDIN "/dev/jtag_uart_0"
-#define ALT_STDIN_BASE 0x1001098
-#define ALT_STDIN_DEV jtag_uart_0
+#define ALT_STDIN "/dev/JTAG_UART"
+#define ALT_STDIN_BASE 0x1001090
+#define ALT_STDIN_DEV JTAG_UART
 #define ALT_STDIN_IS_JTAG_UART
 #define ALT_STDIN_PRESENT
 #define ALT_STDIN_TYPE "altera_avalon_jtag_uart"
-#define ALT_STDOUT "/dev/jtag_uart_0"
-#define ALT_STDOUT_BASE 0x1001098
-#define ALT_STDOUT_DEV jtag_uart_0
+#define ALT_STDOUT "/dev/JTAG_UART"
+#define ALT_STDOUT_BASE 0x1001090
+#define ALT_STDOUT_DEV JTAG_UART
 #define ALT_STDOUT_IS_JTAG_UART
 #define ALT_STDOUT_PRESENT
 #define ALT_STDOUT_TYPE "altera_avalon_jtag_uart"
 #define ALT_SYSTEM_NAME "qsys"
+
+
+/*
+ * TS_TIMER configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_TS_TIMER altera_avalon_timer
+#define TS_TIMER_ALWAYS_RUN 0
+#define TS_TIMER_BASE 0x1001020
+#define TS_TIMER_COUNTER_SIZE 32
+#define TS_TIMER_FIXED_PERIOD 0
+#define TS_TIMER_FREQ 50000000
+#define TS_TIMER_IRQ 8
+#define TS_TIMER_IRQ_INTERRUPT_CONTROLLER_ID 0
+#define TS_TIMER_LOAD_VALUE 4999
+#define TS_TIMER_MULT 1.0E-6
+#define TS_TIMER_NAME "/dev/TS_TIMER"
+#define TS_TIMER_PERIOD 100
+#define TS_TIMER_PERIOD_UNITS "us"
+#define TS_TIMER_RESET_OUTPUT 0
+#define TS_TIMER_SNAPSHOT 1
+#define TS_TIMER_SPAN 32
+#define TS_TIMER_TICKS_PER_SEC 10000
+#define TS_TIMER_TIMEOUT_PULSE_OUTPUT 0
+#define TS_TIMER_TYPE "altera_avalon_timer"
 
 
 /*
@@ -185,244 +422,7 @@
 
 #define ALT_INCLUDE_INSTRUCTION_RELATED_EXCEPTION_API
 #define ALT_MAX_FD 32
-#define ALT_SYS_CLK TIMER_0
-#define ALT_TIMESTAMP_CLK TIMER_1
-
-
-/*
- * jtag_uart_0 configuration
- *
- */
-
-#define ALT_MODULE_CLASS_jtag_uart_0 altera_avalon_jtag_uart
-#define JTAG_UART_0_BASE 0x1001098
-#define JTAG_UART_0_IRQ 3
-#define JTAG_UART_0_IRQ_INTERRUPT_CONTROLLER_ID 0
-#define JTAG_UART_0_NAME "/dev/jtag_uart_0"
-#define JTAG_UART_0_READ_DEPTH 64
-#define JTAG_UART_0_READ_THRESHOLD 8
-#define JTAG_UART_0_SPAN 8
-#define JTAG_UART_0_TYPE "altera_avalon_jtag_uart"
-#define JTAG_UART_0_WRITE_DEPTH 64
-#define JTAG_UART_0_WRITE_THRESHOLD 8
-
-
-/*
- * new_sdram_controller_0 configuration
- *
- */
-
-#define ALT_MODULE_CLASS_new_sdram_controller_0 altera_avalon_new_sdram_controller
-#define NEW_SDRAM_CONTROLLER_0_BASE 0x800000
-#define NEW_SDRAM_CONTROLLER_0_CAS_LATENCY 2
-#define NEW_SDRAM_CONTROLLER_0_CONTENTS_INFO
-#define NEW_SDRAM_CONTROLLER_0_INIT_NOP_DELAY 0.0
-#define NEW_SDRAM_CONTROLLER_0_INIT_REFRESH_COMMANDS 2
-#define NEW_SDRAM_CONTROLLER_0_IRQ -1
-#define NEW_SDRAM_CONTROLLER_0_IRQ_INTERRUPT_CONTROLLER_ID -1
-#define NEW_SDRAM_CONTROLLER_0_IS_INITIALIZED 1
-#define NEW_SDRAM_CONTROLLER_0_NAME "/dev/new_sdram_controller_0"
-#define NEW_SDRAM_CONTROLLER_0_POWERUP_DELAY 100.0
-#define NEW_SDRAM_CONTROLLER_0_REFRESH_PERIOD 31.25
-#define NEW_SDRAM_CONTROLLER_0_REGISTER_DATA_IN 1
-#define NEW_SDRAM_CONTROLLER_0_SDRAM_ADDR_WIDTH 0x16
-#define NEW_SDRAM_CONTROLLER_0_SDRAM_BANK_WIDTH 2
-#define NEW_SDRAM_CONTROLLER_0_SDRAM_COL_WIDTH 8
-#define NEW_SDRAM_CONTROLLER_0_SDRAM_DATA_WIDTH 16
-#define NEW_SDRAM_CONTROLLER_0_SDRAM_NUM_BANKS 4
-#define NEW_SDRAM_CONTROLLER_0_SDRAM_NUM_CHIPSELECTS 1
-#define NEW_SDRAM_CONTROLLER_0_SDRAM_ROW_WIDTH 12
-#define NEW_SDRAM_CONTROLLER_0_SHARED_DATA 0
-#define NEW_SDRAM_CONTROLLER_0_SIM_MODEL_BASE 0
-#define NEW_SDRAM_CONTROLLER_0_SPAN 8388608
-#define NEW_SDRAM_CONTROLLER_0_STARVATION_INDICATOR 0
-#define NEW_SDRAM_CONTROLLER_0_TRISTATE_BRIDGE_SLAVE ""
-#define NEW_SDRAM_CONTROLLER_0_TYPE "altera_avalon_new_sdram_controller"
-#define NEW_SDRAM_CONTROLLER_0_T_AC 5.4
-#define NEW_SDRAM_CONTROLLER_0_T_MRD 3
-#define NEW_SDRAM_CONTROLLER_0_T_RCD 20.0
-#define NEW_SDRAM_CONTROLLER_0_T_RFC 70.0
-#define NEW_SDRAM_CONTROLLER_0_T_RP 20.0
-#define NEW_SDRAM_CONTROLLER_0_T_WR 14.0
-
-
-/*
- * pio_0 configuration
- *
- */
-
-#define ALT_MODULE_CLASS_pio_0 altera_avalon_pio
-#define PIO_0_BASE 0x1001080
-#define PIO_0_BIT_CLEARING_EDGE_REGISTER 0
-#define PIO_0_BIT_MODIFYING_OUTPUT_REGISTER 0
-#define PIO_0_CAPTURE 0
-#define PIO_0_DATA_WIDTH 4
-#define PIO_0_DO_TEST_BENCH_WIRING 0
-#define PIO_0_DRIVEN_SIM_VALUE 0
-#define PIO_0_EDGE_TYPE "NONE"
-#define PIO_0_FREQ 50000000
-#define PIO_0_HAS_IN 0
-#define PIO_0_HAS_OUT 1
-#define PIO_0_HAS_TRI 0
-#define PIO_0_IRQ -1
-#define PIO_0_IRQ_INTERRUPT_CONTROLLER_ID -1
-#define PIO_0_IRQ_TYPE "NONE"
-#define PIO_0_NAME "/dev/pio_0"
-#define PIO_0_RESET_VALUE 0
-#define PIO_0_SPAN 16
-#define PIO_0_TYPE "altera_avalon_pio"
-
-
-/*
- * pio_1 configuration
- *
- */
-
-#define ALT_MODULE_CLASS_pio_1 altera_avalon_pio
-#define PIO_1_BASE 0x1001070
-#define PIO_1_BIT_CLEARING_EDGE_REGISTER 1
-#define PIO_1_BIT_MODIFYING_OUTPUT_REGISTER 0
-#define PIO_1_CAPTURE 1
-#define PIO_1_DATA_WIDTH 8
-#define PIO_1_DO_TEST_BENCH_WIRING 0
-#define PIO_1_DRIVEN_SIM_VALUE 0
-#define PIO_1_EDGE_TYPE "RISING"
-#define PIO_1_FREQ 50000000
-#define PIO_1_HAS_IN 1
-#define PIO_1_HAS_OUT 0
-#define PIO_1_HAS_TRI 0
-#define PIO_1_IRQ 4
-#define PIO_1_IRQ_INTERRUPT_CONTROLLER_ID 0
-#define PIO_1_IRQ_TYPE "EDGE"
-#define PIO_1_NAME "/dev/pio_1"
-#define PIO_1_RESET_VALUE 0
-#define PIO_1_SPAN 16
-#define PIO_1_TYPE "altera_avalon_pio"
-
-
-/*
- * pio_2 configuration
- *
- */
-
-#define ALT_MODULE_CLASS_pio_2 altera_avalon_pio
-#define PIO_2_BASE 0x1001060
-#define PIO_2_BIT_CLEARING_EDGE_REGISTER 0
-#define PIO_2_BIT_MODIFYING_OUTPUT_REGISTER 0
-#define PIO_2_CAPTURE 0
-#define PIO_2_DATA_WIDTH 16
-#define PIO_2_DO_TEST_BENCH_WIRING 0
-#define PIO_2_DRIVEN_SIM_VALUE 0
-#define PIO_2_EDGE_TYPE "NONE"
-#define PIO_2_FREQ 50000000
-#define PIO_2_HAS_IN 0
-#define PIO_2_HAS_OUT 1
-#define PIO_2_HAS_TRI 0
-#define PIO_2_IRQ -1
-#define PIO_2_IRQ_INTERRUPT_CONTROLLER_ID -1
-#define PIO_2_IRQ_TYPE "NONE"
-#define PIO_2_NAME "/dev/pio_2"
-#define PIO_2_RESET_VALUE 0
-#define PIO_2_SPAN 16
-#define PIO_2_TYPE "altera_avalon_pio"
-
-
-/*
- * spi_0 configuration
- *
- */
-
-#define ALT_MODULE_CLASS_spi_0 altera_avalon_spi
-#define SPI_0_BASE 0x1001000
-#define SPI_0_CLOCKMULT 1
-#define SPI_0_CLOCKPHASE 0
-#define SPI_0_CLOCKPOLARITY 0
-#define SPI_0_CLOCKUNITS "Hz"
-#define SPI_0_DATABITS 8
-#define SPI_0_DATAWIDTH 16
-#define SPI_0_DELAYMULT "1.0E-9"
-#define SPI_0_DELAYUNITS "ns"
-#define SPI_0_EXTRADELAY 0
-#define SPI_0_INSERT_SYNC 0
-#define SPI_0_IRQ 0
-#define SPI_0_IRQ_INTERRUPT_CONTROLLER_ID 0
-#define SPI_0_ISMASTER 1
-#define SPI_0_LSBFIRST 0
-#define SPI_0_NAME "/dev/spi_0"
-#define SPI_0_NUMSLAVES 1
-#define SPI_0_PREFIX "spi_"
-#define SPI_0_SPAN 32
-#define SPI_0_SYNC_REG_DEPTH 2
-#define SPI_0_TARGETCLOCK 20000000u
-#define SPI_0_TARGETSSDELAY "0.0"
-#define SPI_0_TYPE "altera_avalon_spi"
-
-
-/*
- * sysid_qsys_0 configuration
- *
- */
-
-#define ALT_MODULE_CLASS_sysid_qsys_0 altera_avalon_sysid_qsys
-#define SYSID_QSYS_0_BASE 0x1001090
-#define SYSID_QSYS_0_ID 4660
-#define SYSID_QSYS_0_IRQ -1
-#define SYSID_QSYS_0_IRQ_INTERRUPT_CONTROLLER_ID -1
-#define SYSID_QSYS_0_NAME "/dev/sysid_qsys_0"
-#define SYSID_QSYS_0_SPAN 8
-#define SYSID_QSYS_0_TIMESTAMP 1632071347
-#define SYSID_QSYS_0_TYPE "altera_avalon_sysid_qsys"
-
-
-/*
- * timer_0 configuration
- *
- */
-
-#define ALT_MODULE_CLASS_timer_0 altera_avalon_timer
-#define TIMER_0_ALWAYS_RUN 0
-#define TIMER_0_BASE 0x1001040
-#define TIMER_0_COUNTER_SIZE 32
-#define TIMER_0_FIXED_PERIOD 0
-#define TIMER_0_FREQ 50000000
-#define TIMER_0_IRQ 2
-#define TIMER_0_IRQ_INTERRUPT_CONTROLLER_ID 0
-#define TIMER_0_LOAD_VALUE 499999
-#define TIMER_0_MULT 0.001
-#define TIMER_0_NAME "/dev/timer_0"
-#define TIMER_0_PERIOD 10
-#define TIMER_0_PERIOD_UNITS "ms"
-#define TIMER_0_RESET_OUTPUT 0
-#define TIMER_0_SNAPSHOT 1
-#define TIMER_0_SPAN 32
-#define TIMER_0_TICKS_PER_SEC 100
-#define TIMER_0_TIMEOUT_PULSE_OUTPUT 0
-#define TIMER_0_TYPE "altera_avalon_timer"
-
-
-/*
- * timer_1 configuration
- *
- */
-
-#define ALT_MODULE_CLASS_timer_1 altera_avalon_timer
-#define TIMER_1_ALWAYS_RUN 0
-#define TIMER_1_BASE 0x1001020
-#define TIMER_1_COUNTER_SIZE 32
-#define TIMER_1_FIXED_PERIOD 0
-#define TIMER_1_FREQ 50000000
-#define TIMER_1_IRQ 1
-#define TIMER_1_IRQ_INTERRUPT_CONTROLLER_ID 0
-#define TIMER_1_LOAD_VALUE 4999
-#define TIMER_1_MULT 1.0E-6
-#define TIMER_1_NAME "/dev/timer_1"
-#define TIMER_1_PERIOD 100
-#define TIMER_1_PERIOD_UNITS "us"
-#define TIMER_1_RESET_OUTPUT 0
-#define TIMER_1_SNAPSHOT 1
-#define TIMER_1_SPAN 32
-#define TIMER_1_TICKS_PER_SEC 10000
-#define TIMER_1_TIMEOUT_PULSE_OUTPUT 0
-#define TIMER_1_TYPE "altera_avalon_timer"
+#define ALT_SYS_CLK SYS_TIMER
+#define ALT_TIMESTAMP_CLK none
 
 #endif /* __SYSTEM_H_ */

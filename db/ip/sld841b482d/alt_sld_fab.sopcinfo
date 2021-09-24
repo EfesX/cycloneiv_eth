@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="alt_sld_fab" kind="alt_sld_fab" version="1.0" fabric="QSYS">
  <!-- Format version 20.1 720 (Future versions may contain additional information.) -->
- <!-- 2021.09.17.16:44:38 -->
+ <!-- 2021.09.24.00:32:54 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_DEVICE_FAMILY">
   <type>java.lang.String</type>
@@ -56,7 +56,7 @@
 the requested settings for a module instance. -->
   <parameter name="DESIGN_HASH">
    <type>java.lang.String</type>
-   <value>71ef3b82fab7b1eea743</value>
+   <value>c907632329c739409b46</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -104,7 +104,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="EP_INFOS">
    <type>java.lang.String</type>
-   <value>{hpath {qsys:qsys_unit|qsys_jtag_uart_0:jtag_uart_0|alt_jtag_atlantic:qsys_jtag_uart_0_alt_jtag_atlantic} } {hpath {qsys:qsys_unit|qsys_nios2_qsys_0:nios2_qsys_0|qsys_nios2_qsys_0_cpu:cpu|qsys_nios2_qsys_0_cpu_nios2_oci:the_qsys_nios2_qsys_0_cpu_nios2_oci|qsys_nios2_qsys_0_cpu_debug_slave_wrapper:the_qsys_nios2_qsys_0_cpu_debug_slave_wrapper|sld_virtual_jtag_basic:qsys_nios2_qsys_0_cpu_debug_slave_phy|sld_virtual_jtag_impl:sld_virtual_jtag_impl_inst} } </value>
+   <value>{hpath {qsys:qsys_unit|qsys_JTAG_UART:jtag_uart|alt_jtag_atlantic:qsys_JTAG_UART_alt_jtag_atlantic} } {hpath {qsys:qsys_unit|qsys_NIOSII:niosii|qsys_NIOSII_cpu:cpu|qsys_NIOSII_cpu_nios2_oci:the_qsys_NIOSII_cpu_nios2_oci|qsys_NIOSII_cpu_debug_slave_wrapper:the_qsys_NIOSII_cpu_debug_slave_wrapper|sld_virtual_jtag_basic:qsys_NIOSII_cpu_debug_slave_phy|sld_virtual_jtag_impl:sld_virtual_jtag_impl_inst} } </value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -2181,7 +2181,7 @@ parameters are a RESULT of the module parameters. -->
 the requested settings for a module instance. -->
   <parameter name="DESIGN_HASH">
    <type>java.lang.String</type>
-   <value>71ef3b82fab7b1eea743</value>
+   <value>c907632329c739409b46</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>

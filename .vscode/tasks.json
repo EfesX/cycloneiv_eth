@@ -1,0 +1,17 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "launchNIOSIICommandShell",
+            "type": "shell",
+            "command": "/home/efesxzc/intelFPGA_lite/19.1/nios2eds/nios2_command_shell.sh"
+        },
+        {
+            "label": "cd_gdb_path",
+            "type": "shell",
+            "command": "export gdb_path=/home/efesxzc/intelFPGA_lite/19.1/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/"
+        }
+    ]
+}

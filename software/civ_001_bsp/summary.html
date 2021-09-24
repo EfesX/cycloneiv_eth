@@ -7,13 +7,13 @@
 <td width="20%" bgcolor="#77BBFF">BSP Type:</td><td>hal</td>
 </tr>
 <tr mode="wrap">
-<td width="20%" bgcolor="#77BBFF">SOPC Design File:</td><td>../../qsys.sopcinfo</td>
+<td width="20%" bgcolor="#77BBFF">SOPC Design File:</td><td>../../qsys/qsys.sopcinfo</td>
 </tr>
 <tr mode="wrap">
 <td width="20%" bgcolor="#77BBFF">Quartus JDI File:</td><td>default</td>
 </tr>
 <tr mode="wrap">
-<td width="20%" bgcolor="#77BBFF">CPU:</td><td>nios2_qsys_0</td>
+<td width="20%" bgcolor="#77BBFF">CPU:</td><td>NIOSII</td>
 </tr>
 <tr mode="wrap">
 <td width="20%" bgcolor="#77BBFF">BSP Settings File:</td><td>./settings.bsp</td>
@@ -22,10 +22,10 @@
 <td width="20%" bgcolor="#77BBFF">BSP Version:</td><td>default</td>
 </tr>
 <tr mode="wrap">
-<td width="20%" bgcolor="#77BBFF">BSP Generated On:</td><td>20.09.2021 1:12:13</td>
+<td width="20%" bgcolor="#77BBFF">BSP Generated On:</td><td>24.09.2021 0:33:23</td>
 </tr>
 <tr mode="wrap">
-<td width="20%" bgcolor="#77BBFF">BSP Generated Timestamp:</td><td>1632078733381</td>
+<td width="20%" bgcolor="#77BBFF">BSP Generated Timestamp:</td><td>1632425603154</td>
 </tr>
 <tr mode="wrap">
 <td width="20%" bgcolor="#77BBFF">BSP Generated Location:</td><td>/home/efesxzc/projects/fpga/cycloneiv_eth/software/civ_001_bsp</td>
@@ -38,31 +38,31 @@
 <th align="left" width="20%">Slave Descriptor</th><th align="left" width="40%">Address Range</th><th align="left" width="20%">Size</th><th align="left" width="20%">Attributes</th>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>jtag_uart_0</td><td>0x01001098 - 0x0100109F</td><td>8</td><td class="listing">printable</td>
+<td>SYSID</td><td>0x01001098 - 0x0100109F</td><td>8</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>sysid_qsys_0</td><td>0x01001090 - 0x01001097</td><td>8</td><td class="listing">&nbsp;</td>
+<td>JTAG_UART</td><td>0x01001090 - 0x01001097</td><td>8</td><td class="listing">printable</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>pio_0</td><td>0x01001080 - 0x0100108F</td><td>16</td><td class="listing">&nbsp;</td>
+<td>PIO_LED</td><td>0x01001080 - 0x0100108F</td><td>16</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>pio_1</td><td>0x01001070 - 0x0100107F</td><td>16</td><td class="listing">&nbsp;</td>
+<td>PIO_BTN</td><td>0x01001070 - 0x0100107F</td><td>16</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>pio_2</td><td>0x01001060 - 0x0100106F</td><td>16</td><td class="listing">&nbsp;</td>
+<td>PIO_D7SEG</td><td>0x01001060 - 0x0100106F</td><td>16</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>timer_0</td><td>0x01001040 - 0x0100105F</td><td>32</td><td class="listing">timer</td>
+<td>SYS_TIMER</td><td>0x01001040 - 0x0100105F</td><td>32</td><td class="listing">timer</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>timer_1</td><td>0x01001020 - 0x0100103F</td><td>32</td><td class="listing">timer</td>
+<td>TS_TIMER</td><td>0x01001020 - 0x0100103F</td><td>32</td><td class="listing">timer</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>spi_0</td><td>0x01001000 - 0x0100101F</td><td>32</td><td class="listing">&nbsp;</td>
+<td>SPI_MASTER</td><td>0x01001000 - 0x0100101F</td><td>32</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>new_sdram_controller_0</td><td>0x00800000 - 0x00FFFFFF</td><td>8388608</td><td class="listing">memory</td>
+<td>RAM</td><td>0x00800000 - 0x00FFFFFF</td><td>8388608</td><td class="listing">memory</td>
 </tr>
 </table>
 <br>
@@ -81,22 +81,22 @@
 <th align="left" width="50%">Section</th><th align="left" width="50%">Region</th>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>.text</td><td>new_sdram_controller_0</td>
+<td>.text</td><td>RAM</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>.rodata</td><td>new_sdram_controller_0</td>
+<td>.rodata</td><td>RAM</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>.rwdata</td><td>new_sdram_controller_0</td>
+<td>.rwdata</td><td>RAM</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>.bss</td><td>new_sdram_controller_0</td>
+<td>.bss</td><td>RAM</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>.heap</td><td>new_sdram_controller_0</td>
+<td>.heap</td><td>RAM</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>.stack</td><td>new_sdram_controller_0</td>
+<td>.stack</td><td>RAM</td>
 </tr>
 </table>
 <h3>Settings</h3>
@@ -552,7 +552,7 @@
 <td width="20%">Destination:</td><td>none</td>
 </tr>
 <tr mode="wrap">
-<td width="20%">Description:</td><td>Enables the alt_load() facility. The alt_load() facility copies sections from the .text memory into RAM. If true, this setting sets up the VMA/LMA of sections in linker.x to allow them to be loaded into the .text memory.</td>
+<td width="20%">Description:</td><td>Enables the alt_load() facility. The alt_load() facility copies data sections (.rodata, .rwdata, or .exceptions) from boot memory to RAM. If true, this setting sets up the VMA/LMA of sections in linker.x to allow them to be loaded into the .text memory.</td>
 </tr>
 <tr mode="wrap">
 <td width="20%">Restrictions:</td><td>This setting is typically false if an external bootloader (e.g. flash bootloader) is present.</td>
@@ -705,7 +705,7 @@
 <td width="20%">Default Value:</td><td>none</td>
 </tr>
 <tr>
-<td width="20%">Value:</td><td>new_sdram_controller_0</td>
+<td width="20%">Value:</td><td>RAM</td>
 </tr>
 <tr>
 <td width="20%">Type:</td><td>UnquotedString</td>
@@ -759,7 +759,7 @@
 <td width="20%">Default Value:</td><td>none</td>
 </tr>
 <tr>
-<td width="20%">Value:</td><td>new_sdram_controller_0</td>
+<td width="20%">Value:</td><td>RAM</td>
 </tr>
 <tr>
 <td width="20%">Type:</td><td>UnquotedString</td>
@@ -1425,6 +1425,33 @@
 <br>
 <table border="1" bgcolor="#FFFFCC" width="60%">
 <tr bgcolor="#77BBFF">
+<td align="left" width="15%">Setting Name:</td><td align="left">hal.make.cflags_mgpopt</td>
+</tr>
+<tr>
+<td width="20%">Identifier:</td><td>CFLAGS_MGPOPT</td>
+</tr>
+<tr>
+<td width="20%">Default Value:</td><td>-mgpopt=global</td>
+</tr>
+<tr>
+<td width="20%">Value:</td><td>-mgpopt=global</td>
+</tr>
+<tr>
+<td width="20%">Type:</td><td>UnquotedString</td>
+</tr>
+<tr mode="wrap">
+<td width="20%">Destination:</td><td>public_mk_define</td>
+</tr>
+<tr mode="wrap">
+<td width="20%">Description:</td><td>C/C++ compiler to generate (do not generate) GP-relative accesses. 'none' tells the compilter not to generate GP-relative accesses. 'local' will generate GP-relative accesses for small data objects that are not external, weak, or uninitialized common symbols. Also use GP-relative addressing for objects that have been explicitly placed in a small data section via a section attribute. provides the default set of debug symbols typically required to debug a typical application. 'global' is same as 'local' but also generate GP-relative accesses for small data objects that are external, weak, or common.</td>
+</tr>
+<tr mode="wrap">
+<td width="20%">Restrictions:</td><td>none</td>
+</tr>
+</table>
+<br>
+<table border="1" bgcolor="#FFFFCC" width="60%">
+<tr bgcolor="#77BBFF">
 <td align="left" width="15%">Setting Name:</td><td align="left">hal.make.cxx</td>
 </tr>
 <tr>
@@ -1947,7 +1974,7 @@
 <td width="20%">Default Value:</td><td>none</td>
 </tr>
 <tr>
-<td width="20%">Value:</td><td>jtag_uart_0</td>
+<td width="20%">Value:</td><td>JTAG_UART</td>
 </tr>
 <tr>
 <td width="20%">Type:</td><td>UnquotedString</td>
@@ -1974,7 +2001,7 @@
 <td width="20%">Default Value:</td><td>none</td>
 </tr>
 <tr>
-<td width="20%">Value:</td><td>jtag_uart_0</td>
+<td width="20%">Value:</td><td>JTAG_UART</td>
 </tr>
 <tr>
 <td width="20%">Type:</td><td>UnquotedString</td>
@@ -2001,7 +2028,7 @@
 <td width="20%">Default Value:</td><td>none</td>
 </tr>
 <tr>
-<td width="20%">Value:</td><td>jtag_uart_0</td>
+<td width="20%">Value:</td><td>JTAG_UART</td>
 </tr>
 <tr>
 <td width="20%">Type:</td><td>UnquotedString</td>
@@ -2028,7 +2055,7 @@
 <td width="20%">Default Value:</td><td>none</td>
 </tr>
 <tr>
-<td width="20%">Value:</td><td>timer_0</td>
+<td width="20%">Value:</td><td>SYS_TIMER</td>
 </tr>
 <tr>
 <td width="20%">Type:</td><td>UnquotedString</td>
@@ -2055,7 +2082,7 @@
 <td width="20%">Default Value:</td><td>none</td>
 </tr>
 <tr>
-<td width="20%">Value:</td><td>timer_1</td>
+<td width="20%">Value:</td><td>none</td>
 </tr>
 <tr>
 <td width="20%">Type:</td><td>UnquotedString</td>

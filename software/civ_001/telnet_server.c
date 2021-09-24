@@ -121,7 +121,7 @@ FreeRTOSConfig.h as it is a demo application constant. */
 #endif
 
 /*-----------------------------------------------------------*/
-
+uint8_t close_flag = 0;
 /*
  * Uses FreeRTOS+TCP to listen for incoming echo connections, creating a task
  * to handle each connection.
@@ -141,7 +141,7 @@ static uint16_t usUsedStackSize = 0;
 
 /*-----------------------------------------------------------*/
 
-void vStartSimpleTCPServerTasks( uint16_t usStackSize, UBaseType_t uxPriority )
+void vStartTelnetServer( uint16_t usStackSize, UBaseType_t uxPriority )
 {
 	/* Create the TCP echo server. */
 	xTaskCreate( prvConnectionListeningTask, "Telnet", usStackSize, NULL, uxPriority + 1, NULL );
@@ -230,6 +230,11 @@ int32_t lSent = strlen(tHeader);
 								xMoreDataToFollow = FreeRTOS_CLIProcessCommand(rx_buf, tx_buf, ipconfigTCP_MSS);
 								lSent = FreeRTOS_send(xConnectedSocket, tx_buf, strlen(tx_buf),NULL);
 							}while(xMoreDataToFollow != pdFALSE);
+
+							if (close_flag == 1) {
+								close_flag = 0;
+								break;
+							}
 
 							if(lSent < 0) break;
 							lSent = FreeRTOS_send(xConnectedSocket, ">> \0", strlen(">> \0"), NULL);

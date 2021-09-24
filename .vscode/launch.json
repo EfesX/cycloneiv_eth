@@ -1,0 +1,23 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "gdb",
+            "name": "GDB NIOSII",
+            "request": "attach",
+            "executable": "${workspaceFolder}/software/civ_001/civ_001.elf",
+            "target": "192.168.1.166:2342",
+           // "preLaunchTask": "launchNIOSIICommandShell",
+            "gdbpath": "nios2-elf-gdb",
+            "remote": true,
+            "autorun": [
+                "load"
+            ],
+            "cwd": "${workspaceRoot}"
+        }
+    ]
+    
+}

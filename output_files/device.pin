@@ -171,15 +171,15 @@ i2c_scl                      : 99        : bidir  : 2.5 V             :         
 ir                           : 100       : input  : 2.5 V             :         : 6         : Y              
 ~ALTERA_nCEO~ / RESERVED_OUTPUT_OPEN_DRAIN : 101       : output : 2.5 V             :         : 6         : N              
 VCCINT                       : 102       : power  :                   : 1.2V    :           :                
-sw[1]                        : 103       : input  : 2.5 V             :         : 6         : N              
+sw[3]                        : 103       : input  : 2.5 V             :         : 6         : N              
 vga_b                        : 104       : output : 2.5 V             :         : 6         : N              
-vga_hsync                    : 105       : output : 2.5 V             :         : 6         : N              
-sw[2]                        : 106       : input  : 2.5 V             :         : 6         : N              
+vga_g                        : 105       : output : 2.5 V             :         : 6         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 106       :        :                   :         : 6         :                
 VCCA2                        : 107       : power  :                   : 2.5V    :           :                
 GNDA2                        : 108       : gnd    :                   :         :           :                
 VCCD_PLL2                    : 109       : power  :                   : 1.2V    :           :                
 buzzer                       : 110       : output : 2.5 V             :         : 7         : Y              
-vga_vsync                    : 111       : output : 2.5 V             :         : 7         : N              
+sw[1]                        : 111       : input  : 2.5 V             :         : 7         : N              
 scl                          : 112       : bidir  : 2.5 V             :         : 7         : Y              
 sda                          : 113       : bidir  : 2.5 V             :         : 7         : Y              
 uart_tx                      : 114       : output : 2.5 V             :         : 7         : Y              
@@ -206,11 +206,11 @@ VCCINT                       : 134       : power  :                   : 1.2V    
 dt_dig[1]                    : 135       : output : 2.5 V             :         : 8         : Y              
 dt_dig[2]                    : 136       : output : 2.5 V             :         : 8         : Y              
 dt_dig[3]                    : 137       : output : 2.5 V             :         : 8         : Y              
-RESERVED_INPUT_WITH_WEAK_PULLUP : 138       :        :                   :         : 8         :                
+sw[0]                        : 138       : input  : 2.5 V             :         : 8         : N              
 VCCIO8                       : 139       : power  :                   : 2.5V    : 8         :                
 GND                          : 140       : gnd    :                   :         :           :                
-vga_g                        : 141       : output : 2.5 V             :         : 8         : N              
-sw[0]                        : 142       : input  : 2.5 V             :         : 8         : N              
-sw[3]                        : 143       : input  : 2.5 V             :         : 8         : N              
-vga_r                        : 144       : output : 2.5 V             :         : 8         : N              
+sw[2]                        : 141       : input  : 2.5 V             :         : 8         : N              
+vga_r                        : 142       : output : 2.5 V             :         : 8         : N              
+vga_hsync                    : 143       : output : 2.5 V             :         : 8         : N              
+vga_vsync                    : 144       : output : 2.5 V             :         : 8         : N              
 GND                          : EPAD      :        :                   :         :           :                

@@ -1,10 +1,10 @@
 /*
  * linker.h - Linker script mapping information
  *
- * Machine generated for CPU 'nios2_qsys_0' in SOPC Builder design 'qsys'
- * SOPC Builder design path: ../../qsys.sopcinfo
+ * Machine generated for CPU 'NIOSII' in SOPC Builder design 'qsys'
+ * SOPC Builder design path: ../../qsys/qsys.sopcinfo
  *
- * Generated: Fri Sep 17 20:14:15 YEKT 2021
+ * Generated: Thu Sep 23 23:09:43 YEKT 2021
  */
 
 /*
@@ -65,8 +65,8 @@
  *
  */
 
-#define NEW_SDRAM_CONTROLLER_0_REGION_BASE 0x800020
-#define NEW_SDRAM_CONTROLLER_0_REGION_SPAN 8388576
+#define RAM_REGION_BASE 0x800020
+#define RAM_REGION_SPAN 8388576
 #define RESET_REGION_BASE 0x800000
 #define RESET_REGION_SPAN 32
 
@@ -76,11 +76,11 @@
  *
  */
 
-#define ALT_EXCEPTIONS_DEVICE NEW_SDRAM_CONTROLLER_0
-#define ALT_RESET_DEVICE NEW_SDRAM_CONTROLLER_0
-#define ALT_RODATA_DEVICE NEW_SDRAM_CONTROLLER_0
-#define ALT_RWDATA_DEVICE NEW_SDRAM_CONTROLLER_0
-#define ALT_TEXT_DEVICE NEW_SDRAM_CONTROLLER_0
+#define ALT_EXCEPTIONS_DEVICE RAM
+#define ALT_RESET_DEVICE RAM
+#define ALT_RODATA_DEVICE RAM
+#define ALT_RWDATA_DEVICE RAM
+#define ALT_TEXT_DEVICE RAM
 
 
 /*

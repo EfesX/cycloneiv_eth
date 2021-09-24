@@ -77,16 +77,16 @@ ALT_CPPFLAGS += -pipe
 
 # This following VERSION comment indicates the version of the tool used to 
 # generate this makefile. A makefile variable is provided for VERSION as well. 
-# ACDS_VERSION: 15.0
-ACDS_VERSION := 15.0
+# ACDS_VERSION: 20.1
+ACDS_VERSION := 20.1
 
 # This following BUILD_NUMBER comment indicates the build number of the tool 
 # used to generate this makefile. 
-# BUILD_NUMBER: 145
+# BUILD_NUMBER: 720
 
 # Qsys--generated SOPCINFO file. Required for resolving node instance ID's with 
 # design component names. 
-SOPCINFO_FILE := $(ABS_BSP_ROOT_DIR)/../../qsys.sopcinfo
+SOPCINFO_FILE := $(ABS_BSP_ROOT_DIR)/../../qsys/qsys.sopcinfo
 
 # Big-Endian operation. 
 # setting BIG_ENDIAN is false
@@ -113,8 +113,8 @@ BSP_TYPE := hal
 # setting CDX is false
 
 # CPU Name 
-# setting CPU_NAME is nios2_qsys_0
-CPU_NAME = nios2_qsys_0
+# setting CPU_NAME is NIOSII
+CPU_NAME = NIOSII
 ELF_PATCH_FLAG  += --cpu_name $(CPU_NAME)
 
 # Hardware Divider present. 
@@ -147,19 +147,19 @@ SOPC_NAME := qsys
 ELF_PATCH_FLAG  += --simulation_enabled false
 
 # The SOPC System ID 
-# setting SOPC_SYSID is 4660
-SOPC_SYSID_FLAG += --id=4660
-ELF_PATCH_FLAG  += --id 4660
+# setting SOPC_SYSID is 233492483
+SOPC_SYSID_FLAG += --id=233492483
+ELF_PATCH_FLAG  += --id 233492483
 
 # The SOPC System ID Base Address 
-# setting SOPC_SYSID_BASE_ADDRESS is 0x1001090
-SOPC_SYSID_FLAG += --sidp=0x1001090
-ELF_PATCH_FLAG  += --sidp 0x1001090
+# setting SOPC_SYSID_BASE_ADDRESS is 0x1001098
+SOPC_SYSID_FLAG += --sidp=0x1001098
+ELF_PATCH_FLAG  += --sidp 0x1001098
 
 # The SOPC Timestamp 
-# setting SOPC_TIMESTAMP is 1632071347
-SOPC_SYSID_FLAG += --timestamp=1632071347
-ELF_PATCH_FLAG  += --timestamp 1632071347
+# setting SOPC_TIMESTAMP is 1632425476
+SOPC_SYSID_FLAG += --timestamp=1632425476
+ELF_PATCH_FLAG  += --timestamp 1632425476
 
 # Enable JTAG UART driver to recover when host is inactive causing buffer to 
 # full without returning error. Printf will not fail with this recovery. none 
@@ -256,6 +256,18 @@ ALT_CPPFLAGS += -DALT_NO_INSTRUCTION_EMULATION
 # SOPC_SYSID_FLAG in public.mk. none 
 # setting hal.enable_sopc_sysid_check is true
 
+# C/C++ compiler to generate (do not generate) GP-relative accesses. 'none' 
+# tells the compilter not to generate GP-relative accesses. 'local' will 
+# generate GP-relative accesses for small data objects that are not external, 
+# weak, or uninitialized common symbols. Also use GP-relative addressing for 
+# objects that have been explicitly placed in a small data section via a 
+# section attribute. provides the default set of debug symbols typically 
+# required to debug a typical application. 'global' is same as 'local' but also 
+# generate GP-relative accesses for small data objects that are external, weak, 
+# or common. none 
+# setting hal.make.cflags_mgpopt is -mgpopt=global
+ALT_CFLAGS += -mgpopt=global
+
 # Enable BSP generation to query if SOPC system is big endian. If true ignores 
 # export of 'ALT_CFLAGS += -meb' to public.mk if big endian system. none 
 # setting hal.make.ignore_system_derived.big_endian is false
@@ -332,18 +344,18 @@ ALT_CPPFLAGS += -DALT_NO_INSTRUCTION_EMULATION
 
 # Slave descriptor of STDERR character-mode device. This setting is used by the 
 # ALT_STDERR family of defines in system.h. none 
-# setting hal.stderr is jtag_uart_0
-ELF_PATCH_FLAG  += --stderr_dev jtag_uart_0
+# setting hal.stderr is JTAG_UART
+ELF_PATCH_FLAG  += --stderr_dev JTAG_UART
 
 # Slave descriptor of STDIN character-mode device. This setting is used by the 
 # ALT_STDIN family of defines in system.h. none 
-# setting hal.stdin is jtag_uart_0
-ELF_PATCH_FLAG  += --stdin_dev jtag_uart_0
+# setting hal.stdin is JTAG_UART
+ELF_PATCH_FLAG  += --stdin_dev JTAG_UART
 
 # Slave descriptor of STDOUT character-mode device. This setting is used by the 
 # ALT_STDOUT family of defines in system.h. none 
-# setting hal.stdout is jtag_uart_0
-ELF_PATCH_FLAG  += --stdout_dev jtag_uart_0
+# setting hal.stdout is JTAG_UART
+ELF_PATCH_FLAG  += --stdout_dev JTAG_UART
 
 
 #------------------------------------------------------------------------------
