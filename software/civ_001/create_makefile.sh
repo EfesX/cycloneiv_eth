@@ -8,6 +8,7 @@ nios2-app-generate-makefile --bsp-dir ../civ_001_bsp/ \
 --inc-dir FreeRTOS/FreeRTOS-Plus-TCP/portable/NetworkInterface/include/ \
 --inc-dir FreeRTOS/FreeRTOS-Plus-TCP/portable/Compiler/GCC/ \
 --inc-dir FreeRTOS/FreeRTOS-Plus-CLI/ \
+--inc-dir ../civ_001_bsp/HAL/inc/priv/ \
 \
 --src-dir . \
 --src-dir FreeRTOS/FreeRTOS-Kernel/ \
