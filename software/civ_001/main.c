@@ -56,8 +56,8 @@ int main()
 
 void vApplicationIPNetworkEventHook(eIPCallbackEvent_t ev){
 	printf("vApplicationIPNetworkEventHook\n");
-	vStartTelnetServer(configMINIMAL_STACK_SIZE * 2, 5);
-	//vStartHTTPServer(configMINIMAL_STACK_SIZE, 9);
+	vStartTelnetServer(configMINIMAL_STACK_SIZE * 2, 6);
+	vStartHTTPServer(configMINIMAL_STACK_SIZE*2, 8);
 }
 
 void vApplicationMallocFailedHook(){

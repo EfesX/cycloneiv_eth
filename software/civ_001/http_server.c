@@ -33,12 +33,16 @@ const alt_u8 http_header[] = "HTTP/1.1 200 OK"
 		"Date: Mon, 27 Jul 2009 12:28:53 GMT"
 		"Server: Apache/2.2.14 (Win32)"
 		"Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT"
-		"Content-Length: 88"
 		"Content-Type: text/html"
 		"Connection: Closed"
-		"\r\n"
+		"\r\n\r\n"
+		"<!doctype html>"
 		"<html>"
+		"<head><title>NIOSII</title></head>"
 		"<body>	<h1>Hello, World!</h1></body></html>\0";
+
+
+
 
 
 static void prvHTTPServer(void *p);
@@ -62,16 +66,6 @@ static void prvHTTPServer(void *p){
 	TickType_t xTimeOnShutdown;
 	portBASE_TYPE xMoreDataToFollow;
 
-	#if( ipconfigUSE_TCP_WIN == 1 )
-		WinProperties_t xWinProps;
-
-		/* Fill in the buffer and window sizes that will be used by the socket. */
-		xWinProps.lTxBufSize = ipconfigTCP_TX_BUFFER_LENGTH;
-		xWinProps.lTxWinSize = configECHO_SERVER_TX_WINDOW_SIZE;
-		xWinProps.lRxBufSize = ipconfigTCP_RX_BUFFER_LENGTH;
-		xWinProps.lRxWinSize = configECHO_SERVER_RX_WINDOW_SIZE;
-	#endif /* ipconfigUSE_TCP_WIN */
-
 	/* Just to prevent compiler warnings. */
 	( void ) p;
 
@@ -81,13 +75,6 @@ static void prvHTTPServer(void *p){
 
 	/* Set a time out so accept() will just wait for a connection. */
 	FreeRTOS_setsockopt( xListeningSocket, 0, FREERTOS_SO_RCVTIMEO, &xReceiveTimeOut, sizeof( xReceiveTimeOut ) );
-
-	/* Set the window and buffer sizes. */
-	#if( ipconfigUSE_TCP_WIN == 1 )
-	{
-		FreeRTOS_setsockopt( xListeningSocket, 0, FREERTOS_SO_WIN_PROPERTIES, ( void * ) &xWinProps, sizeof( xWinProps ) );
-	}
-	#endif /* ipconfigUSE_TCP_WIN */
 
 	/* Bind the socket to the port that the client task will send to, then
 	listen for incoming connections. */

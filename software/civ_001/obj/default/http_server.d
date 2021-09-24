@@ -8,6 +8,7 @@ obj/default/./http_server.o: http_server.c \
  FreeRTOS/FreeRTOS-Kernel/portable/GCC/NiosII/portmacro.h \
  ../civ_001_bsp//HAL/inc/sys/alt_irq.h ../civ_001_bsp//HAL/inc/nios2.h \
  ../civ_001_bsp//HAL/inc/alt_types.h \
+ ../civ_001_bsp//HAL/inc/priv/alt_legacy_irq.h \
  FreeRTOS/FreeRTOS-Kernel/include/mpu_wrappers.h \
  FreeRTOS/FreeRTOS-Kernel/include/task.h \
  FreeRTOS/FreeRTOS-Kernel/include/list.h \
@@ -45,6 +46,8 @@ FreeRTOS/FreeRTOS-Kernel/portable/GCC/NiosII/portmacro.h:
 ../civ_001_bsp//HAL/inc/nios2.h:
 
 ../civ_001_bsp//HAL/inc/alt_types.h:
+
+../civ_001_bsp//HAL/inc/priv/alt_legacy_irq.h:
 
 FreeRTOS/FreeRTOS-Kernel/include/mpu_wrappers.h:
 

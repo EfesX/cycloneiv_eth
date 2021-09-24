@@ -76,7 +76,7 @@ static BaseType_t prvTaskStatsCommand( char *pcWriteBuffer, size_t xWriteBufferL
 	const char *const pcHeader = "Task State  Priority  Stack #\r\n************************************************\r\n";
 	strcpy(pcWriteBuffer, pcHeader);
 
-	vTaskList(pcWriteBuffer + strlen(pcWriteBuffer));
+	vTaskList(pcWriteBuffer);
 
 	return pdFALSE;
 }

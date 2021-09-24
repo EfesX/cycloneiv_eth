@@ -159,30 +159,30 @@ static const TickType_t xSendTimeOut = pdMS_TO_TICKS( 5000 );
 
 static void prvConnectionListeningTask( void *pvParameters )
 {
-struct freertos_sockaddr xClient, xBindAddress;
-Socket_t xListeningSocket, xConnectedSocket;
-socklen_t xSize = sizeof( xClient );
-static const TickType_t xReceiveTimeOut = portMAX_DELAY;
-const BaseType_t xBacklog = 20;
-int32_t lBytes;
-TickType_t xTimeOnShutdown;
-portBASE_TYPE xMoreDataToFollow;
+	struct freertos_sockaddr xClient, xBindAddress;
+	Socket_t xListeningSocket, xConnectedSocket;
+	socklen_t xSize = sizeof( xClient );
+	static const TickType_t xReceiveTimeOut = portMAX_DELAY;
+	const BaseType_t xBacklog = 20;
+	int32_t lBytes;
+	TickType_t xTimeOnShutdown;
+	portBASE_TYPE xMoreDataToFollow;
 
-const char *const tHeader = "************************************************\r\n"
-		"TELNET SERVER ON eFPGA + NIOSII + ENC28J60\r\n"
-		"************************************************\r\n"
-		">> \0";
-int32_t lSent = strlen(tHeader);
+	const char *const tHeader = "************************************************\r\n"
+			"TELNET SERVER ON eFPGA + NIOSII + ENC28J60\r\n"
+			"************************************************\r\n"
+			">> \0";
+	int32_t lSent = strlen(tHeader);
 
-#if( ipconfigUSE_TCP_WIN == 1 )
-	WinProperties_t xWinProps;
+	#if( ipconfigUSE_TCP_WIN == 1 )
+		WinProperties_t xWinProps;
 
-	/* Fill in the buffer and window sizes that will be used by the socket. */
-	xWinProps.lTxBufSize = ipconfigTCP_TX_BUFFER_LENGTH;
-	xWinProps.lTxWinSize = configECHO_SERVER_TX_WINDOW_SIZE;
-	xWinProps.lRxBufSize = ipconfigTCP_RX_BUFFER_LENGTH;
-	xWinProps.lRxWinSize = configECHO_SERVER_RX_WINDOW_SIZE;
-#endif /* ipconfigUSE_TCP_WIN */
+		/* Fill in the buffer and window sizes that will be used by the socket. */
+		xWinProps.lTxBufSize = ipconfigTCP_TX_BUFFER_LENGTH;
+		xWinProps.lTxWinSize = configECHO_SERVER_TX_WINDOW_SIZE;
+		xWinProps.lRxBufSize = ipconfigTCP_RX_BUFFER_LENGTH;
+		xWinProps.lRxWinSize = configECHO_SERVER_RX_WINDOW_SIZE;
+	#endif /* ipconfigUSE_TCP_WIN */
 
 	/* Just to prevent compiler warnings. */
 	( void ) pvParameters;
