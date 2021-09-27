@@ -51,12 +51,9 @@ ifeq ($(findstring Microsoft,$(UNAME)),Microsoft)
 	WINDOWS_EXE = .exe
 endif
 
-eq = $(and $(findstring $(1),$(2)),$(findstring $(2),$(1)))
-
 ifdef WINDOWS_EXE 
 	adjust-path = $(if $1,$(shell wslpath "$1"),)
-	adjust-path-mixed = $(if $(call eq,$(shell echo $1 | head -c 5),/mnt/),$(shell echo $1 | sed 's/\/mnt\///g;s/\//:\//1'),$1)
-	
+	adjust-path-mixed = $(if $1,$(shell wslpath -m "$1"),)
 else # !WINDOWS_EXE
 	adjust-path = $1
 	adjust-path-mixed = $1
@@ -76,12 +73,12 @@ BUILD_CONFIGS := default
 
 # This following VERSION comment indicates the version of the tool used to 
 # generate this makefile. A makefile variable is provided for VERSION as well. 
-# ACDS_VERSION: 20.1
-ACDS_VERSION := 20.1
+# ACDS_VERSION: 19.1
+ACDS_VERSION := 19.1
 
 # This following BUILD_NUMBER comment indicates the build number of the tool 
 # used to generate this makefile. 
-# BUILD_NUMBER: 720
+# BUILD_NUMBER: 670
 
 # Define path to the application ELF. 
 # It may be used by the makefile fragments so is defined before including them. 
@@ -107,6 +104,7 @@ SRC_DIR_07 := $(call adjust-path,FreeRTOS/FreeRTOS-Plus-TCP/portable/NetworkInte
 
 SDIR_C_SRCS += $(SRC_DIR_01)/CLI-Commands.c
 SDIR_C_SRCS += $(SRC_DIR_01)/http_server.c
+SDIR_C_SRCS += $(SRC_DIR_01)/lm75.c
 SDIR_C_SRCS += $(SRC_DIR_01)/main.c
 SDIR_C_SRCS += $(SRC_DIR_01)/telnet_server.c
 SDIR_C_SRCS += $(SRC_DIR_02)/croutine.c

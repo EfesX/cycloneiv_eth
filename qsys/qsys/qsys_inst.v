@@ -16,6 +16,14 @@
 		.ram_dqm       (<connected-to-ram_dqm>),       //        .dqm
 		.ram_ras_n     (<connected-to-ram_ras_n>),     //        .ras_n
 		.ram_we_n      (<connected-to-ram_we_n>),      //        .we_n
-		.reset_reset_n (<connected-to-reset_reset_n>)  //   reset.reset_n
+		.reset_reset_n (<connected-to-reset_reset_n>), //   reset.reset_n
+		.temp_sda_in   (<connected-to-temp_sda_in>),   //    temp.sda_in
+		.temp_scl_in   (<connected-to-temp_scl_in>),   //        .scl_in
+		.temp_sda_oe   (<connected-to-temp_sda_oe>),   //        .sda_oe
+		.temp_scl_oe   (<connected-to-temp_scl_oe>),   //        .scl_oe
+		.eeprom_sda_in (<connected-to-eeprom_sda_in>), //  eeprom.sda_in
+		.eeprom_scl_in (<connected-to-eeprom_scl_in>), //        .scl_in
+		.eeprom_sda_oe (<connected-to-eeprom_sda_oe>), //        .sda_oe
+		.eeprom_scl_oe (<connected-to-eeprom_scl_oe>)  //        .scl_oe
 	);
 

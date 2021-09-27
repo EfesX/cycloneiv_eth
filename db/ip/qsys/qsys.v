@@ -7,6 +7,10 @@ module qsys (
 		input  wire [7:0]  btn_export,    //     btn.export
 		input  wire        clk_clk,       //     clk.clk
 		output wire [15:0] d7seg_export,  //   d7seg.export
+		input  wire        eeprom_sda_in, //  eeprom.sda_in
+		input  wire        eeprom_scl_in, //        .scl_in
+		output wire        eeprom_sda_oe, //        .sda_oe
+		output wire        eeprom_scl_oe, //        .scl_oe
 		input  wire        enc_spi_MISO,  // enc_spi.MISO
 		output wire        enc_spi_MOSI,  //        .MOSI
 		output wire        enc_spi_SCLK,  //        .SCLK
@@ -21,7 +25,11 @@ module qsys (
 		output wire [1:0]  ram_dqm,       //        .dqm
 		output wire        ram_ras_n,     //        .ras_n
 		output wire        ram_we_n,      //        .we_n
-		input  wire        reset_reset_n  //   reset.reset_n
+		input  wire        reset_reset_n, //   reset.reset_n
+		input  wire        temp_sda_in,   //    temp.sda_in
+		input  wire        temp_scl_in,   //        .scl_in
+		output wire        temp_sda_oe,   //        .sda_oe
+		output wire        temp_scl_oe    //        .scl_oe
 	);
 
 	wire  [31:0] niosii_data_master_readdata;                               // mm_interconnect_0:NIOSII_data_master_readdata -> NIOSII:d_readdata
@@ -45,6 +53,16 @@ module qsys (
 	wire  [31:0] mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata;   // mm_interconnect_0:JTAG_UART_avalon_jtag_slave_writedata -> JTAG_UART:av_writedata
 	wire  [31:0] mm_interconnect_0_sysid_control_slave_readdata;            // SYSID:readdata -> mm_interconnect_0:SYSID_control_slave_readdata
 	wire   [0:0] mm_interconnect_0_sysid_control_slave_address;             // mm_interconnect_0:SYSID_control_slave_address -> SYSID:address
+	wire  [31:0] mm_interconnect_0_i2c_temp_csr_readdata;                   // I2C_TEMP:readdata -> mm_interconnect_0:I2C_TEMP_csr_readdata
+	wire   [3:0] mm_interconnect_0_i2c_temp_csr_address;                    // mm_interconnect_0:I2C_TEMP_csr_address -> I2C_TEMP:addr
+	wire         mm_interconnect_0_i2c_temp_csr_read;                       // mm_interconnect_0:I2C_TEMP_csr_read -> I2C_TEMP:read
+	wire         mm_interconnect_0_i2c_temp_csr_write;                      // mm_interconnect_0:I2C_TEMP_csr_write -> I2C_TEMP:write
+	wire  [31:0] mm_interconnect_0_i2c_temp_csr_writedata;                  // mm_interconnect_0:I2C_TEMP_csr_writedata -> I2C_TEMP:writedata
+	wire  [31:0] mm_interconnect_0_i2c_eeprom_csr_readdata;                 // I2C_EEPROM:readdata -> mm_interconnect_0:I2C_EEPROM_csr_readdata
+	wire   [3:0] mm_interconnect_0_i2c_eeprom_csr_address;                  // mm_interconnect_0:I2C_EEPROM_csr_address -> I2C_EEPROM:addr
+	wire         mm_interconnect_0_i2c_eeprom_csr_read;                     // mm_interconnect_0:I2C_EEPROM_csr_read -> I2C_EEPROM:read
+	wire         mm_interconnect_0_i2c_eeprom_csr_write;                    // mm_interconnect_0:I2C_EEPROM_csr_write -> I2C_EEPROM:write
+	wire  [31:0] mm_interconnect_0_i2c_eeprom_csr_writedata;                // mm_interconnect_0:I2C_EEPROM_csr_writedata -> I2C_EEPROM:writedata
 	wire  [31:0] mm_interconnect_0_niosii_debug_mem_slave_readdata;         // NIOSII:debug_mem_slave_readdata -> mm_interconnect_0:NIOSII_debug_mem_slave_readdata
 	wire         mm_interconnect_0_niosii_debug_mem_slave_waitrequest;      // NIOSII:debug_mem_slave_waitrequest -> mm_interconnect_0:NIOSII_debug_mem_slave_waitrequest
 	wire         mm_interconnect_0_niosii_debug_mem_slave_debugaccess;      // mm_interconnect_0:NIOSII_debug_mem_slave_debugaccess -> NIOSII:debug_mem_slave_debugaccess
@@ -93,13 +111,61 @@ module qsys (
 	wire         mm_interconnect_0_spi_master_spi_control_port_read;        // mm_interconnect_0:SPI_MASTER_spi_control_port_read -> SPI_MASTER:read_n
 	wire         mm_interconnect_0_spi_master_spi_control_port_write;       // mm_interconnect_0:SPI_MASTER_spi_control_port_write -> SPI_MASTER:write_n
 	wire  [15:0] mm_interconnect_0_spi_master_spi_control_port_writedata;   // mm_interconnect_0:SPI_MASTER_spi_control_port_writedata -> SPI_MASTER:data_from_cpu
-	wire         irq_mapper_receiver0_irq;                                  // PIO_BTN:irq -> irq_mapper:receiver0_irq
-	wire         irq_mapper_receiver1_irq;                                  // SYS_TIMER:irq -> irq_mapper:receiver1_irq
-	wire         irq_mapper_receiver2_irq;                                  // TS_TIMER:irq -> irq_mapper:receiver2_irq
-	wire         irq_mapper_receiver3_irq;                                  // JTAG_UART:av_irq -> irq_mapper:receiver3_irq
+	wire         irq_mapper_receiver0_irq;                                  // SYS_TIMER:irq -> irq_mapper:receiver0_irq
+	wire         irq_mapper_receiver1_irq;                                  // JTAG_UART:av_irq -> irq_mapper:receiver1_irq
 	wire  [31:0] niosii_irq_irq;                                            // irq_mapper:sender_irq -> NIOSII:irq
-	wire         rst_controller_reset_out_reset;                            // rst_controller:reset_out -> [JTAG_UART:rst_n, NIOSII:reset_n, PIO_BTN:reset_n, PIO_D7SEG:reset_n, PIO_LED:reset_n, RAM:reset_n, SPI_MASTER:reset_n, SYSID:reset_n, SYS_TIMER:reset_n, TS_TIMER:reset_n, irq_mapper:reset, mm_interconnect_0:NIOSII_reset_reset_bridge_in_reset_reset, rst_translator:in_reset]
+	wire         rst_controller_reset_out_reset;                            // rst_controller:reset_out -> [I2C_EEPROM:rst_n, I2C_TEMP:rst_n, JTAG_UART:rst_n, NIOSII:reset_n, PIO_BTN:reset_n, PIO_D7SEG:reset_n, PIO_LED:reset_n, RAM:reset_n, SPI_MASTER:reset_n, SYSID:reset_n, SYS_TIMER:reset_n, TS_TIMER:reset_n, irq_mapper:reset, mm_interconnect_0:NIOSII_reset_reset_bridge_in_reset_reset, rst_translator:in_reset]
 	wire         rst_controller_reset_out_reset_req;                        // rst_controller:reset_req -> [NIOSII:reset_req, rst_translator:reset_req_in]
+
+	altera_avalon_i2c #(
+		.USE_AV_ST       (0),
+		.FIFO_DEPTH      (8),
+		.FIFO_DEPTH_LOG2 (3)
+	) i2c_eeprom (
+		.clk       (clk_clk),                                    //            clock.clk
+		.rst_n     (~rst_controller_reset_out_reset),            //       reset_sink.reset_n
+		.intr      (),                                           // interrupt_sender.irq
+		.addr      (mm_interconnect_0_i2c_eeprom_csr_address),   //              csr.address
+		.read      (mm_interconnect_0_i2c_eeprom_csr_read),      //                 .read
+		.write     (mm_interconnect_0_i2c_eeprom_csr_write),     //                 .write
+		.writedata (mm_interconnect_0_i2c_eeprom_csr_writedata), //                 .writedata
+		.readdata  (mm_interconnect_0_i2c_eeprom_csr_readdata),  //                 .readdata
+		.sda_in    (eeprom_sda_in),                              //       i2c_serial.sda_in
+		.scl_in    (eeprom_scl_in),                              //                 .scl_in
+		.sda_oe    (eeprom_sda_oe),                              //                 .sda_oe
+		.scl_oe    (eeprom_scl_oe),                              //                 .scl_oe
+		.src_data  (),                                           //      (terminated)
+		.src_valid (),                                           //      (terminated)
+		.src_ready (1'b0),                                       //      (terminated)
+		.snk_data  (16'b0000000000000000),                       //      (terminated)
+		.snk_valid (1'b0),                                       //      (terminated)
+		.snk_ready ()                                            //      (terminated)
+	);
+
+	altera_avalon_i2c #(
+		.USE_AV_ST       (0),
+		.FIFO_DEPTH      (8),
+		.FIFO_DEPTH_LOG2 (3)
+	) i2c_temp (
+		.clk       (clk_clk),                                  //            clock.clk
+		.rst_n     (~rst_controller_reset_out_reset),          //       reset_sink.reset_n
+		.intr      (),                                         // interrupt_sender.irq
+		.addr      (mm_interconnect_0_i2c_temp_csr_address),   //              csr.address
+		.read      (mm_interconnect_0_i2c_temp_csr_read),      //                 .read
+		.write     (mm_interconnect_0_i2c_temp_csr_write),     //                 .write
+		.writedata (mm_interconnect_0_i2c_temp_csr_writedata), //                 .writedata
+		.readdata  (mm_interconnect_0_i2c_temp_csr_readdata),  //                 .readdata
+		.sda_in    (temp_sda_in),                              //       i2c_serial.sda_in
+		.scl_in    (temp_scl_in),                              //                 .scl_in
+		.sda_oe    (temp_sda_oe),                              //                 .sda_oe
+		.scl_oe    (temp_scl_oe),                              //                 .scl_oe
+		.src_data  (),                                         //      (terminated)
+		.src_valid (),                                         //      (terminated)
+		.src_ready (1'b0),                                     //      (terminated)
+		.snk_data  (16'b0000000000000000),                     //      (terminated)
+		.snk_valid (1'b0),                                     //      (terminated)
+		.snk_ready ()                                          //      (terminated)
+	);
 
 	qsys_JTAG_UART jtag_uart (
 		.clk            (clk_clk),                                                   //               clk.clk
@@ -111,7 +177,7 @@ module qsys (
 		.av_write_n     (~mm_interconnect_0_jtag_uart_avalon_jtag_slave_write),      //                  .write_n
 		.av_writedata   (mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata),   //                  .writedata
 		.av_waitrequest (mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest), //                  .waitrequest
-		.av_irq         (irq_mapper_receiver3_irq)                                   //               irq.irq
+		.av_irq         (irq_mapper_receiver1_irq)                                   //               irq.irq
 	);
 
 	qsys_NIOSII niosii (
@@ -152,7 +218,7 @@ module qsys (
 		.chipselect (mm_interconnect_0_pio_btn_s1_chipselect), //                    .chipselect
 		.readdata   (mm_interconnect_0_pio_btn_s1_readdata),   //                    .readdata
 		.in_port    (btn_export),                              // external_connection.export
-		.irq        (irq_mapper_receiver0_irq)                 //                 irq.irq
+		.irq        ()                                         //                 irq.irq
 	);
 
 	qsys_PIO_D7SEG pio_d7seg (
@@ -231,7 +297,7 @@ module qsys (
 		.readdata   (mm_interconnect_0_sys_timer_s1_readdata),   //      .readdata
 		.chipselect (mm_interconnect_0_sys_timer_s1_chipselect), //      .chipselect
 		.write_n    (~mm_interconnect_0_sys_timer_s1_write),     //      .write_n
-		.irq        (irq_mapper_receiver1_irq)                   //   irq.irq
+		.irq        (irq_mapper_receiver0_irq)                   //   irq.irq
 	);
 
 	qsys_TS_TIMER ts_timer (
@@ -242,7 +308,7 @@ module qsys (
 		.readdata   (mm_interconnect_0_ts_timer_s1_readdata),   //      .readdata
 		.chipselect (mm_interconnect_0_ts_timer_s1_chipselect), //      .chipselect
 		.write_n    (~mm_interconnect_0_ts_timer_s1_write),     //      .write_n
-		.irq        (irq_mapper_receiver2_irq)                  //   irq.irq
+		.irq        ()                                          //   irq.irq
 	);
 
 	qsys_mm_interconnect_0 mm_interconnect_0 (
@@ -260,6 +326,16 @@ module qsys (
 		.NIOSII_instruction_master_waitrequest    (niosii_instruction_master_waitrequest),                     //                                   .waitrequest
 		.NIOSII_instruction_master_read           (niosii_instruction_master_read),                            //                                   .read
 		.NIOSII_instruction_master_readdata       (niosii_instruction_master_readdata),                        //                                   .readdata
+		.I2C_EEPROM_csr_address                   (mm_interconnect_0_i2c_eeprom_csr_address),                  //                     I2C_EEPROM_csr.address
+		.I2C_EEPROM_csr_write                     (mm_interconnect_0_i2c_eeprom_csr_write),                    //                                   .write
+		.I2C_EEPROM_csr_read                      (mm_interconnect_0_i2c_eeprom_csr_read),                     //                                   .read
+		.I2C_EEPROM_csr_readdata                  (mm_interconnect_0_i2c_eeprom_csr_readdata),                 //                                   .readdata
+		.I2C_EEPROM_csr_writedata                 (mm_interconnect_0_i2c_eeprom_csr_writedata),                //                                   .writedata
+		.I2C_TEMP_csr_address                     (mm_interconnect_0_i2c_temp_csr_address),                    //                       I2C_TEMP_csr.address
+		.I2C_TEMP_csr_write                       (mm_interconnect_0_i2c_temp_csr_write),                      //                                   .write
+		.I2C_TEMP_csr_read                        (mm_interconnect_0_i2c_temp_csr_read),                       //                                   .read
+		.I2C_TEMP_csr_readdata                    (mm_interconnect_0_i2c_temp_csr_readdata),                   //                                   .readdata
+		.I2C_TEMP_csr_writedata                   (mm_interconnect_0_i2c_temp_csr_writedata),                  //                                   .writedata
 		.JTAG_UART_avalon_jtag_slave_address      (mm_interconnect_0_jtag_uart_avalon_jtag_slave_address),     //        JTAG_UART_avalon_jtag_slave.address
 		.JTAG_UART_avalon_jtag_slave_write        (mm_interconnect_0_jtag_uart_avalon_jtag_slave_write),       //                                   .write
 		.JTAG_UART_avalon_jtag_slave_read         (mm_interconnect_0_jtag_uart_avalon_jtag_slave_read),        //                                   .read
@@ -324,8 +400,6 @@ module qsys (
 		.reset         (rst_controller_reset_out_reset), // clk_reset.reset
 		.receiver0_irq (irq_mapper_receiver0_irq),       // receiver0.irq
 		.receiver1_irq (irq_mapper_receiver1_irq),       // receiver1.irq
-		.receiver2_irq (irq_mapper_receiver2_irq),       // receiver2.irq
-		.receiver3_irq (irq_mapper_receiver3_irq),       // receiver3.irq
 		.sender_irq    (niosii_irq_irq)                  //    sender.irq
 	);
 

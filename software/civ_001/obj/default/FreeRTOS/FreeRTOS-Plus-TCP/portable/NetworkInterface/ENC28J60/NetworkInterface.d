@@ -37,9 +37,9 @@ obj/default/FreeRTOS/FreeRTOS-Plus-TCP/portable/NetworkInterface/ENC28J60/Networ
  FreeRTOS/FreeRTOS-Plus-TCP/include/NetworkInterface.h \
  FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOSIPConfig.h \
  FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOSIPConfigDefaults.h \
- ../civ_001_bsp//drivers/inc/altera_avalon_pio_regs.h \
- ../civ_001_bsp//HAL/inc/io.h ../civ_001_bsp//HAL/inc/alt_types.h \
  FreeRTOS/FreeRTOS-Plus-TCP/portable/NetworkInterface/include/enc.h \
+ ../civ_001_bsp//HAL/inc/io.h ../civ_001_bsp//HAL/inc/alt_types.h \
+ ../civ_001_bsp//drivers/inc/altera_avalon_pio_regs.h \
  ../civ_001_bsp//drivers/inc/altera_avalon_spi_regs.h \
  ../civ_001_bsp//drivers/inc/altera_avalon_spi.h
 
@@ -121,13 +121,13 @@ FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOSIPConfig.h:
 
 FreeRTOS/FreeRTOS-Plus-TCP/include/FreeRTOSIPConfigDefaults.h:
 
-../civ_001_bsp//drivers/inc/altera_avalon_pio_regs.h:
+FreeRTOS/FreeRTOS-Plus-TCP/portable/NetworkInterface/include/enc.h:
 
 ../civ_001_bsp//HAL/inc/io.h:
 
 ../civ_001_bsp//HAL/inc/alt_types.h:
 
-FreeRTOS/FreeRTOS-Plus-TCP/portable/NetworkInterface/include/enc.h:
+../civ_001_bsp//drivers/inc/altera_avalon_pio_regs.h:
 
 ../civ_001_bsp//drivers/inc/altera_avalon_spi_regs.h:
 

@@ -232,6 +232,22 @@
 					"strict" : false
 				},
 				{
+					"name" : "scl",
+					"strict" : false
+				},
+				{
+					"name" : "sda",
+					"strict" : false
+				},
+				{
+					"name" : "i2c_scl",
+					"strict" : false
+				},
+				{
+					"name" : "i2c_sda",
+					"strict" : false
+				},
+				{
 					"name" : "clock",
 					"strict" : false
 				},
@@ -252,11 +268,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "enc_irq",
+					"name" : "reset",
 					"strict" : false
 				},
 				{
-					"name" : "reset",
+					"name" : "enc_irq",
 					"strict" : false
 				},
 				{

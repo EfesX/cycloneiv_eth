@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>24.09.2021 0:33:23</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1632425603154</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>27.09.2021 22:32:56</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1632763976172</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>/home/efesxzc/projects/fpga/cycloneiv_eth/software/civ_001_bsp</BspGeneratedLocation>
         <BspSettingsFile>./settings.bsp</BspSettingsFile>
         <SopcDesignFile>../../qsys/qsys.sopcinfo</SopcDesignFile>
@@ -905,52 +905,64 @@
                 <attributes>memory</attributes>
         </MemoryMap>
         <MemoryMap>
+                <slaveDescriptor>I2C_EEPROM</slaveDescriptor>
+                <addressRange>0x01001000 - 0x0100103F</addressRange>
+                <addressSpan>64</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>I2C_TEMP</slaveDescriptor>
+                <addressRange>0x01001040 - 0x0100107F</addressRange>
+                <addressSpan>64</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>SPI_MASTER</slaveDescriptor>
-                <addressRange>0x01001000 - 0x0100101F</addressRange>
+                <addressRange>0x01001080 - 0x0100109F</addressRange>
                 <addressSpan>32</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>TS_TIMER</slaveDescriptor>
-                <addressRange>0x01001020 - 0x0100103F</addressRange>
+                <addressRange>0x010010A0 - 0x010010BF</addressRange>
                 <addressSpan>32</addressSpan>
                 <attributes>timer</attributes>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>SYS_TIMER</slaveDescriptor>
-                <addressRange>0x01001040 - 0x0100105F</addressRange>
+                <addressRange>0x010010C0 - 0x010010DF</addressRange>
                 <addressSpan>32</addressSpan>
                 <attributes>timer</attributes>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>PIO_D7SEG</slaveDescriptor>
-                <addressRange>0x01001060 - 0x0100106F</addressRange>
+                <addressRange>0x010010E0 - 0x010010EF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>PIO_BTN</slaveDescriptor>
-                <addressRange>0x01001070 - 0x0100107F</addressRange>
+                <addressRange>0x010010F0 - 0x010010FF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>PIO_LED</slaveDescriptor>
-                <addressRange>0x01001080 - 0x0100108F</addressRange>
+                <addressRange>0x01001100 - 0x0100110F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>JTAG_UART</slaveDescriptor>
-                <addressRange>0x01001090 - 0x01001097</addressRange>
-                <addressSpan>8</addressSpan>
-                <attributes>printable</attributes>
-        </MemoryMap>
-        <MemoryMap>
                 <slaveDescriptor>SYSID</slaveDescriptor>
-                <addressRange>0x01001098 - 0x0100109F</addressRange>
+                <addressRange>0x01001110 - 0x01001117</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>JTAG_UART</slaveDescriptor>
+                <addressRange>0x01001118 - 0x0100111F</addressRange>
+                <addressSpan>8</addressSpan>
+                <attributes>printable</attributes>
         </MemoryMap>
         <LinkerSection>
                 <sectionName>.text</sectionName>

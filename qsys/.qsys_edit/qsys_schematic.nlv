@@ -1,30 +1,36 @@
 # # File gsaved with Nlview version 6.3.8  2013-12-19 bk=1.2992 VDI=34 GEI=35
 # 
-preplace inst qsys.JTAG_UART -pg 1 -lvl 3 -y 150
+preplace inst qsys.JTAG_UART -pg 1 -lvl 3 -y 270
 preplace inst qsys -pg 1 -lvl 1 -y 40 -regy -20
+preplace inst qsys.SPI_SDCARD -pg 1 -lvl 3 -y 1090
 preplace inst qsys.NIOSII.cpu -pg 1
-preplace inst qsys.SPI_MASTER -pg 1 -lvl 3 -y 350
-preplace inst qsys.SYSID -pg 1 -lvl 3 -y 470
-preplace inst qsys.PIO_LED -pg 1 -lvl 3 -y 650
+preplace inst qsys.SPI_MASTER -pg 1 -lvl 3 -y 470
+preplace inst qsys.SYSID -pg 1 -lvl 3 -y 590
+preplace inst qsys.PIO_LED -pg 1 -lvl 3 -y 770
 preplace inst qsys.NIOSII.clock_bridge -pg 1
-preplace inst qsys.clk_0 -pg 1 -lvl 1 -y 510
-preplace inst qsys.PIO_BTN -pg 1 -lvl 3 -y 30
-preplace inst qsys.NIOSII -pg 1 -lvl 2 -y 490
-preplace inst qsys.TS_TIMER -pg 1 -lvl 3 -y 550
+preplace inst qsys.clk_0 -pg 1 -lvl 1 -y 630
+preplace inst qsys.PIO_BTN -pg 1 -lvl 3 -y 150
+preplace inst qsys.NIOSII -pg 1 -lvl 2 -y 610
+preplace inst qsys.TS_TIMER -pg 1 -lvl 3 -y 670
+preplace inst qsys.I2C_EEPROM -pg 1 -lvl 3 -y 30
 preplace inst qsys.NIOSII.reset_bridge -pg 1
-preplace inst qsys.RAM -pg 1 -lvl 3 -y 750
-preplace inst qsys.SYS_TIMER -pg 1 -lvl 3 -y 250
-preplace inst qsys.PIO_D7SEG -pg 1 -lvl 3 -y 850
-preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)RAM.wire,(SLAVE)qsys.ram) 1 0 3 NJ 820 NJ 820 NJ
-preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)SPI_MASTER.external,(SLAVE)qsys.enc_spi) 1 0 3 NJ 380 NJ 380 NJ
-preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)PIO_D7SEG.external_connection,(SLAVE)qsys.d7seg) 1 0 3 NJ 880 NJ 880 NJ
-preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)qsys.led,(SLAVE)PIO_LED.external_connection) 1 0 3 NJ 680 NJ 680 NJ
-preplace netloc INTERCONNECT<net_container>qsys</net_container>(SLAVE)NIOSII.debug_mem_slave,(SLAVE)SPI_MASTER.spi_control_port,(MASTER)NIOSII.instruction_master,(SLAVE)SYS_TIMER.s1,(SLAVE)PIO_D7SEG.s1,(MASTER)NIOSII.data_master,(SLAVE)RAM.s1,(SLAVE)PIO_BTN.s1,(SLAVE)PIO_LED.s1,(SLAVE)TS_TIMER.s1,(SLAVE)JTAG_UART.avalon_jtag_slave,(SLAVE)SYSID.control_slave) 1 1 2 310 450 730
-preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)PIO_BTN.external_connection,(SLAVE)qsys.btn) 1 0 3 NJ 60 NJ 60 NJ
-preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)clk_0.clk_in,(SLAVE)qsys.clk) 1 0 1 NJ
-preplace netloc FAN_OUT<net_container>qsys</net_container>(SLAVE)TS_TIMER.irq,(SLAVE)SYS_TIMER.irq,(SLAVE)PIO_BTN.irq,(SLAVE)JTAG_UART.irq,(MASTER)NIOSII.irq) 1 2 1 670
-preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)qsys.reset,(SLAVE)clk_0.clk_in_reset) 1 0 1 NJ
-preplace netloc FAN_OUT<net_container>qsys</net_container>(SLAVE)TS_TIMER.reset,(MASTER)clk_0.clk_reset,(SLAVE)RAM.reset,(SLAVE)PIO_LED.reset,(SLAVE)SYSID.reset,(SLAVE)JTAG_UART.reset,(SLAVE)NIOSII.reset,(SLAVE)PIO_D7SEG.reset,(SLAVE)PIO_BTN.reset,(SLAVE)SYS_TIMER.reset,(SLAVE)SPI_MASTER.reset) 1 1 2 290 430 710
-preplace netloc FAN_OUT<net_container>qsys</net_container>(SLAVE)RAM.clk,(SLAVE)JTAG_UART.clk,(SLAVE)SYS_TIMER.clk,(SLAVE)NIOSII.clk,(SLAVE)PIO_LED.clk,(MASTER)clk_0.clk,(SLAVE)PIO_BTN.clk,(SLAVE)SPI_MASTER.clk,(SLAVE)TS_TIMER.clk,(SLAVE)SYSID.clk,(SLAVE)PIO_D7SEG.clk) 1 1 2 270 410 690
-levelinfo -pg 1 0 60 920
-levelinfo -hier qsys 70 100 430 760 910
+preplace inst qsys.RAM -pg 1 -lvl 3 -y 870
+preplace inst qsys.I2C_TEMP -pg 1 -lvl 3 -y 970
+preplace inst qsys.SYS_TIMER -pg 1 -lvl 3 -y 370
+preplace inst qsys.PIO_D7SEG -pg 1 -lvl 3 -y 1210
+preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)RAM.wire,(SLAVE)qsys.ram) 1 0 3 NJ 940 NJ 940 NJ
+preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)SPI_MASTER.external,(SLAVE)qsys.enc_spi) 1 0 3 NJ 500 NJ 500 NJ
+preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)qsys.led,(SLAVE)PIO_LED.external_connection) 1 0 3 NJ 800 NJ 800 NJ
+preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)qsys.d7seg,(SLAVE)PIO_D7SEG.external_connection) 1 0 3 NJ 1240 NJ 1240 NJ
+preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)qsys.eeprom,(SLAVE)I2C_EEPROM.i2c_serial) 1 0 3 NJ 100 NJ 100 NJ
+preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)PIO_BTN.external_connection,(SLAVE)qsys.btn) 1 0 3 NJ 180 NJ 180 NJ
+preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)qsys.temp,(SLAVE)I2C_TEMP.i2c_serial) 1 0 3 NJ 990 NJ 990 NJ
+preplace netloc FAN_OUT<net_container>qsys</net_container>(SLAVE)NIOSII.clk,(SLAVE)PIO_D7SEG.clk,(SLAVE)PIO_LED.clk,(MASTER)clk_0.clk,(SLAVE)RAM.clk,(SLAVE)SYSID.clk,(SLAVE)SPI_SDCARD.clk,(SLAVE)SPI_MASTER.clk,(SLAVE)JTAG_UART.clk,(SLAVE)I2C_EEPROM.clock,(SLAVE)PIO_BTN.clk,(SLAVE)TS_TIMER.clk,(SLAVE)SYS_TIMER.clk,(SLAVE)I2C_TEMP.clock) 1 1 2 290 1030 730
+preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)clk_0.clk_in_reset,(SLAVE)qsys.reset) 1 0 1 NJ
+preplace netloc FAN_OUT<net_container>qsys</net_container>(SLAVE)PIO_BTN.irq,(SLAVE)TS_TIMER.irq,(SLAVE)JTAG_UART.irq,(MASTER)NIOSII.irq,(SLAVE)SYS_TIMER.irq) 1 2 1 770
+preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)SPI_SDCARD.external,(SLAVE)qsys.sdcard) 1 0 3 NJ 1010 NJ 1010 NJ
+preplace netloc EXPORT<net_container>qsys</net_container>(SLAVE)qsys.clk,(SLAVE)clk_0.clk_in) 1 0 1 NJ
+preplace netloc FAN_OUT<net_container>qsys</net_container>(SLAVE)PIO_BTN.reset,(SLAVE)SPI_SDCARD.reset,(SLAVE)I2C_TEMP.reset_sink,(SLAVE)NIOSII.reset,(SLAVE)SYSID.reset,(SLAVE)PIO_D7SEG.reset,(SLAVE)SYS_TIMER.reset,(SLAVE)SPI_MASTER.reset,(SLAVE)I2C_EEPROM.reset_sink,(SLAVE)RAM.reset,(SLAVE)PIO_LED.reset,(MASTER)clk_0.clk_reset,(SLAVE)JTAG_UART.reset,(SLAVE)TS_TIMER.reset) 1 1 2 270 1260 750
+preplace netloc INTERCONNECT<net_container>qsys</net_container>(SLAVE)RAM.s1,(SLAVE)TS_TIMER.s1,(MASTER)NIOSII.instruction_master,(MASTER)NIOSII.data_master,(SLAVE)SYSID.control_slave,(SLAVE)PIO_D7SEG.s1,(SLAVE)NIOSII.debug_mem_slave,(SLAVE)SPI_SDCARD.spi_control_port,(SLAVE)PIO_LED.s1,(SLAVE)I2C_EEPROM.csr,(SLAVE)PIO_BTN.s1,(SLAVE)SYS_TIMER.s1,(SLAVE)SPI_MASTER.spi_control_port,(SLAVE)JTAG_UART.avalon_jtag_slave,(SLAVE)I2C_TEMP.csr) 1 1 2 310 1280 710
+levelinfo -pg 1 0 60 960
+levelinfo -hier qsys 70 100 430 800 950

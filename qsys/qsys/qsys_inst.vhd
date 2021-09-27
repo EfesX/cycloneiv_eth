@@ -17,7 +17,15 @@
 			ram_dqm       : out   std_logic_vector(1 downto 0);                     -- dqm
 			ram_ras_n     : out   std_logic;                                        -- ras_n
 			ram_we_n      : out   std_logic;                                        -- we_n
-			reset_reset_n : in    std_logic                     := 'X'              -- reset_n
+			reset_reset_n : in    std_logic                     := 'X';             -- reset_n
+			temp_sda_in   : in    std_logic                     := 'X';             -- sda_in
+			temp_scl_in   : in    std_logic                     := 'X';             -- scl_in
+			temp_sda_oe   : out   std_logic;                                        -- sda_oe
+			temp_scl_oe   : out   std_logic;                                        -- scl_oe
+			eeprom_sda_in : in    std_logic                     := 'X';             -- sda_in
+			eeprom_scl_in : in    std_logic                     := 'X';             -- scl_in
+			eeprom_sda_oe : out   std_logic;                                        -- sda_oe
+			eeprom_scl_oe : out   std_logic                                         -- scl_oe
 		);
 	end component qsys;
 
@@ -40,6 +48,14 @@
 			ram_dqm       => CONNECTED_TO_ram_dqm,       --        .dqm
 			ram_ras_n     => CONNECTED_TO_ram_ras_n,     --        .ras_n
 			ram_we_n      => CONNECTED_TO_ram_we_n,      --        .we_n
-			reset_reset_n => CONNECTED_TO_reset_reset_n  --   reset.reset_n
+			reset_reset_n => CONNECTED_TO_reset_reset_n, --   reset.reset_n
+			temp_sda_in   => CONNECTED_TO_temp_sda_in,   --    temp.sda_in
+			temp_scl_in   => CONNECTED_TO_temp_scl_in,   --        .scl_in
+			temp_sda_oe   => CONNECTED_TO_temp_sda_oe,   --        .sda_oe
+			temp_scl_oe   => CONNECTED_TO_temp_scl_oe,   --        .scl_oe
+			eeprom_sda_in => CONNECTED_TO_eeprom_sda_in, --  eeprom.sda_in
+			eeprom_scl_in => CONNECTED_TO_eeprom_scl_in, --        .scl_in
+			eeprom_sda_oe => CONNECTED_TO_eeprom_sda_oe, --        .sda_oe
+			eeprom_scl_oe => CONNECTED_TO_eeprom_scl_oe  --        .scl_oe
 		);
 

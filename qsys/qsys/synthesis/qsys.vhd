@@ -11,6 +11,10 @@ entity qsys is
 		btn_export    : in    std_logic_vector(7 downto 0)  := (others => '0'); --     btn.export
 		clk_clk       : in    std_logic                     := '0';             --     clk.clk
 		d7seg_export  : out   std_logic_vector(15 downto 0);                    --   d7seg.export
+		eeprom_sda_in : in    std_logic                     := '0';             --  eeprom.sda_in
+		eeprom_scl_in : in    std_logic                     := '0';             --        .scl_in
+		eeprom_sda_oe : out   std_logic;                                        --        .sda_oe
+		eeprom_scl_oe : out   std_logic;                                        --        .scl_oe
 		enc_spi_MISO  : in    std_logic                     := '0';             -- enc_spi.MISO
 		enc_spi_MOSI  : out   std_logic;                                        --        .MOSI
 		enc_spi_SCLK  : out   std_logic;                                        --        .SCLK
@@ -25,11 +29,43 @@ entity qsys is
 		ram_dqm       : out   std_logic_vector(1 downto 0);                     --        .dqm
 		ram_ras_n     : out   std_logic;                                        --        .ras_n
 		ram_we_n      : out   std_logic;                                        --        .we_n
-		reset_reset_n : in    std_logic                     := '0'              --   reset.reset_n
+		reset_reset_n : in    std_logic                     := '0';             --   reset.reset_n
+		temp_sda_in   : in    std_logic                     := '0';             --    temp.sda_in
+		temp_scl_in   : in    std_logic                     := '0';             --        .scl_in
+		temp_sda_oe   : out   std_logic;                                        --        .sda_oe
+		temp_scl_oe   : out   std_logic                                         --        .scl_oe
 	);
 end entity qsys;
 
 architecture rtl of qsys is
+	component altera_avalon_i2c is
+		generic (
+			USE_AV_ST       : integer := 0;
+			FIFO_DEPTH      : integer := 4;
+			FIFO_DEPTH_LOG2 : integer := 2
+		);
+		port (
+			clk       : in  std_logic                     := 'X';             -- clk
+			rst_n     : in  std_logic                     := 'X';             -- reset_n
+			intr      : out std_logic;                                        -- irq
+			addr      : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- address
+			read      : in  std_logic                     := 'X';             -- read
+			write     : in  std_logic                     := 'X';             -- write
+			writedata : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			readdata  : out std_logic_vector(31 downto 0);                    -- readdata
+			sda_in    : in  std_logic                     := 'X';             -- sda_in
+			scl_in    : in  std_logic                     := 'X';             -- scl_in
+			sda_oe    : out std_logic;                                        -- sda_oe
+			scl_oe    : out std_logic;                                        -- scl_oe
+			src_data  : out std_logic_vector(7 downto 0);                     -- data
+			src_valid : out std_logic;                                        -- valid
+			src_ready : in  std_logic                     := 'X';             -- ready
+			snk_data  : in  std_logic_vector(15 downto 0) := (others => 'X'); -- data
+			snk_valid : in  std_logic                     := 'X';             -- valid
+			snk_ready : out std_logic                                         -- ready
+		);
+	end component altera_avalon_i2c;
+
 	component qsys_JTAG_UART is
 		port (
 			clk            : in  std_logic                     := 'X';             -- clk
@@ -210,6 +246,16 @@ architecture rtl of qsys is
 			NIOSII_instruction_master_waitrequest    : out std_logic;                                        -- waitrequest
 			NIOSII_instruction_master_read           : in  std_logic                     := 'X';             -- read
 			NIOSII_instruction_master_readdata       : out std_logic_vector(31 downto 0);                    -- readdata
+			I2C_EEPROM_csr_address                   : out std_logic_vector(3 downto 0);                     -- address
+			I2C_EEPROM_csr_write                     : out std_logic;                                        -- write
+			I2C_EEPROM_csr_read                      : out std_logic;                                        -- read
+			I2C_EEPROM_csr_readdata                  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			I2C_EEPROM_csr_writedata                 : out std_logic_vector(31 downto 0);                    -- writedata
+			I2C_TEMP_csr_address                     : out std_logic_vector(3 downto 0);                     -- address
+			I2C_TEMP_csr_write                       : out std_logic;                                        -- write
+			I2C_TEMP_csr_read                        : out std_logic;                                        -- read
+			I2C_TEMP_csr_readdata                    : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			I2C_TEMP_csr_writedata                   : out std_logic_vector(31 downto 0);                    -- writedata
 			JTAG_UART_avalon_jtag_slave_address      : out std_logic_vector(0 downto 0);                     -- address
 			JTAG_UART_avalon_jtag_slave_write        : out std_logic;                                        -- write
 			JTAG_UART_avalon_jtag_slave_read         : out std_logic;                                        -- read
@@ -276,8 +322,6 @@ architecture rtl of qsys is
 			reset         : in  std_logic                     := 'X'; -- reset
 			receiver0_irq : in  std_logic                     := 'X'; -- irq
 			receiver1_irq : in  std_logic                     := 'X'; -- irq
-			receiver2_irq : in  std_logic                     := 'X'; -- irq
-			receiver3_irq : in  std_logic                     := 'X'; -- irq
 			sender_irq    : out std_logic_vector(31 downto 0)         -- irq
 		);
 	end component qsys_irq_mapper;
@@ -369,6 +413,16 @@ architecture rtl of qsys is
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata       : std_logic_vector(31 downto 0); -- mm_interconnect_0:JTAG_UART_avalon_jtag_slave_writedata -> JTAG_UART:av_writedata
 	signal mm_interconnect_0_sysid_control_slave_readdata                : std_logic_vector(31 downto 0); -- SYSID:readdata -> mm_interconnect_0:SYSID_control_slave_readdata
 	signal mm_interconnect_0_sysid_control_slave_address                 : std_logic_vector(0 downto 0);  -- mm_interconnect_0:SYSID_control_slave_address -> SYSID:address
+	signal mm_interconnect_0_i2c_temp_csr_readdata                       : std_logic_vector(31 downto 0); -- I2C_TEMP:readdata -> mm_interconnect_0:I2C_TEMP_csr_readdata
+	signal mm_interconnect_0_i2c_temp_csr_address                        : std_logic_vector(3 downto 0);  -- mm_interconnect_0:I2C_TEMP_csr_address -> I2C_TEMP:addr
+	signal mm_interconnect_0_i2c_temp_csr_read                           : std_logic;                     -- mm_interconnect_0:I2C_TEMP_csr_read -> I2C_TEMP:read
+	signal mm_interconnect_0_i2c_temp_csr_write                          : std_logic;                     -- mm_interconnect_0:I2C_TEMP_csr_write -> I2C_TEMP:write
+	signal mm_interconnect_0_i2c_temp_csr_writedata                      : std_logic_vector(31 downto 0); -- mm_interconnect_0:I2C_TEMP_csr_writedata -> I2C_TEMP:writedata
+	signal mm_interconnect_0_i2c_eeprom_csr_readdata                     : std_logic_vector(31 downto 0); -- I2C_EEPROM:readdata -> mm_interconnect_0:I2C_EEPROM_csr_readdata
+	signal mm_interconnect_0_i2c_eeprom_csr_address                      : std_logic_vector(3 downto 0);  -- mm_interconnect_0:I2C_EEPROM_csr_address -> I2C_EEPROM:addr
+	signal mm_interconnect_0_i2c_eeprom_csr_read                         : std_logic;                     -- mm_interconnect_0:I2C_EEPROM_csr_read -> I2C_EEPROM:read
+	signal mm_interconnect_0_i2c_eeprom_csr_write                        : std_logic;                     -- mm_interconnect_0:I2C_EEPROM_csr_write -> I2C_EEPROM:write
+	signal mm_interconnect_0_i2c_eeprom_csr_writedata                    : std_logic_vector(31 downto 0); -- mm_interconnect_0:I2C_EEPROM_csr_writedata -> I2C_EEPROM:writedata
 	signal mm_interconnect_0_niosii_debug_mem_slave_readdata             : std_logic_vector(31 downto 0); -- NIOSII:debug_mem_slave_readdata -> mm_interconnect_0:NIOSII_debug_mem_slave_readdata
 	signal mm_interconnect_0_niosii_debug_mem_slave_waitrequest          : std_logic;                     -- NIOSII:debug_mem_slave_waitrequest -> mm_interconnect_0:NIOSII_debug_mem_slave_waitrequest
 	signal mm_interconnect_0_niosii_debug_mem_slave_debugaccess          : std_logic;                     -- mm_interconnect_0:NIOSII_debug_mem_slave_debugaccess -> NIOSII:debug_mem_slave_debugaccess
@@ -417,10 +471,8 @@ architecture rtl of qsys is
 	signal mm_interconnect_0_spi_master_spi_control_port_read            : std_logic;                     -- mm_interconnect_0:SPI_MASTER_spi_control_port_read -> mm_interconnect_0_spi_master_spi_control_port_read:in
 	signal mm_interconnect_0_spi_master_spi_control_port_write           : std_logic;                     -- mm_interconnect_0:SPI_MASTER_spi_control_port_write -> mm_interconnect_0_spi_master_spi_control_port_write:in
 	signal mm_interconnect_0_spi_master_spi_control_port_writedata       : std_logic_vector(15 downto 0); -- mm_interconnect_0:SPI_MASTER_spi_control_port_writedata -> SPI_MASTER:data_from_cpu
-	signal irq_mapper_receiver0_irq                                      : std_logic;                     -- PIO_BTN:irq -> irq_mapper:receiver0_irq
-	signal irq_mapper_receiver1_irq                                      : std_logic;                     -- SYS_TIMER:irq -> irq_mapper:receiver1_irq
-	signal irq_mapper_receiver2_irq                                      : std_logic;                     -- TS_TIMER:irq -> irq_mapper:receiver2_irq
-	signal irq_mapper_receiver3_irq                                      : std_logic;                     -- JTAG_UART:av_irq -> irq_mapper:receiver3_irq
+	signal irq_mapper_receiver0_irq                                      : std_logic;                     -- SYS_TIMER:irq -> irq_mapper:receiver0_irq
+	signal irq_mapper_receiver1_irq                                      : std_logic;                     -- JTAG_UART:av_irq -> irq_mapper:receiver1_irq
 	signal niosii_irq_irq                                                : std_logic_vector(31 downto 0); -- irq_mapper:sender_irq -> NIOSII:irq
 	signal rst_controller_reset_out_reset                                : std_logic;                     -- rst_controller:reset_out -> [irq_mapper:reset, mm_interconnect_0:NIOSII_reset_reset_bridge_in_reset_reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
 	signal rst_controller_reset_out_reset_req                            : std_logic;                     -- rst_controller:reset_req -> [NIOSII:reset_req, rst_translator:reset_req_in]
@@ -437,9 +489,63 @@ architecture rtl of qsys is
 	signal mm_interconnect_0_pio_d7seg_s1_write_ports_inv                : std_logic;                     -- mm_interconnect_0_pio_d7seg_s1_write:inv -> PIO_D7SEG:write_n
 	signal mm_interconnect_0_spi_master_spi_control_port_read_ports_inv  : std_logic;                     -- mm_interconnect_0_spi_master_spi_control_port_read:inv -> SPI_MASTER:read_n
 	signal mm_interconnect_0_spi_master_spi_control_port_write_ports_inv : std_logic;                     -- mm_interconnect_0_spi_master_spi_control_port_write:inv -> SPI_MASTER:write_n
-	signal rst_controller_reset_out_reset_ports_inv                      : std_logic;                     -- rst_controller_reset_out_reset:inv -> [JTAG_UART:rst_n, NIOSII:reset_n, PIO_BTN:reset_n, PIO_D7SEG:reset_n, PIO_LED:reset_n, RAM:reset_n, SPI_MASTER:reset_n, SYSID:reset_n, SYS_TIMER:reset_n, TS_TIMER:reset_n]
+	signal rst_controller_reset_out_reset_ports_inv                      : std_logic;                     -- rst_controller_reset_out_reset:inv -> [I2C_EEPROM:rst_n, I2C_TEMP:rst_n, JTAG_UART:rst_n, NIOSII:reset_n, PIO_BTN:reset_n, PIO_D7SEG:reset_n, PIO_LED:reset_n, RAM:reset_n, SPI_MASTER:reset_n, SYSID:reset_n, SYS_TIMER:reset_n, TS_TIMER:reset_n]
 
 begin
+
+	i2c_eeprom : component altera_avalon_i2c
+		generic map (
+			USE_AV_ST       => 0,
+			FIFO_DEPTH      => 8,
+			FIFO_DEPTH_LOG2 => 3
+		)
+		port map (
+			clk       => clk_clk,                                    --            clock.clk
+			rst_n     => rst_controller_reset_out_reset_ports_inv,   --       reset_sink.reset_n
+			intr      => open,                                       -- interrupt_sender.irq
+			addr      => mm_interconnect_0_i2c_eeprom_csr_address,   --              csr.address
+			read      => mm_interconnect_0_i2c_eeprom_csr_read,      --                 .read
+			write     => mm_interconnect_0_i2c_eeprom_csr_write,     --                 .write
+			writedata => mm_interconnect_0_i2c_eeprom_csr_writedata, --                 .writedata
+			readdata  => mm_interconnect_0_i2c_eeprom_csr_readdata,  --                 .readdata
+			sda_in    => eeprom_sda_in,                              --       i2c_serial.sda_in
+			scl_in    => eeprom_scl_in,                              --                 .scl_in
+			sda_oe    => eeprom_sda_oe,                              --                 .sda_oe
+			scl_oe    => eeprom_scl_oe,                              --                 .scl_oe
+			src_data  => open,                                       --      (terminated)
+			src_valid => open,                                       --      (terminated)
+			src_ready => '0',                                        --      (terminated)
+			snk_data  => "0000000000000000",                         --      (terminated)
+			snk_valid => '0',                                        --      (terminated)
+			snk_ready => open                                        --      (terminated)
+		);
+
+	i2c_temp : component altera_avalon_i2c
+		generic map (
+			USE_AV_ST       => 0,
+			FIFO_DEPTH      => 8,
+			FIFO_DEPTH_LOG2 => 3
+		)
+		port map (
+			clk       => clk_clk,                                  --            clock.clk
+			rst_n     => rst_controller_reset_out_reset_ports_inv, --       reset_sink.reset_n
+			intr      => open,                                     -- interrupt_sender.irq
+			addr      => mm_interconnect_0_i2c_temp_csr_address,   --              csr.address
+			read      => mm_interconnect_0_i2c_temp_csr_read,      --                 .read
+			write     => mm_interconnect_0_i2c_temp_csr_write,     --                 .write
+			writedata => mm_interconnect_0_i2c_temp_csr_writedata, --                 .writedata
+			readdata  => mm_interconnect_0_i2c_temp_csr_readdata,  --                 .readdata
+			sda_in    => temp_sda_in,                              --       i2c_serial.sda_in
+			scl_in    => temp_scl_in,                              --                 .scl_in
+			sda_oe    => temp_sda_oe,                              --                 .sda_oe
+			scl_oe    => temp_scl_oe,                              --                 .scl_oe
+			src_data  => open,                                     --      (terminated)
+			src_valid => open,                                     --      (terminated)
+			src_ready => '0',                                      --      (terminated)
+			snk_data  => "0000000000000000",                       --      (terminated)
+			snk_valid => '0',                                      --      (terminated)
+			snk_ready => open                                      --      (terminated)
+		);
 
 	jtag_uart : component qsys_JTAG_UART
 		port map (
@@ -452,7 +558,7 @@ begin
 			av_write_n     => mm_interconnect_0_jtag_uart_avalon_jtag_slave_write_ports_inv, --                  .write_n
 			av_writedata   => mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata,       --                  .writedata
 			av_waitrequest => mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest,     --                  .waitrequest
-			av_irq         => irq_mapper_receiver3_irq                                       --               irq.irq
+			av_irq         => irq_mapper_receiver1_irq                                       --               irq.irq
 		);
 
 	niosii : component qsys_NIOSII
@@ -495,7 +601,7 @@ begin
 			chipselect => mm_interconnect_0_pio_btn_s1_chipselect,      --                    .chipselect
 			readdata   => mm_interconnect_0_pio_btn_s1_readdata,        --                    .readdata
 			in_port    => btn_export,                                   -- external_connection.export
-			irq        => irq_mapper_receiver0_irq                      --                 irq.irq
+			irq        => open                                          --                 irq.irq
 		);
 
 	pio_d7seg : component qsys_PIO_D7SEG
@@ -580,7 +686,7 @@ begin
 			readdata   => mm_interconnect_0_sys_timer_s1_readdata,        --      .readdata
 			chipselect => mm_interconnect_0_sys_timer_s1_chipselect,      --      .chipselect
 			write_n    => mm_interconnect_0_sys_timer_s1_write_ports_inv, --      .write_n
-			irq        => irq_mapper_receiver1_irq                        --   irq.irq
+			irq        => irq_mapper_receiver0_irq                        --   irq.irq
 		);
 
 	ts_timer : component qsys_TS_TIMER
@@ -592,7 +698,7 @@ begin
 			readdata   => mm_interconnect_0_ts_timer_s1_readdata,        --      .readdata
 			chipselect => mm_interconnect_0_ts_timer_s1_chipselect,      --      .chipselect
 			write_n    => mm_interconnect_0_ts_timer_s1_write_ports_inv, --      .write_n
-			irq        => irq_mapper_receiver2_irq                       --   irq.irq
+			irq        => open                                           --   irq.irq
 		);
 
 	mm_interconnect_0 : component qsys_mm_interconnect_0
@@ -611,6 +717,16 @@ begin
 			NIOSII_instruction_master_waitrequest    => niosii_instruction_master_waitrequest,                     --                                   .waitrequest
 			NIOSII_instruction_master_read           => niosii_instruction_master_read,                            --                                   .read
 			NIOSII_instruction_master_readdata       => niosii_instruction_master_readdata,                        --                                   .readdata
+			I2C_EEPROM_csr_address                   => mm_interconnect_0_i2c_eeprom_csr_address,                  --                     I2C_EEPROM_csr.address
+			I2C_EEPROM_csr_write                     => mm_interconnect_0_i2c_eeprom_csr_write,                    --                                   .write
+			I2C_EEPROM_csr_read                      => mm_interconnect_0_i2c_eeprom_csr_read,                     --                                   .read
+			I2C_EEPROM_csr_readdata                  => mm_interconnect_0_i2c_eeprom_csr_readdata,                 --                                   .readdata
+			I2C_EEPROM_csr_writedata                 => mm_interconnect_0_i2c_eeprom_csr_writedata,                --                                   .writedata
+			I2C_TEMP_csr_address                     => mm_interconnect_0_i2c_temp_csr_address,                    --                       I2C_TEMP_csr.address
+			I2C_TEMP_csr_write                       => mm_interconnect_0_i2c_temp_csr_write,                      --                                   .write
+			I2C_TEMP_csr_read                        => mm_interconnect_0_i2c_temp_csr_read,                       --                                   .read
+			I2C_TEMP_csr_readdata                    => mm_interconnect_0_i2c_temp_csr_readdata,                   --                                   .readdata
+			I2C_TEMP_csr_writedata                   => mm_interconnect_0_i2c_temp_csr_writedata,                  --                                   .writedata
 			JTAG_UART_avalon_jtag_slave_address      => mm_interconnect_0_jtag_uart_avalon_jtag_slave_address,     --        JTAG_UART_avalon_jtag_slave.address
 			JTAG_UART_avalon_jtag_slave_write        => mm_interconnect_0_jtag_uart_avalon_jtag_slave_write,       --                                   .write
 			JTAG_UART_avalon_jtag_slave_read         => mm_interconnect_0_jtag_uart_avalon_jtag_slave_read,        --                                   .read
@@ -676,8 +792,6 @@ begin
 			reset         => rst_controller_reset_out_reset, -- clk_reset.reset
 			receiver0_irq => irq_mapper_receiver0_irq,       -- receiver0.irq
 			receiver1_irq => irq_mapper_receiver1_irq,       -- receiver1.irq
-			receiver2_irq => irq_mapper_receiver2_irq,       -- receiver2.irq
-			receiver3_irq => irq_mapper_receiver3_irq,       -- receiver3.irq
 			sender_irq    => niosii_irq_irq                  --    sender.irq
 		);
 

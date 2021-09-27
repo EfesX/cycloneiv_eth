@@ -9,6 +9,38 @@
    categories="System" />
  <parameter name="bonusData"><![CDATA[bonusData 
 {
+   element I2C_EEPROM
+   {
+      datum _sortIndex
+      {
+         value = "12";
+         type = "int";
+      }
+   }
+   element I2C_EEPROM.csr
+   {
+      datum baseAddress
+      {
+         value = "16781312";
+         type = "String";
+      }
+   }
+   element I2C_TEMP
+   {
+      datum _sortIndex
+      {
+         value = "11";
+         type = "int";
+      }
+   }
+   element I2C_TEMP.csr
+   {
+      datum baseAddress
+      {
+         value = "16781376";
+         type = "String";
+      }
+   }
    element JTAG_UART
    {
       datum _sortIndex
@@ -21,7 +53,7 @@
    {
       datum baseAddress
       {
-         value = "16781456";
+         value = "16781592";
          type = "String";
       }
    }
@@ -31,6 +63,14 @@
       {
          value = "1";
          type = "int";
+      }
+   }
+   element NIOSII.custom_instruction_master
+   {
+      datum _tags
+      {
+         value = "";
+         type = "String";
       }
    }
    element NIOSII.debug_mem_slave
@@ -49,11 +89,19 @@
          type = "int";
       }
    }
+   element PIO_BTN.clk
+   {
+      datum _tags
+      {
+         value = "";
+         type = "String";
+      }
+   }
    element PIO_BTN.s1
    {
       datum baseAddress
       {
-         value = "16781424";
+         value = "16781552";
          type = "String";
       }
    }
@@ -69,7 +117,7 @@
    {
       datum baseAddress
       {
-         value = "16781408";
+         value = "16781536";
          type = "String";
       }
    }
@@ -81,11 +129,19 @@
          type = "int";
       }
    }
+   element PIO_LED.reset
+   {
+      datum _tags
+      {
+         value = "";
+         type = "String";
+      }
+   }
    element PIO_LED.s1
    {
       datum baseAddress
       {
-         value = "16781440";
+         value = "16781568";
          type = "String";
       }
    }
@@ -113,11 +169,19 @@
          type = "int";
       }
    }
+   element SPI_MASTER.irq
+   {
+      datum _tags
+      {
+         value = "";
+         type = "String";
+      }
+   }
    element SPI_MASTER.spi_control_port
    {
       datum baseAddress
       {
-         value = "16781312";
+         value = "16781440";
          type = "String";
       }
    }
@@ -133,7 +197,7 @@
    {
       datum baseAddress
       {
-         value = "16781464";
+         value = "16781584";
          type = "String";
       }
    }
@@ -155,9 +219,14 @@
    }
    element SYS_TIMER.s1
    {
+      datum _tags
+      {
+         value = "";
+         type = "String";
+      }
       datum baseAddress
       {
-         value = "16781376";
+         value = "16781504";
          type = "String";
       }
    }
@@ -189,7 +258,7 @@
    {
       datum baseAddress
       {
-         value = "16781344";
+         value = "16781472";
          type = "String";
       }
    }
@@ -234,6 +303,11 @@
    type="conduit"
    dir="end" />
  <interface
+   name="eeprom"
+   internal="I2C_EEPROM.i2c_serial"
+   type="conduit"
+   dir="end" />
+ <interface
    name="enc_spi"
    internal="SPI_MASTER.external"
    type="conduit"
@@ -245,6 +319,17 @@
    dir="end" />
  <interface name="ram" internal="RAM.wire" type="conduit" dir="end" />
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
+ <interface name="temp" internal="I2C_TEMP.i2c_serial" type="conduit" dir="end" />
+ <module name="I2C_EEPROM" kind="altera_avalon_i2c" version="20.1" enabled="1">
+  <parameter name="FIFO_DEPTH" value="8" />
+  <parameter name="USE_AV_ST" value="0" />
+  <parameter name="clockRate" value="50000000" />
+ </module>
+ <module name="I2C_TEMP" kind="altera_avalon_i2c" version="20.1" enabled="1">
+  <parameter name="FIFO_DEPTH" value="8" />
+  <parameter name="USE_AV_ST" value="0" />
+  <parameter name="clockRate" value="50000000" />
+ </module>
  <module
    name="JTAG_UART"
    kind="altera_avalon_jtag_uart"
@@ -284,7 +369,7 @@
   <parameter name="dataAddrWidth" value="25" />
   <parameter name="dataMasterHighPerformanceAddrWidth" value="1" />
   <parameter name="dataMasterHighPerformanceMapParam" value="" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='RAM.s1' start='0x800000' end='0x1000000' type='altera_avalon_new_sdram_controller.s1' /><slave name='NIOSII.debug_mem_slave' start='0x1000800' end='0x1001000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='SPI_MASTER.spi_control_port' start='0x1001000' end='0x1001020' type='altera_avalon_spi.spi_control_port' /><slave name='TS_TIMER.s1' start='0x1001020' end='0x1001040' type='altera_avalon_timer.s1' /><slave name='SYS_TIMER.s1' start='0x1001040' end='0x1001060' type='altera_avalon_timer.s1' /><slave name='PIO_D7SEG.s1' start='0x1001060' end='0x1001070' type='altera_avalon_pio.s1' /><slave name='PIO_BTN.s1' start='0x1001070' end='0x1001080' type='altera_avalon_pio.s1' /><slave name='PIO_LED.s1' start='0x1001080' end='0x1001090' type='altera_avalon_pio.s1' /><slave name='JTAG_UART.avalon_jtag_slave' start='0x1001090' end='0x1001098' type='altera_avalon_jtag_uart.avalon_jtag_slave' /><slave name='SYSID.control_slave' start='0x1001098' end='0x10010A0' type='altera_avalon_sysid_qsys.control_slave' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='RAM.s1' start='0x800000' end='0x1000000' type='altera_avalon_new_sdram_controller.s1' /><slave name='NIOSII.debug_mem_slave' start='0x1000800' end='0x1001000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='I2C_EEPROM.csr' start='0x1001000' end='0x1001040' type='altera_avalon_i2c.csr' /><slave name='I2C_TEMP.csr' start='0x1001040' end='0x1001080' type='altera_avalon_i2c.csr' /><slave name='SPI_MASTER.spi_control_port' start='0x1001080' end='0x10010A0' type='altera_avalon_spi.spi_control_port' /><slave name='TS_TIMER.s1' start='0x10010A0' end='0x10010C0' type='altera_avalon_timer.s1' /><slave name='SYS_TIMER.s1' start='0x10010C0' end='0x10010E0' type='altera_avalon_timer.s1' /><slave name='PIO_D7SEG.s1' start='0x10010E0' end='0x10010F0' type='altera_avalon_pio.s1' /><slave name='PIO_BTN.s1' start='0x10010F0' end='0x1001100' type='altera_avalon_pio.s1' /><slave name='PIO_LED.s1' start='0x1001100' end='0x1001110' type='altera_avalon_pio.s1' /><slave name='SYSID.control_slave' start='0x1001110' end='0x1001118' type='altera_avalon_sysid_qsys.control_slave' /><slave name='JTAG_UART.avalon_jtag_slave' start='0x1001118' end='0x1001120' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
   <parameter name="data_master_high_performance_paddr_base" value="0" />
   <parameter name="data_master_high_performance_paddr_size" value="0" />
   <parameter name="data_master_paddr_base" value="0" />
@@ -330,7 +415,7 @@
   <parameter name="instruction_master_high_performance_paddr_size" value="0" />
   <parameter name="instruction_master_paddr_base" value="0" />
   <parameter name="instruction_master_paddr_size" value="0" />
-  <parameter name="internalIrqMaskSystemInfo" value="802" />
+  <parameter name="internalIrqMaskSystemInfo" value="12" />
   <parameter name="io_regionbase" value="0" />
   <parameter name="io_regionsize" value="0" />
   <parameter name="master_addr_map" value="false" />
@@ -544,7 +629,7 @@
   <parameter name="alwaysRun" value="false" />
   <parameter name="counterSize" value="32" />
   <parameter name="fixedPeriod" value="false" />
-  <parameter name="period" value="1" />
+  <parameter name="period" value="10" />
   <parameter name="periodUnits" value="MSEC" />
   <parameter name="resetOutput" value="false" />
   <parameter name="snapshot" value="true" />
@@ -576,7 +661,7 @@
    start="NIOSII.data_master"
    end="JTAG_UART.avalon_jtag_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01001090" />
+  <parameter name="baseAddress" value="0x01001118" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -585,7 +670,25 @@
    start="NIOSII.data_master"
    end="SYSID.control_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01001098" />
+  <parameter name="baseAddress" value="0x01001110" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="20.1"
+   start="NIOSII.data_master"
+   end="I2C_TEMP.csr">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x01001040" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="20.1"
+   start="NIOSII.data_master"
+   end="I2C_EEPROM.csr">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x01001000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -608,7 +711,7 @@
    start="NIOSII.data_master"
    end="PIO_LED.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01001080" />
+  <parameter name="baseAddress" value="0x01001100" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -617,7 +720,7 @@
    start="NIOSII.data_master"
    end="PIO_BTN.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01001070" />
+  <parameter name="baseAddress" value="0x010010f0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -626,7 +729,7 @@
    start="NIOSII.data_master"
    end="SYS_TIMER.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01001040" />
+  <parameter name="baseAddress" value="0x010010c0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -635,7 +738,7 @@
    start="NIOSII.data_master"
    end="TS_TIMER.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01001020" />
+  <parameter name="baseAddress" value="0x010010a0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -644,7 +747,7 @@
    start="NIOSII.data_master"
    end="PIO_D7SEG.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01001060" />
+  <parameter name="baseAddress" value="0x010010e0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -653,7 +756,7 @@
    start="NIOSII.data_master"
    end="SPI_MASTER.spi_control_port">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01001000" />
+  <parameter name="baseAddress" value="0x01001080" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -684,25 +787,21 @@
  <connection kind="clock" version="20.1" start="clk_0.clk" end="PIO_D7SEG.clk" />
  <connection kind="clock" version="20.1" start="clk_0.clk" end="SPI_MASTER.clk" />
  <connection kind="clock" version="20.1" start="clk_0.clk" end="JTAG_UART.clk" />
- <connection kind="interrupt" version="20.1" start="NIOSII.irq" end="PIO_BTN.irq">
-  <parameter name="irqNumber" value="5" />
- </connection>
+ <connection kind="clock" version="20.1" start="clk_0.clk" end="I2C_TEMP.clock" />
+ <connection kind="clock" version="20.1" start="clk_0.clk" end="I2C_EEPROM.clock" />
  <connection
    kind="interrupt"
    version="20.1"
    start="NIOSII.irq"
    end="SYS_TIMER.irq">
-  <parameter name="irqNumber" value="1" />
- </connection>
- <connection kind="interrupt" version="20.1" start="NIOSII.irq" end="TS_TIMER.irq">
-  <parameter name="irqNumber" value="8" />
+  <parameter name="irqNumber" value="2" />
  </connection>
  <connection
    kind="interrupt"
    version="20.1"
    start="NIOSII.irq"
    end="JTAG_UART.irq">
-  <parameter name="irqNumber" value="9" />
+  <parameter name="irqNumber" value="3" />
  </connection>
  <connection
    kind="reset"
@@ -746,6 +845,16 @@
    version="20.1"
    start="clk_0.clk_reset"
    end="JTAG_UART.reset" />
+ <connection
+   kind="reset"
+   version="20.1"
+   start="clk_0.clk_reset"
+   end="I2C_TEMP.reset_sink" />
+ <connection
+   kind="reset"
+   version="20.1"
+   start="clk_0.clk_reset"
+   end="I2C_EEPROM.reset_sink" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.enableEccProtection" value="FALSE" />
  <interconnectRequirement for="$system" name="qsys_mm.insertDefaultSlave" value="FALSE" />

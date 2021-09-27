@@ -28,6 +28,11 @@
 #include "altera_avalon_timer.h"
 #include "altera_avalon_timer_regs.h"
 
+#include "altera_avalon_i2c.h"
+#include "altera_avalon_i2c_regs.h"
+
+#include "lm75.h"
+
 
 uint8_t my_ip[4] = {192, 168, 1, 70};
 uint8_t mymask[4] = {255, 255, 255, 0};
@@ -41,7 +46,7 @@ void vApplicationStackOverflowHook(TaskHandle_t  pxCurrentTCB, char *pcTaskName 
 }
 
 
-int main()
+int main(void)
 {
 	
 	vRegisterCLICommands();
@@ -58,6 +63,7 @@ void vApplicationIPNetworkEventHook(eIPCallbackEvent_t ev){
 	printf("vApplicationIPNetworkEventHook\n");
 	vStartTelnetServer(configMINIMAL_STACK_SIZE * 2, 6);
 	vStartHTTPServer(configMINIMAL_STACK_SIZE*2, 8);
+	vStartTempChecking(configMINIMAL_STACK_SIZE, 5);
 }
 
 void vApplicationMallocFailedHook(){

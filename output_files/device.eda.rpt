@@ -1,5 +1,5 @@
 EDA Netlist Writer report for device
-Fri Sep 24 00:34:45 2021
+Mon Sep 27 22:26:22 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -37,7 +37,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Fri Sep 24 00:34:45 2021 ;
+; EDA Netlist Writer Status ; Successful - Mon Sep 27 22:26:22 2021 ;
 ; Revision Name             ; device                                ;
 ; Top-level Entity Name     ; device                                ;
 ; Family                    ; Cyclone IV E                          ;
@@ -89,7 +89,7 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Fri Sep 24 00:34:34 2021
+    Info: Processing started: Mon Sep 27 22:26:07 2021
 Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off device -c device
 Warning (125092): Tcl Script File lvds_buf.qip not found
     Info (125063): set_global_assignment -name QIP_FILE lvds_buf.qip
@@ -103,9 +103,9 @@ Info (204019): Generated file device_8_1200mv_0c_vhd_slow.sdo in folder "/home/e
 Info (204019): Generated file device_min_1200mv_0c_vhd_fast.sdo in folder "/home/efesxzc/projects/fpga/cycloneiv_eth/simulation/modelsim/" for EDA simulation tool
 Info (204019): Generated file device_vhd.sdo in folder "/home/efesxzc/projects/fpga/cycloneiv_eth/simulation/modelsim/" for EDA simulation tool
 Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 2 warnings
-    Info: Peak virtual memory: 656 megabytes
-    Info: Processing ended: Fri Sep 24 00:34:45 2021
-    Info: Elapsed time: 00:00:11
-    Info: Total CPU time (on all processors): 00:00:11
+    Info: Peak virtual memory: 669 megabytes
+    Info: Processing ended: Mon Sep 27 22:26:22 2021
+    Info: Elapsed time: 00:00:15
+    Info: Total CPU time (on all processors): 00:00:13
 
 

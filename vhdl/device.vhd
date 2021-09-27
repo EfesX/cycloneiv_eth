@@ -36,10 +36,7 @@ entity device is
 		
 		i2c_scl : inout std_logic := 'Z';
 		i2c_sda : inout std_logic := 'Z';
-		
-		ps_clock : in std_logic := '0';
-		ps_data  : in std_logic := '0';
-		
+				
 		ir : in std_logic := '0';
 		
 		vga_hsync : out std_logic := '0';
@@ -54,6 +51,11 @@ entity device is
 		enc_spi_SS_n : out std_logic := '0';
 		enc_rst		 : out std_logic := '1';
 		enc_irq		 : in  std_logic := '0'
+
+--		sd_miso : in  std_logic := '0';
+--		sd_mosi : out std_logic := '0';
+--		sd_sck	: out std_logic := '0';
+--		sd_cs	: out std_logic := '0'
 	);
 end entity device;
 
@@ -73,16 +75,30 @@ architecture dev_bhv of device is
             ram_ras_n     : out   std_logic;                                        -- ras_n
             ram_we_n      : out   std_logic;                                         -- we_n
 				
-				d7seg_export  : out   std_logic_vector(15 downto 0);                     -- export
+			d7seg_export  : out   std_logic_vector(15 downto 0);                     -- export
 				
-				led_export    : out   std_logic_vector(3 downto 0);                     -- export
+			led_export    : out   std_logic_vector(3 downto 0);                     -- export
             btn_export    : in    std_logic_vector(7 downto 0)  := (others => 'X'); -- export
 				
-				enc_spi_MISO  : in    std_logic                     := 'X';             -- MISO
+			enc_spi_MISO  : in    std_logic                     := 'X';             -- MISO
             enc_spi_MOSI  : out   std_logic;                                        -- MOSI
             enc_spi_SCLK  : out   std_logic;                                        -- SCLK
-            enc_spi_SS_n  : out   std_logic                                         -- SS_n
-				
+            enc_spi_SS_n  : out   std_logic;                                         -- SS_n
+
+			temp_sda_in   : in    std_logic                     := 'X';             -- sda_in
+			temp_scl_in   : in    std_logic                     := 'X';             -- scl_in
+			temp_sda_oe   : out   std_logic;                                        -- sda_oe
+			temp_scl_oe   : out   std_logic;                                         -- scl_oe
+
+			eeprom_sda_in : in    std_logic                     := 'X';             -- sda_in
+			eeprom_scl_in : in    std_logic                     := 'X';             -- scl_in
+			eeprom_sda_oe : out   std_logic;                                        -- sda_oe
+			eeprom_scl_oe : out   std_logic                                        -- scl_oe
+--
+--			sdcard_MISO   : in    std_logic                     := 'X';             -- MISO
+--			sdcard_MOSI   : out   std_logic;                                        -- MOSI
+--			sdcard_SCLK   : out   std_logic;                                        -- SCLK
+--			sdcard_SS_n   : out   std_logic                                        -- SS_n
         );
     end component qsys;
 	 
@@ -99,8 +115,18 @@ architecture dev_bhv of device is
 	signal s_num_7seg : std_logic_vector(15 downto 0) := (others => '0'); -- 11...0  numbers
 																								 -- 15...12 points
 																								 
-   signal  s_btn : std_logic_vector(7 downto 0) := (others => '0');
+   	signal  s_btn : std_logic_vector(7 downto 0) := (others => '0');
 	signal s_led	: std_logic_vector(3 downto 0) := "0000";
+
+	signal s_temp_sda_in   : std_logic                     := 'X';             -- sda_in
+	signal s_temp_scl_in   : std_logic                     := 'X';             -- scl_in
+	signal s_temp_sda_oe   : std_logic;                                        -- sda_oe
+	signal s_temp_scl_oe   : std_logic;                                         -- scl_oe
+
+	signal s_eeprom_sda_in : std_logic                     := 'X';             -- sda_in
+	signal s_eeprom_scl_in : std_logic                     := 'X';             -- scl_in
+	signal s_eeprom_sda_oe : std_logic;                                        -- sda_oe
+	signal s_eeprom_scl_oe : std_logic;                                        -- scl_oe
 begin
 
 	led(3 downto 0) <= s_led(3 downto 0);
@@ -113,6 +139,16 @@ begin
 	s_btn(4) <= enc_irq;
 	
 	enc_rst <= btn(0);
+
+	s_temp_scl_in <= scl; 
+	scl  <= '0' when s_temp_scl_oe = '1' else 'Z';
+	s_temp_sda_in <= sda; 
+	sda  <= '0' when s_temp_sda_oe = '1' else 'Z';
+
+	s_eeprom_scl_in <= i2c_scl; 
+	i2c_scl  <= '0' when s_eeprom_scl_oe = '1' else 'Z';
+	s_eeprom_sda_in <= i2c_sda; 
+	i2c_sda  <= '0' when s_eeprom_sda_oe = '1' else 'Z';
 
 	qsys_unit : qsys
 		port map(
@@ -129,15 +165,30 @@ begin
             ram_ras_n     => ram_ras,
             ram_we_n      => ram_we,
 				
-				d7seg_export  => s_num_7seg,
+			d7seg_export  => s_num_7seg,
 				
-				led_export    => s_led,
+			led_export    => s_led,
             btn_export    => s_btn,
 				
-				enc_spi_MISO  => enc_spi_MISO,
+			enc_spi_MISO  => enc_spi_MISO,
             enc_spi_MOSI  => enc_spi_MOSI,
             enc_spi_SCLK  => enc_spi_SCLK,
-            enc_spi_SS_n  => enc_spi_SS_n--enc_spi_SS_n
+            enc_spi_SS_n  => enc_spi_SS_n,
+
+			temp_sda_in   => s_temp_sda_in,
+			temp_scl_in   => s_temp_scl_in,
+			temp_sda_oe   => s_temp_sda_oe,
+			temp_scl_oe   => s_temp_scl_oe,
+
+			eeprom_sda_in => s_eeprom_sda_in,
+			eeprom_scl_in => s_eeprom_scl_in,
+			eeprom_sda_oe => s_eeprom_sda_oe,
+			eeprom_scl_oe => s_eeprom_scl_oe
+
+--			sdcard_MISO   => '0',
+--			sdcard_MOSI   => open,
+--			sdcard_SCLK   => open,
+--			sdcard_SS_n   => open
         );
 		  
 	disp_7_seg_unit : disp_7_seg		

@@ -4,6 +4,8 @@
         "freertos_ip.h": "c",
         "freertosipconfig.h": "c",
         "alt_irq.h": "c",
-        "alt_legacy_irq.h": "c"
+        "alt_legacy_irq.h": "c",
+        "altera_avalon_i2c.h": "c",
+        "altera_avalon_i2c_regs.h": "c"
     }
 }

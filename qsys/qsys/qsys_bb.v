@@ -17,7 +17,15 @@ module qsys (
 	ram_dqm,
 	ram_ras_n,
 	ram_we_n,
-	reset_reset_n);	
+	reset_reset_n,
+	temp_sda_in,
+	temp_scl_in,
+	temp_sda_oe,
+	temp_scl_oe,
+	eeprom_sda_in,
+	eeprom_scl_in,
+	eeprom_sda_oe,
+	eeprom_scl_oe);	
 
 	input	[7:0]	btn_export;
 	input		clk_clk;
@@ -37,4 +45,12 @@ module qsys (
 	output		ram_ras_n;
 	output		ram_we_n;
 	input		reset_reset_n;
+	input		temp_sda_in;
+	input		temp_scl_in;
+	output		temp_sda_oe;
+	output		temp_scl_oe;
+	input		eeprom_sda_in;
+	input		eeprom_scl_in;
+	output		eeprom_sda_oe;
+	output		eeprom_scl_oe;
 endmodule

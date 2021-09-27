@@ -2,6 +2,10 @@ Info: Starting: Create HDL design files for synthesis
 Info: qsys-generate /home/efesxzc/projects/fpga/cycloneiv_eth/qsys/qsys.qsys --synthesis=VHDL --output-directory=/home/efesxzc/projects/fpga/cycloneiv_eth/qsys/qsys/synthesis --family="Cyclone IV E" --part=EP4CE6E22C8
 Progress: Loading qsys/qsys.qsys
 Progress: Reading input file
+Progress: Adding I2C_EEPROM [altera_avalon_i2c 20.1]
+Progress: Parameterizing module I2C_EEPROM
+Progress: Adding I2C_TEMP [altera_avalon_i2c 20.1]
+Progress: Parameterizing module I2C_TEMP
 Progress: Adding JTAG_UART [altera_avalon_jtag_uart 20.1]
 Progress: Parameterizing module JTAG_UART
 Progress: Adding NIOSII [altera_nios2_gen2 20.1]
@@ -33,40 +37,45 @@ Info: qsys.PIO_BTN: PIO inputs are not hardwired in test bench. Undefined values
 Info: qsys.RAM: SDRAM Controller will only be supported in Quartus Prime Standard Edition in the future release.
 Info: qsys.SYSID: System ID is not assigned automatically. Edit the System ID parameter to provide a unique ID
 Info: qsys.SYSID: Time stamp will be automatically updated when this component is generated.
+Warning: qsys.I2C_EEPROM: Interrupt sender I2C_EEPROM.interrupt_sender is not connected to an interrupt receiver
+Warning: qsys.I2C_TEMP: Interrupt sender I2C_TEMP.interrupt_sender is not connected to an interrupt receiver
+Warning: qsys.PIO_BTN: Interrupt sender PIO_BTN.irq is not connected to an interrupt receiver
 Warning: qsys.SPI_MASTER: Interrupt sender SPI_MASTER.irq is not connected to an interrupt receiver
+Warning: qsys.TS_TIMER: Interrupt sender TS_TIMER.irq is not connected to an interrupt receiver
 Info: qsys: Generating qsys "qsys" for QUARTUS_SYNTH
+Info: I2C_EEPROM: "qsys" instantiated altera_avalon_i2c "I2C_EEPROM"
 Info: JTAG_UART: Starting RTL generation for module 'qsys_JTAG_UART'
-Info: JTAG_UART:   Generation command is [exec /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/bin/perl -I /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin/europa -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=qsys_JTAG_UART --dir=/tmp/alt8893_4889139279388291285.dir/0039_JTAG_UART_gen/ --quartus_dir=/home/efesxzc/intelFPGA_lite/20.1/quartus --verilog --config=/tmp/alt8893_4889139279388291285.dir/0039_JTAG_UART_gen//qsys_JTAG_UART_component_configuration.pl  --do_build_sim=0  ]
+Info: JTAG_UART:   Generation command is [exec /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/bin/perl -I /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin/europa -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=qsys_JTAG_UART --dir=/tmp/alt8896_8750837163460860321.dir/0135_JTAG_UART_gen/ --quartus_dir=/home/efesxzc/intelFPGA_lite/20.1/quartus --verilog --config=/tmp/alt8896_8750837163460860321.dir/0135_JTAG_UART_gen//qsys_JTAG_UART_component_configuration.pl  --do_build_sim=0  ]
 Info: JTAG_UART: Done RTL generation for module 'qsys_JTAG_UART'
 Info: JTAG_UART: "qsys" instantiated altera_avalon_jtag_uart "JTAG_UART"
 Info: NIOSII: "qsys" instantiated altera_nios2_gen2 "NIOSII"
 Info: PIO_BTN: Starting RTL generation for module 'qsys_PIO_BTN'
-Info: PIO_BTN:   Generation command is [exec /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/bin/perl -I /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin/europa -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=qsys_PIO_BTN --dir=/tmp/alt8893_4889139279388291285.dir/0040_PIO_BTN_gen/ --quartus_dir=/home/efesxzc/intelFPGA_lite/20.1/quartus --verilog --config=/tmp/alt8893_4889139279388291285.dir/0040_PIO_BTN_gen//qsys_PIO_BTN_component_configuration.pl  --do_build_sim=0  ]
+Info: PIO_BTN:   Generation command is [exec /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/bin/perl -I /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin/europa -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=qsys_PIO_BTN --dir=/tmp/alt8896_8750837163460860321.dir/0136_PIO_BTN_gen/ --quartus_dir=/home/efesxzc/intelFPGA_lite/20.1/quartus --verilog --config=/tmp/alt8896_8750837163460860321.dir/0136_PIO_BTN_gen//qsys_PIO_BTN_component_configuration.pl  --do_build_sim=0  ]
 Info: PIO_BTN: Done RTL generation for module 'qsys_PIO_BTN'
 Info: PIO_BTN: "qsys" instantiated altera_avalon_pio "PIO_BTN"
 Info: PIO_D7SEG: Starting RTL generation for module 'qsys_PIO_D7SEG'
-Info: PIO_D7SEG:   Generation command is [exec /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/bin/perl -I /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin/europa -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=qsys_PIO_D7SEG --dir=/tmp/alt8893_4889139279388291285.dir/0041_PIO_D7SEG_gen/ --quartus_dir=/home/efesxzc/intelFPGA_lite/20.1/quartus --verilog --config=/tmp/alt8893_4889139279388291285.dir/0041_PIO_D7SEG_gen//qsys_PIO_D7SEG_component_configuration.pl  --do_build_sim=0  ]
+Info: PIO_D7SEG:   Generation command is [exec /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/bin/perl -I /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin/europa -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=qsys_PIO_D7SEG --dir=/tmp/alt8896_8750837163460860321.dir/0137_PIO_D7SEG_gen/ --quartus_dir=/home/efesxzc/intelFPGA_lite/20.1/quartus --verilog --config=/tmp/alt8896_8750837163460860321.dir/0137_PIO_D7SEG_gen//qsys_PIO_D7SEG_component_configuration.pl  --do_build_sim=0  ]
 Info: PIO_D7SEG: Done RTL generation for module 'qsys_PIO_D7SEG'
 Info: PIO_D7SEG: "qsys" instantiated altera_avalon_pio "PIO_D7SEG"
 Info: PIO_LED: Starting RTL generation for module 'qsys_PIO_LED'
-Info: PIO_LED:   Generation command is [exec /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/bin/perl -I /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin/europa -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=qsys_PIO_LED --dir=/tmp/alt8893_4889139279388291285.dir/0042_PIO_LED_gen/ --quartus_dir=/home/efesxzc/intelFPGA_lite/20.1/quartus --verilog --config=/tmp/alt8893_4889139279388291285.dir/0042_PIO_LED_gen//qsys_PIO_LED_component_configuration.pl  --do_build_sim=0  ]
+Info: PIO_LED:   Generation command is [exec /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/bin/perl -I /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin/europa -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=qsys_PIO_LED --dir=/tmp/alt8896_8750837163460860321.dir/0138_PIO_LED_gen/ --quartus_dir=/home/efesxzc/intelFPGA_lite/20.1/quartus --verilog --config=/tmp/alt8896_8750837163460860321.dir/0138_PIO_LED_gen//qsys_PIO_LED_component_configuration.pl  --do_build_sim=0  ]
 Info: PIO_LED: Done RTL generation for module 'qsys_PIO_LED'
 Info: PIO_LED: "qsys" instantiated altera_avalon_pio "PIO_LED"
 Info: RAM: Starting RTL generation for module 'qsys_RAM'
-Info: RAM:   Generation command is [exec /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/bin/perl -I /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin/europa -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller -- /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller/generate_rtl.pl --name=qsys_RAM --dir=/tmp/alt8893_4889139279388291285.dir/0043_RAM_gen/ --quartus_dir=/home/efesxzc/intelFPGA_lite/20.1/quartus --verilog --config=/tmp/alt8893_4889139279388291285.dir/0043_RAM_gen//qsys_RAM_component_configuration.pl  --do_build_sim=0  ]
+Info: RAM:   Generation command is [exec /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/bin/perl -I /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin/europa -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller -- /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller/generate_rtl.pl --name=qsys_RAM --dir=/tmp/alt8896_8750837163460860321.dir/0139_RAM_gen/ --quartus_dir=/home/efesxzc/intelFPGA_lite/20.1/quartus --verilog --config=/tmp/alt8896_8750837163460860321.dir/0139_RAM_gen//qsys_RAM_component_configuration.pl  --do_build_sim=0  ]
 Info: RAM: Done RTL generation for module 'qsys_RAM'
 Info: RAM: "qsys" instantiated altera_avalon_new_sdram_controller "RAM"
 Info: SPI_MASTER: Starting RTL generation for module 'qsys_SPI_MASTER'
-Info: SPI_MASTER:   Generation command is [exec /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/bin/perl -I /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin/europa -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_spi -- /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_spi/generate_rtl.pl --name=qsys_SPI_MASTER --dir=/tmp/alt8893_4889139279388291285.dir/0044_SPI_MASTER_gen/ --quartus_dir=/home/efesxzc/intelFPGA_lite/20.1/quartus --verilog --config=/tmp/alt8893_4889139279388291285.dir/0044_SPI_MASTER_gen//qsys_SPI_MASTER_component_configuration.pl  --do_build_sim=0  ]
+Info: SPI_MASTER:   Generation command is [exec /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/bin/perl -I /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/perl/lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin/europa -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_spi -- /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_spi/generate_rtl.pl --name=qsys_SPI_MASTER --dir=/tmp/alt8896_8750837163460860321.dir/0140_SPI_MASTER_gen/ --quartus_dir=/home/efesxzc/intelFPGA_lite/20.1/quartus --verilog --config=/tmp/alt8896_8750837163460860321.dir/0140_SPI_MASTER_gen//qsys_SPI_MASTER_component_configuration.pl  --do_build_sim=0  ]
 Info: SPI_MASTER: Done RTL generation for module 'qsys_SPI_MASTER'
 Info: SPI_MASTER: "qsys" instantiated altera_avalon_spi "SPI_MASTER"
 Info: SYSID: "qsys" instantiated altera_avalon_sysid_qsys "SYSID"
 Info: SYS_TIMER: Starting RTL generation for module 'qsys_SYS_TIMER'
-Info: SYS_TIMER:   Generation command is [exec /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64//perl/bin/perl -I /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64//perl/lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin/europa -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer -- /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer/generate_rtl.pl --name=qsys_SYS_TIMER --dir=/tmp/alt8893_4889139279388291285.dir/0046_SYS_TIMER_gen/ --quartus_dir=/home/efesxzc/intelFPGA_lite/20.1/quartus --verilog --config=/tmp/alt8893_4889139279388291285.dir/0046_SYS_TIMER_gen//qsys_SYS_TIMER_component_configuration.pl  --do_build_sim=0  ]
+Info: SYS_TIMER:   Generation command is [exec /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64//perl/bin/perl -I /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64//perl/lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin/europa -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer -- /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer/generate_rtl.pl --name=qsys_SYS_TIMER --dir=/tmp/alt8896_8750837163460860321.dir/0142_SYS_TIMER_gen/ --quartus_dir=/home/efesxzc/intelFPGA_lite/20.1/quartus --verilog --config=/tmp/alt8896_8750837163460860321.dir/0142_SYS_TIMER_gen//qsys_SYS_TIMER_component_configuration.pl  --do_build_sim=0  ]
 Info: SYS_TIMER: Done RTL generation for module 'qsys_SYS_TIMER'
 Info: SYS_TIMER: "qsys" instantiated altera_avalon_timer "SYS_TIMER"
 Info: TS_TIMER: Starting RTL generation for module 'qsys_TS_TIMER'
-Info: TS_TIMER:   Generation command is [exec /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64//perl/bin/perl -I /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64//perl/lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin/europa -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer -- /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer/generate_rtl.pl --name=qsys_TS_TIMER --dir=/tmp/alt8893_4889139279388291285.dir/0047_TS_TIMER_gen/ --quartus_dir=/home/efesxzc/intelFPGA_lite/20.1/quartus --verilog --config=/tmp/alt8893_4889139279388291285.dir/0047_TS_TIMER_gen//qsys_TS_TIMER_component_configuration.pl  --do_build_sim=0  ]
+Info: TS_TIMER:   Generation command is [exec /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64//perl/bin/perl -I /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64//perl/lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin/europa -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer -- /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer/generate_rtl.pl --name=qsys_TS_TIMER --dir=/tmp/alt8896_8750837163460860321.dir/0143_TS_TIMER_gen/ --quartus_dir=/home/efesxzc/intelFPGA_lite/20.1/quartus --verilog --config=/tmp/alt8896_8750837163460860321.dir/0143_TS_TIMER_gen//qsys_TS_TIMER_component_configuration.pl  --do_build_sim=0  ]
 Info: TS_TIMER: Done RTL generation for module 'qsys_TS_TIMER'
 Info: TS_TIMER: "qsys" instantiated altera_avalon_timer "TS_TIMER"
 Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
@@ -79,17 +88,19 @@ Info: avalon_st_adapter_006: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_007: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_008: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_009: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_010: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_011: Inserting error_adapter: error_adapter_0
 Info: mm_interconnect_0: "qsys" instantiated altera_mm_interconnect "mm_interconnect_0"
 Info: irq_mapper: "qsys" instantiated altera_irq_mapper "irq_mapper"
 Info: rst_controller: "qsys" instantiated altera_reset_controller "rst_controller"
 Info: cpu: Starting RTL generation for module 'qsys_NIOSII_cpu'
-Info: cpu:   Generation command is [exec /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64//perl/bin/perl -I /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64//perl/lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin/europa -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/cpu_lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/nios_lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -- /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/generate_rtl.pl --name=qsys_NIOSII_cpu --dir=/tmp/alt8893_4889139279388291285.dir/0050_cpu_gen/ --quartus_bindir=/home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/ --verilog --config=/tmp/alt8893_4889139279388291285.dir/0050_cpu_gen//qsys_NIOSII_cpu_processor_configuration.pl  --do_build_sim=0  ]
-Info: cpu: # 2021.09.24 00:31:29 (*) Starting Nios II generation
-Info: cpu: # 2021.09.24 00:31:29 (*)   Elaborating CPU configuration settings
-Info: cpu: # 2021.09.24 00:31:29 (*)   Creating all objects for CPU
-Info: cpu: # 2021.09.24 00:31:30 (*)   Generating RTL from CPU objects
-Info: cpu: # 2021.09.24 00:31:30 (*)   Creating plain-text RTL
-Info: cpu: # 2021.09.24 00:31:31 (*) Done Nios II generation
+Info: cpu:   Generation command is [exec /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64//perl/bin/perl -I /home/efesxzc/intelFPGA_lite/20.1/quartus/linux64//perl/lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin/europa -I /home/efesxzc/intelFPGA_lite/20.1/quartus/sopc_builder/bin -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/cpu_lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/nios_lib -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -I /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -- /home/efesxzc/intelFPGA_lite/20.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/generate_rtl.pl --name=qsys_NIOSII_cpu --dir=/tmp/alt8896_8750837163460860321.dir/0146_cpu_gen/ --quartus_bindir=/home/efesxzc/intelFPGA_lite/20.1/quartus/linux64/ --verilog --config=/tmp/alt8896_8750837163460860321.dir/0146_cpu_gen//qsys_NIOSII_cpu_processor_configuration.pl  --do_build_sim=0  ]
+Info: cpu: # 2021.09.26 23:35:07 (*) Starting Nios II generation
+Info: cpu: # 2021.09.26 23:35:07 (*)   Elaborating CPU configuration settings
+Info: cpu: # 2021.09.26 23:35:07 (*)   Creating all objects for CPU
+Info: cpu: # 2021.09.26 23:35:09 (*)   Generating RTL from CPU objects
+Info: cpu: # 2021.09.26 23:35:09 (*)   Creating plain-text RTL
+Info: cpu: # 2021.09.26 23:35:10 (*) Done Nios II generation
 Info: cpu: Done RTL generation for module 'qsys_NIOSII_cpu'
 Info: cpu: "NIOSII" instantiated altera_nios2_gen2_unit "cpu"
 Info: NIOSII_data_master_translator: "mm_interconnect_0" instantiated altera_merlin_master_translator "NIOSII_data_master_translator"
@@ -100,13 +111,13 @@ Info: JTAG_UART_avalon_jtag_slave_agent_rsp_fifo: "mm_interconnect_0" instantiat
 Info: router: "mm_interconnect_0" instantiated altera_merlin_router "router"
 Info: router_001: "mm_interconnect_0" instantiated altera_merlin_router "router_001"
 Info: router_002: "mm_interconnect_0" instantiated altera_merlin_router "router_002"
-Info: router_004: "mm_interconnect_0" instantiated altera_merlin_router "router_004"
-Info: router_005: "mm_interconnect_0" instantiated altera_merlin_router "router_005"
+Info: router_006: "mm_interconnect_0" instantiated altera_merlin_router "router_006"
+Info: router_007: "mm_interconnect_0" instantiated altera_merlin_router "router_007"
 Info: RAM_s1_burst_adapter: "mm_interconnect_0" instantiated altera_merlin_burst_adapter "RAM_s1_burst_adapter"
 Info: cmd_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux"
 Info: cmd_demux_001: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux_001"
 Info: cmd_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux"
-Info: cmd_mux_002: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux_002"
+Info: cmd_mux_004: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux_004"
 Info: Reusing file /home/efesxzc/projects/fpga/cycloneiv_eth/qsys/qsys/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: rsp_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux"
 Info: rsp_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux"
@@ -117,9 +128,9 @@ Info: RAM_s1_rsp_width_adapter: "mm_interconnect_0" instantiated altera_merlin_w
 Info: Reusing file /home/efesxzc/projects/fpga/cycloneiv_eth/qsys/qsys/synthesis/submodules/altera_merlin_address_alignment.sv
 Info: Reusing file /home/efesxzc/projects/fpga/cycloneiv_eth/qsys/qsys/synthesis/submodules/altera_merlin_burst_uncompressor.sv
 Info: avalon_st_adapter: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter"
-Info: avalon_st_adapter_003: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter_003"
+Info: avalon_st_adapter_005: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter_005"
 Info: error_adapter_0: "avalon_st_adapter" instantiated error_adapter "error_adapter_0"
-Info: error_adapter_0: "avalon_st_adapter_003" instantiated error_adapter "error_adapter_0"
-Info: qsys: Done "qsys" with 38 modules, 59 files
+Info: error_adapter_0: "avalon_st_adapter_005" instantiated error_adapter "error_adapter_0"
+Info: qsys: Done "qsys" with 39 modules, 70 files
 Info: qsys-generate succeeded.
 Info: Finished: Create HDL design files for synthesis

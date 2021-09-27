@@ -4,7 +4,7 @@
  * Machine generated for CPU 'NIOSII' in SOPC Builder design 'qsys'
  * SOPC Builder design path: ../../qsys/qsys.sopcinfo
  *
- * Generated: Thu Sep 23 23:09:43 YEKT 2021
+ * Generated: Mon Sep 27 22:32:57 YEKT 2021
  */
 
 /*
@@ -59,6 +59,7 @@
  */
 
 #include "altera_nios2_gen2_irq.h"
+#include "altera_avalon_i2c.h"
 #include "altera_avalon_jtag_uart.h"
 #include "altera_avalon_spi.h"
 #include "altera_avalon_sysid_qsys.h"
@@ -69,6 +70,8 @@
  */
 
 ALTERA_NIOS2_GEN2_IRQ_INSTANCE ( NIOSII, NIOSII);
+ALTERA_AVALON_I2C_INSTANCE ( I2C_EEPROM, I2C_EEPROM);
+ALTERA_AVALON_I2C_INSTANCE ( I2C_TEMP, I2C_TEMP);
 ALTERA_AVALON_JTAG_UART_INSTANCE ( JTAG_UART, JTAG_UART);
 ALTERA_AVALON_SPI_INSTANCE ( SPI_MASTER, SPI_MASTER);
 ALTERA_AVALON_SYSID_QSYS_INSTANCE ( SYSID, SYSID);
@@ -98,6 +101,8 @@ void alt_sys_init( void )
 {
     ALTERA_AVALON_TIMER_INIT ( SYS_TIMER, SYS_TIMER);
     ALTERA_AVALON_TIMER_INIT ( TS_TIMER, TS_TIMER);
+    ALTERA_AVALON_I2C_INIT ( I2C_EEPROM, I2C_EEPROM);
+    ALTERA_AVALON_I2C_INIT ( I2C_TEMP, I2C_TEMP);
     ALTERA_AVALON_JTAG_UART_INIT ( JTAG_UART, JTAG_UART);
     ALTERA_AVALON_SPI_INIT ( SPI_MASTER, SPI_MASTER);
     ALTERA_AVALON_SYSID_QSYS_INIT ( SYSID, SYSID);
