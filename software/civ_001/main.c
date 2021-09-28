@@ -32,6 +32,7 @@
 #include "altera_avalon_i2c_regs.h"
 
 #include "lm75.h"
+#include "at24c08.h"
 
 
 uint8_t my_ip[4] = {192, 168, 1, 70};
@@ -46,9 +47,24 @@ void vApplicationStackOverflowHook(TaskHandle_t  pxCurrentTCB, char *pcTaskName 
 }
 
 
+alt_u8 rxbuffer[0x200]; 
+
 int main(void)
 {
-	
+	eeprom_init();
+
+	eeprom_buffer_tx_t tx_buf;
+	tx_buf.addr = 0x0101;
+	tx_buf.data[0] = 0xde;
+	tx_buf.data[1] = 0xad;
+	tx_buf.data[2] = 0xbe;
+	tx_buf.data[3] = 0xaf;
+
+
+
+	eeprom_write_32(0x0000, 0x01020304);
+	eeprom_read(0x0000, rxbuffer, 4);
+
 	vRegisterCLICommands();
 
 	FreeRTOS_IPInit(my_ip, mymask, mygate, NULL, mymac);

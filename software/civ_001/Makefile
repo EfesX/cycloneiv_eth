@@ -103,6 +103,7 @@ SRC_DIR_06 := $(call adjust-path,FreeRTOS/FreeRTOS-Plus-TCP)
 SRC_DIR_07 := $(call adjust-path,FreeRTOS/FreeRTOS-Plus-TCP/portable/NetworkInterface/ENC28J60)
 
 SDIR_C_SRCS += $(SRC_DIR_01)/CLI-Commands.c
+SDIR_C_SRCS += $(SRC_DIR_01)/at24c08.c
 SDIR_C_SRCS += $(SRC_DIR_01)/http_server.c
 SDIR_C_SRCS += $(SRC_DIR_01)/lm75.c
 SDIR_C_SRCS += $(SRC_DIR_01)/main.c

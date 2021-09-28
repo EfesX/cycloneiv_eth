@@ -17,7 +17,9 @@
 #define TEMP_POLL_PERIOD_DEFAULT 1000
 
 
-
+void set_poll_period(uint16_t period);
+uint16_t get_temp(void);
+int8_t temp_getI2CStatus(void);
 void vStartTempChecking(uint16_t usStackSize, UBaseType_t uxPriority);
 
 
