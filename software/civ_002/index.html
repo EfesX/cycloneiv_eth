@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <title>NIOSII HTTP SERVER</title>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <style>
+ * {
+ box-sizing: border-box;
+ }
+ article {
+ float: left;
+ padding: 20px;
+ width: 90%;
+ background-color: #f1f1f1;
+ height: 300px;
+ }
+ </style>
+ </head>
+ <body>
+ <section>
+ <article>
+ <h1>Выберите файл прошивки NIOSII:</h1>
+ <form enctype="multipart/form-data" method="post">
+ <p><input type="file" name="f">
+ <input type="submit" value="Отправить"></p>
+ </form>
+ <h1>Выберите web-страницу:</h1>
+ <form enctype="multipart/form-data" method="post">
+ <p><input type="file" name="f">
+ <input type="submit" value="Отправить"></p>
+ </form>
+ <form action="/REBOOT" method="GET">
+ <button type="submit" value="/REBOOT">Перезагрузка</button>
+ </form> 
+ </article>
+ </section>
+ </body>
+</html>

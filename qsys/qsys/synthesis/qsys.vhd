@@ -66,21 +66,6 @@ architecture rtl of qsys is
 		);
 	end component altera_avalon_i2c;
 
-	component qsys_JTAG_UART is
-		port (
-			clk            : in  std_logic                     := 'X';             -- clk
-			rst_n          : in  std_logic                     := 'X';             -- reset_n
-			av_chipselect  : in  std_logic                     := 'X';             -- chipselect
-			av_address     : in  std_logic                     := 'X';             -- address
-			av_read_n      : in  std_logic                     := 'X';             -- read_n
-			av_readdata    : out std_logic_vector(31 downto 0);                    -- readdata
-			av_write_n     : in  std_logic                     := 'X';             -- write_n
-			av_writedata   : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
-			av_waitrequest : out std_logic;                                        -- waitrequest
-			av_irq         : out std_logic                                         -- irq
-		);
-	end component qsys_JTAG_UART;
-
 	component qsys_NIOSII is
 		port (
 			clk                                 : in  std_logic                     := 'X';             -- clk
@@ -256,13 +241,6 @@ architecture rtl of qsys is
 			I2C_TEMP_csr_read                        : out std_logic;                                        -- read
 			I2C_TEMP_csr_readdata                    : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			I2C_TEMP_csr_writedata                   : out std_logic_vector(31 downto 0);                    -- writedata
-			JTAG_UART_avalon_jtag_slave_address      : out std_logic_vector(0 downto 0);                     -- address
-			JTAG_UART_avalon_jtag_slave_write        : out std_logic;                                        -- write
-			JTAG_UART_avalon_jtag_slave_read         : out std_logic;                                        -- read
-			JTAG_UART_avalon_jtag_slave_readdata     : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
-			JTAG_UART_avalon_jtag_slave_writedata    : out std_logic_vector(31 downto 0);                    -- writedata
-			JTAG_UART_avalon_jtag_slave_waitrequest  : in  std_logic                     := 'X';             -- waitrequest
-			JTAG_UART_avalon_jtag_slave_chipselect   : out std_logic;                                        -- chipselect
 			NIOSII_debug_mem_slave_address           : out std_logic_vector(8 downto 0);                     -- address
 			NIOSII_debug_mem_slave_write             : out std_logic;                                        -- write
 			NIOSII_debug_mem_slave_read              : out std_logic;                                        -- read
@@ -321,7 +299,6 @@ architecture rtl of qsys is
 			clk           : in  std_logic                     := 'X'; -- clk
 			reset         : in  std_logic                     := 'X'; -- reset
 			receiver0_irq : in  std_logic                     := 'X'; -- irq
-			receiver1_irq : in  std_logic                     := 'X'; -- irq
 			sender_irq    : out std_logic_vector(31 downto 0)         -- irq
 		);
 	end component qsys_irq_mapper;
@@ -404,13 +381,6 @@ architecture rtl of qsys is
 	signal niosii_instruction_master_waitrequest                         : std_logic;                     -- mm_interconnect_0:NIOSII_instruction_master_waitrequest -> NIOSII:i_waitrequest
 	signal niosii_instruction_master_address                             : std_logic_vector(24 downto 0); -- NIOSII:i_address -> mm_interconnect_0:NIOSII_instruction_master_address
 	signal niosii_instruction_master_read                                : std_logic;                     -- NIOSII:i_read -> mm_interconnect_0:NIOSII_instruction_master_read
-	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_chipselect      : std_logic;                     -- mm_interconnect_0:JTAG_UART_avalon_jtag_slave_chipselect -> JTAG_UART:av_chipselect
-	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_readdata        : std_logic_vector(31 downto 0); -- JTAG_UART:av_readdata -> mm_interconnect_0:JTAG_UART_avalon_jtag_slave_readdata
-	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest     : std_logic;                     -- JTAG_UART:av_waitrequest -> mm_interconnect_0:JTAG_UART_avalon_jtag_slave_waitrequest
-	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_address         : std_logic_vector(0 downto 0);  -- mm_interconnect_0:JTAG_UART_avalon_jtag_slave_address -> JTAG_UART:av_address
-	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_read            : std_logic;                     -- mm_interconnect_0:JTAG_UART_avalon_jtag_slave_read -> mm_interconnect_0_jtag_uart_avalon_jtag_slave_read:in
-	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_write           : std_logic;                     -- mm_interconnect_0:JTAG_UART_avalon_jtag_slave_write -> mm_interconnect_0_jtag_uart_avalon_jtag_slave_write:in
-	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata       : std_logic_vector(31 downto 0); -- mm_interconnect_0:JTAG_UART_avalon_jtag_slave_writedata -> JTAG_UART:av_writedata
 	signal mm_interconnect_0_sysid_control_slave_readdata                : std_logic_vector(31 downto 0); -- SYSID:readdata -> mm_interconnect_0:SYSID_control_slave_readdata
 	signal mm_interconnect_0_sysid_control_slave_address                 : std_logic_vector(0 downto 0);  -- mm_interconnect_0:SYSID_control_slave_address -> SYSID:address
 	signal mm_interconnect_0_i2c_temp_csr_readdata                       : std_logic_vector(31 downto 0); -- I2C_TEMP:readdata -> mm_interconnect_0:I2C_TEMP_csr_readdata
@@ -472,13 +442,10 @@ architecture rtl of qsys is
 	signal mm_interconnect_0_spi_master_spi_control_port_write           : std_logic;                     -- mm_interconnect_0:SPI_MASTER_spi_control_port_write -> mm_interconnect_0_spi_master_spi_control_port_write:in
 	signal mm_interconnect_0_spi_master_spi_control_port_writedata       : std_logic_vector(15 downto 0); -- mm_interconnect_0:SPI_MASTER_spi_control_port_writedata -> SPI_MASTER:data_from_cpu
 	signal irq_mapper_receiver0_irq                                      : std_logic;                     -- SYS_TIMER:irq -> irq_mapper:receiver0_irq
-	signal irq_mapper_receiver1_irq                                      : std_logic;                     -- JTAG_UART:av_irq -> irq_mapper:receiver1_irq
 	signal niosii_irq_irq                                                : std_logic_vector(31 downto 0); -- irq_mapper:sender_irq -> NIOSII:irq
 	signal rst_controller_reset_out_reset                                : std_logic;                     -- rst_controller:reset_out -> [irq_mapper:reset, mm_interconnect_0:NIOSII_reset_reset_bridge_in_reset_reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
 	signal rst_controller_reset_out_reset_req                            : std_logic;                     -- rst_controller:reset_req -> [NIOSII:reset_req, rst_translator:reset_req_in]
 	signal reset_reset_n_ports_inv                                       : std_logic;                     -- reset_reset_n:inv -> rst_controller:reset_in0
-	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_read_ports_inv  : std_logic;                     -- mm_interconnect_0_jtag_uart_avalon_jtag_slave_read:inv -> JTAG_UART:av_read_n
-	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_write_ports_inv : std_logic;                     -- mm_interconnect_0_jtag_uart_avalon_jtag_slave_write:inv -> JTAG_UART:av_write_n
 	signal mm_interconnect_0_ram_s1_read_ports_inv                       : std_logic;                     -- mm_interconnect_0_ram_s1_read:inv -> RAM:az_rd_n
 	signal mm_interconnect_0_ram_s1_byteenable_ports_inv                 : std_logic_vector(1 downto 0);  -- mm_interconnect_0_ram_s1_byteenable:inv -> RAM:az_be_n
 	signal mm_interconnect_0_ram_s1_write_ports_inv                      : std_logic;                     -- mm_interconnect_0_ram_s1_write:inv -> RAM:az_wr_n
@@ -489,7 +456,7 @@ architecture rtl of qsys is
 	signal mm_interconnect_0_pio_d7seg_s1_write_ports_inv                : std_logic;                     -- mm_interconnect_0_pio_d7seg_s1_write:inv -> PIO_D7SEG:write_n
 	signal mm_interconnect_0_spi_master_spi_control_port_read_ports_inv  : std_logic;                     -- mm_interconnect_0_spi_master_spi_control_port_read:inv -> SPI_MASTER:read_n
 	signal mm_interconnect_0_spi_master_spi_control_port_write_ports_inv : std_logic;                     -- mm_interconnect_0_spi_master_spi_control_port_write:inv -> SPI_MASTER:write_n
-	signal rst_controller_reset_out_reset_ports_inv                      : std_logic;                     -- rst_controller_reset_out_reset:inv -> [I2C_EEPROM:rst_n, I2C_TEMP:rst_n, JTAG_UART:rst_n, NIOSII:reset_n, PIO_BTN:reset_n, PIO_D7SEG:reset_n, PIO_LED:reset_n, RAM:reset_n, SPI_MASTER:reset_n, SYSID:reset_n, SYS_TIMER:reset_n, TS_TIMER:reset_n]
+	signal rst_controller_reset_out_reset_ports_inv                      : std_logic;                     -- rst_controller_reset_out_reset:inv -> [I2C_EEPROM:rst_n, I2C_TEMP:rst_n, NIOSII:reset_n, PIO_BTN:reset_n, PIO_D7SEG:reset_n, PIO_LED:reset_n, RAM:reset_n, SPI_MASTER:reset_n, SYSID:reset_n, SYS_TIMER:reset_n, TS_TIMER:reset_n]
 
 begin
 
@@ -545,20 +512,6 @@ begin
 			snk_data  => "0000000000000000",                       --      (terminated)
 			snk_valid => '0',                                      --      (terminated)
 			snk_ready => open                                      --      (terminated)
-		);
-
-	jtag_uart : component qsys_JTAG_UART
-		port map (
-			clk            => clk_clk,                                                       --               clk.clk
-			rst_n          => rst_controller_reset_out_reset_ports_inv,                      --             reset.reset_n
-			av_chipselect  => mm_interconnect_0_jtag_uart_avalon_jtag_slave_chipselect,      -- avalon_jtag_slave.chipselect
-			av_address     => mm_interconnect_0_jtag_uart_avalon_jtag_slave_address(0),      --                  .address
-			av_read_n      => mm_interconnect_0_jtag_uart_avalon_jtag_slave_read_ports_inv,  --                  .read_n
-			av_readdata    => mm_interconnect_0_jtag_uart_avalon_jtag_slave_readdata,        --                  .readdata
-			av_write_n     => mm_interconnect_0_jtag_uart_avalon_jtag_slave_write_ports_inv, --                  .write_n
-			av_writedata   => mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata,       --                  .writedata
-			av_waitrequest => mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest,     --                  .waitrequest
-			av_irq         => irq_mapper_receiver1_irq                                       --               irq.irq
 		);
 
 	niosii : component qsys_NIOSII
@@ -703,87 +656,80 @@ begin
 
 	mm_interconnect_0 : component qsys_mm_interconnect_0
 		port map (
-			clk_0_clk_clk                            => clk_clk,                                                   --                          clk_0_clk.clk
-			NIOSII_reset_reset_bridge_in_reset_reset => rst_controller_reset_out_reset,                            -- NIOSII_reset_reset_bridge_in_reset.reset
-			NIOSII_data_master_address               => niosii_data_master_address,                                --                 NIOSII_data_master.address
-			NIOSII_data_master_waitrequest           => niosii_data_master_waitrequest,                            --                                   .waitrequest
-			NIOSII_data_master_byteenable            => niosii_data_master_byteenable,                             --                                   .byteenable
-			NIOSII_data_master_read                  => niosii_data_master_read,                                   --                                   .read
-			NIOSII_data_master_readdata              => niosii_data_master_readdata,                               --                                   .readdata
-			NIOSII_data_master_write                 => niosii_data_master_write,                                  --                                   .write
-			NIOSII_data_master_writedata             => niosii_data_master_writedata,                              --                                   .writedata
-			NIOSII_data_master_debugaccess           => niosii_data_master_debugaccess,                            --                                   .debugaccess
-			NIOSII_instruction_master_address        => niosii_instruction_master_address,                         --          NIOSII_instruction_master.address
-			NIOSII_instruction_master_waitrequest    => niosii_instruction_master_waitrequest,                     --                                   .waitrequest
-			NIOSII_instruction_master_read           => niosii_instruction_master_read,                            --                                   .read
-			NIOSII_instruction_master_readdata       => niosii_instruction_master_readdata,                        --                                   .readdata
-			I2C_EEPROM_csr_address                   => mm_interconnect_0_i2c_eeprom_csr_address,                  --                     I2C_EEPROM_csr.address
-			I2C_EEPROM_csr_write                     => mm_interconnect_0_i2c_eeprom_csr_write,                    --                                   .write
-			I2C_EEPROM_csr_read                      => mm_interconnect_0_i2c_eeprom_csr_read,                     --                                   .read
-			I2C_EEPROM_csr_readdata                  => mm_interconnect_0_i2c_eeprom_csr_readdata,                 --                                   .readdata
-			I2C_EEPROM_csr_writedata                 => mm_interconnect_0_i2c_eeprom_csr_writedata,                --                                   .writedata
-			I2C_TEMP_csr_address                     => mm_interconnect_0_i2c_temp_csr_address,                    --                       I2C_TEMP_csr.address
-			I2C_TEMP_csr_write                       => mm_interconnect_0_i2c_temp_csr_write,                      --                                   .write
-			I2C_TEMP_csr_read                        => mm_interconnect_0_i2c_temp_csr_read,                       --                                   .read
-			I2C_TEMP_csr_readdata                    => mm_interconnect_0_i2c_temp_csr_readdata,                   --                                   .readdata
-			I2C_TEMP_csr_writedata                   => mm_interconnect_0_i2c_temp_csr_writedata,                  --                                   .writedata
-			JTAG_UART_avalon_jtag_slave_address      => mm_interconnect_0_jtag_uart_avalon_jtag_slave_address,     --        JTAG_UART_avalon_jtag_slave.address
-			JTAG_UART_avalon_jtag_slave_write        => mm_interconnect_0_jtag_uart_avalon_jtag_slave_write,       --                                   .write
-			JTAG_UART_avalon_jtag_slave_read         => mm_interconnect_0_jtag_uart_avalon_jtag_slave_read,        --                                   .read
-			JTAG_UART_avalon_jtag_slave_readdata     => mm_interconnect_0_jtag_uart_avalon_jtag_slave_readdata,    --                                   .readdata
-			JTAG_UART_avalon_jtag_slave_writedata    => mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata,   --                                   .writedata
-			JTAG_UART_avalon_jtag_slave_waitrequest  => mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest, --                                   .waitrequest
-			JTAG_UART_avalon_jtag_slave_chipselect   => mm_interconnect_0_jtag_uart_avalon_jtag_slave_chipselect,  --                                   .chipselect
-			NIOSII_debug_mem_slave_address           => mm_interconnect_0_niosii_debug_mem_slave_address,          --             NIOSII_debug_mem_slave.address
-			NIOSII_debug_mem_slave_write             => mm_interconnect_0_niosii_debug_mem_slave_write,            --                                   .write
-			NIOSII_debug_mem_slave_read              => mm_interconnect_0_niosii_debug_mem_slave_read,             --                                   .read
-			NIOSII_debug_mem_slave_readdata          => mm_interconnect_0_niosii_debug_mem_slave_readdata,         --                                   .readdata
-			NIOSII_debug_mem_slave_writedata         => mm_interconnect_0_niosii_debug_mem_slave_writedata,        --                                   .writedata
-			NIOSII_debug_mem_slave_byteenable        => mm_interconnect_0_niosii_debug_mem_slave_byteenable,       --                                   .byteenable
-			NIOSII_debug_mem_slave_waitrequest       => mm_interconnect_0_niosii_debug_mem_slave_waitrequest,      --                                   .waitrequest
-			NIOSII_debug_mem_slave_debugaccess       => mm_interconnect_0_niosii_debug_mem_slave_debugaccess,      --                                   .debugaccess
-			PIO_BTN_s1_address                       => mm_interconnect_0_pio_btn_s1_address,                      --                         PIO_BTN_s1.address
-			PIO_BTN_s1_write                         => mm_interconnect_0_pio_btn_s1_write,                        --                                   .write
-			PIO_BTN_s1_readdata                      => mm_interconnect_0_pio_btn_s1_readdata,                     --                                   .readdata
-			PIO_BTN_s1_writedata                     => mm_interconnect_0_pio_btn_s1_writedata,                    --                                   .writedata
-			PIO_BTN_s1_chipselect                    => mm_interconnect_0_pio_btn_s1_chipselect,                   --                                   .chipselect
-			PIO_D7SEG_s1_address                     => mm_interconnect_0_pio_d7seg_s1_address,                    --                       PIO_D7SEG_s1.address
-			PIO_D7SEG_s1_write                       => mm_interconnect_0_pio_d7seg_s1_write,                      --                                   .write
-			PIO_D7SEG_s1_readdata                    => mm_interconnect_0_pio_d7seg_s1_readdata,                   --                                   .readdata
-			PIO_D7SEG_s1_writedata                   => mm_interconnect_0_pio_d7seg_s1_writedata,                  --                                   .writedata
-			PIO_D7SEG_s1_chipselect                  => mm_interconnect_0_pio_d7seg_s1_chipselect,                 --                                   .chipselect
-			PIO_LED_s1_address                       => mm_interconnect_0_pio_led_s1_address,                      --                         PIO_LED_s1.address
-			PIO_LED_s1_write                         => mm_interconnect_0_pio_led_s1_write,                        --                                   .write
-			PIO_LED_s1_readdata                      => mm_interconnect_0_pio_led_s1_readdata,                     --                                   .readdata
-			PIO_LED_s1_writedata                     => mm_interconnect_0_pio_led_s1_writedata,                    --                                   .writedata
-			PIO_LED_s1_chipselect                    => mm_interconnect_0_pio_led_s1_chipselect,                   --                                   .chipselect
-			RAM_s1_address                           => mm_interconnect_0_ram_s1_address,                          --                             RAM_s1.address
-			RAM_s1_write                             => mm_interconnect_0_ram_s1_write,                            --                                   .write
-			RAM_s1_read                              => mm_interconnect_0_ram_s1_read,                             --                                   .read
-			RAM_s1_readdata                          => mm_interconnect_0_ram_s1_readdata,                         --                                   .readdata
-			RAM_s1_writedata                         => mm_interconnect_0_ram_s1_writedata,                        --                                   .writedata
-			RAM_s1_byteenable                        => mm_interconnect_0_ram_s1_byteenable,                       --                                   .byteenable
-			RAM_s1_readdatavalid                     => mm_interconnect_0_ram_s1_readdatavalid,                    --                                   .readdatavalid
-			RAM_s1_waitrequest                       => mm_interconnect_0_ram_s1_waitrequest,                      --                                   .waitrequest
-			RAM_s1_chipselect                        => mm_interconnect_0_ram_s1_chipselect,                       --                                   .chipselect
-			SPI_MASTER_spi_control_port_address      => mm_interconnect_0_spi_master_spi_control_port_address,     --        SPI_MASTER_spi_control_port.address
-			SPI_MASTER_spi_control_port_write        => mm_interconnect_0_spi_master_spi_control_port_write,       --                                   .write
-			SPI_MASTER_spi_control_port_read         => mm_interconnect_0_spi_master_spi_control_port_read,        --                                   .read
-			SPI_MASTER_spi_control_port_readdata     => mm_interconnect_0_spi_master_spi_control_port_readdata,    --                                   .readdata
-			SPI_MASTER_spi_control_port_writedata    => mm_interconnect_0_spi_master_spi_control_port_writedata,   --                                   .writedata
-			SPI_MASTER_spi_control_port_chipselect   => mm_interconnect_0_spi_master_spi_control_port_chipselect,  --                                   .chipselect
-			SYS_TIMER_s1_address                     => mm_interconnect_0_sys_timer_s1_address,                    --                       SYS_TIMER_s1.address
-			SYS_TIMER_s1_write                       => mm_interconnect_0_sys_timer_s1_write,                      --                                   .write
-			SYS_TIMER_s1_readdata                    => mm_interconnect_0_sys_timer_s1_readdata,                   --                                   .readdata
-			SYS_TIMER_s1_writedata                   => mm_interconnect_0_sys_timer_s1_writedata,                  --                                   .writedata
-			SYS_TIMER_s1_chipselect                  => mm_interconnect_0_sys_timer_s1_chipselect,                 --                                   .chipselect
-			SYSID_control_slave_address              => mm_interconnect_0_sysid_control_slave_address,             --                SYSID_control_slave.address
-			SYSID_control_slave_readdata             => mm_interconnect_0_sysid_control_slave_readdata,            --                                   .readdata
-			TS_TIMER_s1_address                      => mm_interconnect_0_ts_timer_s1_address,                     --                        TS_TIMER_s1.address
-			TS_TIMER_s1_write                        => mm_interconnect_0_ts_timer_s1_write,                       --                                   .write
-			TS_TIMER_s1_readdata                     => mm_interconnect_0_ts_timer_s1_readdata,                    --                                   .readdata
-			TS_TIMER_s1_writedata                    => mm_interconnect_0_ts_timer_s1_writedata,                   --                                   .writedata
-			TS_TIMER_s1_chipselect                   => mm_interconnect_0_ts_timer_s1_chipselect                   --                                   .chipselect
+			clk_0_clk_clk                            => clk_clk,                                                  --                          clk_0_clk.clk
+			NIOSII_reset_reset_bridge_in_reset_reset => rst_controller_reset_out_reset,                           -- NIOSII_reset_reset_bridge_in_reset.reset
+			NIOSII_data_master_address               => niosii_data_master_address,                               --                 NIOSII_data_master.address
+			NIOSII_data_master_waitrequest           => niosii_data_master_waitrequest,                           --                                   .waitrequest
+			NIOSII_data_master_byteenable            => niosii_data_master_byteenable,                            --                                   .byteenable
+			NIOSII_data_master_read                  => niosii_data_master_read,                                  --                                   .read
+			NIOSII_data_master_readdata              => niosii_data_master_readdata,                              --                                   .readdata
+			NIOSII_data_master_write                 => niosii_data_master_write,                                 --                                   .write
+			NIOSII_data_master_writedata             => niosii_data_master_writedata,                             --                                   .writedata
+			NIOSII_data_master_debugaccess           => niosii_data_master_debugaccess,                           --                                   .debugaccess
+			NIOSII_instruction_master_address        => niosii_instruction_master_address,                        --          NIOSII_instruction_master.address
+			NIOSII_instruction_master_waitrequest    => niosii_instruction_master_waitrequest,                    --                                   .waitrequest
+			NIOSII_instruction_master_read           => niosii_instruction_master_read,                           --                                   .read
+			NIOSII_instruction_master_readdata       => niosii_instruction_master_readdata,                       --                                   .readdata
+			I2C_EEPROM_csr_address                   => mm_interconnect_0_i2c_eeprom_csr_address,                 --                     I2C_EEPROM_csr.address
+			I2C_EEPROM_csr_write                     => mm_interconnect_0_i2c_eeprom_csr_write,                   --                                   .write
+			I2C_EEPROM_csr_read                      => mm_interconnect_0_i2c_eeprom_csr_read,                    --                                   .read
+			I2C_EEPROM_csr_readdata                  => mm_interconnect_0_i2c_eeprom_csr_readdata,                --                                   .readdata
+			I2C_EEPROM_csr_writedata                 => mm_interconnect_0_i2c_eeprom_csr_writedata,               --                                   .writedata
+			I2C_TEMP_csr_address                     => mm_interconnect_0_i2c_temp_csr_address,                   --                       I2C_TEMP_csr.address
+			I2C_TEMP_csr_write                       => mm_interconnect_0_i2c_temp_csr_write,                     --                                   .write
+			I2C_TEMP_csr_read                        => mm_interconnect_0_i2c_temp_csr_read,                      --                                   .read
+			I2C_TEMP_csr_readdata                    => mm_interconnect_0_i2c_temp_csr_readdata,                  --                                   .readdata
+			I2C_TEMP_csr_writedata                   => mm_interconnect_0_i2c_temp_csr_writedata,                 --                                   .writedata
+			NIOSII_debug_mem_slave_address           => mm_interconnect_0_niosii_debug_mem_slave_address,         --             NIOSII_debug_mem_slave.address
+			NIOSII_debug_mem_slave_write             => mm_interconnect_0_niosii_debug_mem_slave_write,           --                                   .write
+			NIOSII_debug_mem_slave_read              => mm_interconnect_0_niosii_debug_mem_slave_read,            --                                   .read
+			NIOSII_debug_mem_slave_readdata          => mm_interconnect_0_niosii_debug_mem_slave_readdata,        --                                   .readdata
+			NIOSII_debug_mem_slave_writedata         => mm_interconnect_0_niosii_debug_mem_slave_writedata,       --                                   .writedata
+			NIOSII_debug_mem_slave_byteenable        => mm_interconnect_0_niosii_debug_mem_slave_byteenable,      --                                   .byteenable
+			NIOSII_debug_mem_slave_waitrequest       => mm_interconnect_0_niosii_debug_mem_slave_waitrequest,     --                                   .waitrequest
+			NIOSII_debug_mem_slave_debugaccess       => mm_interconnect_0_niosii_debug_mem_slave_debugaccess,     --                                   .debugaccess
+			PIO_BTN_s1_address                       => mm_interconnect_0_pio_btn_s1_address,                     --                         PIO_BTN_s1.address
+			PIO_BTN_s1_write                         => mm_interconnect_0_pio_btn_s1_write,                       --                                   .write
+			PIO_BTN_s1_readdata                      => mm_interconnect_0_pio_btn_s1_readdata,                    --                                   .readdata
+			PIO_BTN_s1_writedata                     => mm_interconnect_0_pio_btn_s1_writedata,                   --                                   .writedata
+			PIO_BTN_s1_chipselect                    => mm_interconnect_0_pio_btn_s1_chipselect,                  --                                   .chipselect
+			PIO_D7SEG_s1_address                     => mm_interconnect_0_pio_d7seg_s1_address,                   --                       PIO_D7SEG_s1.address
+			PIO_D7SEG_s1_write                       => mm_interconnect_0_pio_d7seg_s1_write,                     --                                   .write
+			PIO_D7SEG_s1_readdata                    => mm_interconnect_0_pio_d7seg_s1_readdata,                  --                                   .readdata
+			PIO_D7SEG_s1_writedata                   => mm_interconnect_0_pio_d7seg_s1_writedata,                 --                                   .writedata
+			PIO_D7SEG_s1_chipselect                  => mm_interconnect_0_pio_d7seg_s1_chipselect,                --                                   .chipselect
+			PIO_LED_s1_address                       => mm_interconnect_0_pio_led_s1_address,                     --                         PIO_LED_s1.address
+			PIO_LED_s1_write                         => mm_interconnect_0_pio_led_s1_write,                       --                                   .write
+			PIO_LED_s1_readdata                      => mm_interconnect_0_pio_led_s1_readdata,                    --                                   .readdata
+			PIO_LED_s1_writedata                     => mm_interconnect_0_pio_led_s1_writedata,                   --                                   .writedata
+			PIO_LED_s1_chipselect                    => mm_interconnect_0_pio_led_s1_chipselect,                  --                                   .chipselect
+			RAM_s1_address                           => mm_interconnect_0_ram_s1_address,                         --                             RAM_s1.address
+			RAM_s1_write                             => mm_interconnect_0_ram_s1_write,                           --                                   .write
+			RAM_s1_read                              => mm_interconnect_0_ram_s1_read,                            --                                   .read
+			RAM_s1_readdata                          => mm_interconnect_0_ram_s1_readdata,                        --                                   .readdata
+			RAM_s1_writedata                         => mm_interconnect_0_ram_s1_writedata,                       --                                   .writedata
+			RAM_s1_byteenable                        => mm_interconnect_0_ram_s1_byteenable,                      --                                   .byteenable
+			RAM_s1_readdatavalid                     => mm_interconnect_0_ram_s1_readdatavalid,                   --                                   .readdatavalid
+			RAM_s1_waitrequest                       => mm_interconnect_0_ram_s1_waitrequest,                     --                                   .waitrequest
+			RAM_s1_chipselect                        => mm_interconnect_0_ram_s1_chipselect,                      --                                   .chipselect
+			SPI_MASTER_spi_control_port_address      => mm_interconnect_0_spi_master_spi_control_port_address,    --        SPI_MASTER_spi_control_port.address
+			SPI_MASTER_spi_control_port_write        => mm_interconnect_0_spi_master_spi_control_port_write,      --                                   .write
+			SPI_MASTER_spi_control_port_read         => mm_interconnect_0_spi_master_spi_control_port_read,       --                                   .read
+			SPI_MASTER_spi_control_port_readdata     => mm_interconnect_0_spi_master_spi_control_port_readdata,   --                                   .readdata
+			SPI_MASTER_spi_control_port_writedata    => mm_interconnect_0_spi_master_spi_control_port_writedata,  --                                   .writedata
+			SPI_MASTER_spi_control_port_chipselect   => mm_interconnect_0_spi_master_spi_control_port_chipselect, --                                   .chipselect
+			SYS_TIMER_s1_address                     => mm_interconnect_0_sys_timer_s1_address,                   --                       SYS_TIMER_s1.address
+			SYS_TIMER_s1_write                       => mm_interconnect_0_sys_timer_s1_write,                     --                                   .write
+			SYS_TIMER_s1_readdata                    => mm_interconnect_0_sys_timer_s1_readdata,                  --                                   .readdata
+			SYS_TIMER_s1_writedata                   => mm_interconnect_0_sys_timer_s1_writedata,                 --                                   .writedata
+			SYS_TIMER_s1_chipselect                  => mm_interconnect_0_sys_timer_s1_chipselect,                --                                   .chipselect
+			SYSID_control_slave_address              => mm_interconnect_0_sysid_control_slave_address,            --                SYSID_control_slave.address
+			SYSID_control_slave_readdata             => mm_interconnect_0_sysid_control_slave_readdata,           --                                   .readdata
+			TS_TIMER_s1_address                      => mm_interconnect_0_ts_timer_s1_address,                    --                        TS_TIMER_s1.address
+			TS_TIMER_s1_write                        => mm_interconnect_0_ts_timer_s1_write,                      --                                   .write
+			TS_TIMER_s1_readdata                     => mm_interconnect_0_ts_timer_s1_readdata,                   --                                   .readdata
+			TS_TIMER_s1_writedata                    => mm_interconnect_0_ts_timer_s1_writedata,                  --                                   .writedata
+			TS_TIMER_s1_chipselect                   => mm_interconnect_0_ts_timer_s1_chipselect                  --                                   .chipselect
 		);
 
 	irq_mapper : component qsys_irq_mapper
@@ -791,7 +737,6 @@ begin
 			clk           => clk_clk,                        --       clk.clk
 			reset         => rst_controller_reset_out_reset, -- clk_reset.reset
 			receiver0_irq => irq_mapper_receiver0_irq,       -- receiver0.irq
-			receiver1_irq => irq_mapper_receiver1_irq,       -- receiver1.irq
 			sender_irq    => niosii_irq_irq                  --    sender.irq
 		);
 
@@ -861,10 +806,6 @@ begin
 		);
 
 	reset_reset_n_ports_inv <= not reset_reset_n;
-
-	mm_interconnect_0_jtag_uart_avalon_jtag_slave_read_ports_inv <= not mm_interconnect_0_jtag_uart_avalon_jtag_slave_read;
-
-	mm_interconnect_0_jtag_uart_avalon_jtag_slave_write_ports_inv <= not mm_interconnect_0_jtag_uart_avalon_jtag_slave_write;
 
 	mm_interconnect_0_ram_s1_read_ports_inv <= not mm_interconnect_0_ram_s1_read;
 

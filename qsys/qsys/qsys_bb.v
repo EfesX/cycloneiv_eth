@@ -3,6 +3,10 @@ module qsys (
 	btn_export,
 	clk_clk,
 	d7seg_export,
+	eeprom_sda_in,
+	eeprom_scl_in,
+	eeprom_sda_oe,
+	eeprom_scl_oe,
 	enc_spi_MISO,
 	enc_spi_MOSI,
 	enc_spi_SCLK,
@@ -21,15 +25,15 @@ module qsys (
 	temp_sda_in,
 	temp_scl_in,
 	temp_sda_oe,
-	temp_scl_oe,
-	eeprom_sda_in,
-	eeprom_scl_in,
-	eeprom_sda_oe,
-	eeprom_scl_oe);	
+	temp_scl_oe);	
 
 	input	[7:0]	btn_export;
 	input		clk_clk;
 	output	[15:0]	d7seg_export;
+	input		eeprom_sda_in;
+	input		eeprom_scl_in;
+	output		eeprom_sda_oe;
+	output		eeprom_scl_oe;
 	input		enc_spi_MISO;
 	output		enc_spi_MOSI;
 	output		enc_spi_SCLK;
@@ -49,8 +53,4 @@ module qsys (
 	input		temp_scl_in;
 	output		temp_sda_oe;
 	output		temp_scl_oe;
-	input		eeprom_sda_in;
-	input		eeprom_scl_in;
-	output		eeprom_sda_oe;
-	output		eeprom_scl_oe;
 endmodule

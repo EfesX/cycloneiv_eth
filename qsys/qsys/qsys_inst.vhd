@@ -3,6 +3,10 @@
 			btn_export    : in    std_logic_vector(7 downto 0)  := (others => 'X'); -- export
 			clk_clk       : in    std_logic                     := 'X';             -- clk
 			d7seg_export  : out   std_logic_vector(15 downto 0);                    -- export
+			eeprom_sda_in : in    std_logic                     := 'X';             -- sda_in
+			eeprom_scl_in : in    std_logic                     := 'X';             -- scl_in
+			eeprom_sda_oe : out   std_logic;                                        -- sda_oe
+			eeprom_scl_oe : out   std_logic;                                        -- scl_oe
 			enc_spi_MISO  : in    std_logic                     := 'X';             -- MISO
 			enc_spi_MOSI  : out   std_logic;                                        -- MOSI
 			enc_spi_SCLK  : out   std_logic;                                        -- SCLK
@@ -21,11 +25,7 @@
 			temp_sda_in   : in    std_logic                     := 'X';             -- sda_in
 			temp_scl_in   : in    std_logic                     := 'X';             -- scl_in
 			temp_sda_oe   : out   std_logic;                                        -- sda_oe
-			temp_scl_oe   : out   std_logic;                                        -- scl_oe
-			eeprom_sda_in : in    std_logic                     := 'X';             -- sda_in
-			eeprom_scl_in : in    std_logic                     := 'X';             -- scl_in
-			eeprom_sda_oe : out   std_logic;                                        -- sda_oe
-			eeprom_scl_oe : out   std_logic                                         -- scl_oe
+			temp_scl_oe   : out   std_logic                                         -- scl_oe
 		);
 	end component qsys;
 
@@ -34,6 +34,10 @@
 			btn_export    => CONNECTED_TO_btn_export,    --     btn.export
 			clk_clk       => CONNECTED_TO_clk_clk,       --     clk.clk
 			d7seg_export  => CONNECTED_TO_d7seg_export,  --   d7seg.export
+			eeprom_sda_in => CONNECTED_TO_eeprom_sda_in, --  eeprom.sda_in
+			eeprom_scl_in => CONNECTED_TO_eeprom_scl_in, --        .scl_in
+			eeprom_sda_oe => CONNECTED_TO_eeprom_sda_oe, --        .sda_oe
+			eeprom_scl_oe => CONNECTED_TO_eeprom_scl_oe, --        .scl_oe
 			enc_spi_MISO  => CONNECTED_TO_enc_spi_MISO,  -- enc_spi.MISO
 			enc_spi_MOSI  => CONNECTED_TO_enc_spi_MOSI,  --        .MOSI
 			enc_spi_SCLK  => CONNECTED_TO_enc_spi_SCLK,  --        .SCLK
@@ -52,10 +56,6 @@
 			temp_sda_in   => CONNECTED_TO_temp_sda_in,   --    temp.sda_in
 			temp_scl_in   => CONNECTED_TO_temp_scl_in,   --        .scl_in
 			temp_sda_oe   => CONNECTED_TO_temp_sda_oe,   --        .sda_oe
-			temp_scl_oe   => CONNECTED_TO_temp_scl_oe,   --        .scl_oe
-			eeprom_sda_in => CONNECTED_TO_eeprom_sda_in, --  eeprom.sda_in
-			eeprom_scl_in => CONNECTED_TO_eeprom_scl_in, --        .scl_in
-			eeprom_sda_oe => CONNECTED_TO_eeprom_sda_oe, --        .sda_oe
-			eeprom_scl_oe => CONNECTED_TO_eeprom_scl_oe  --        .scl_oe
+			temp_scl_oe   => CONNECTED_TO_temp_scl_oe    --        .scl_oe
 		);
 

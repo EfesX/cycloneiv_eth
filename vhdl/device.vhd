@@ -52,10 +52,10 @@ entity device is
 		enc_rst		 : out std_logic := '1';
 		enc_irq		 : in  std_logic := '0'
 
---		sd_miso : in  std_logic := '0';
---		sd_mosi : out std_logic := '0';
---		sd_sck	: out std_logic := '0';
---		sd_cs	: out std_logic := '0'
+--		epcs_dclk     : out   std_logic;                                        -- dclk
+--		epcs_sce      : out   std_logic;                                        -- sce
+--		epcs_sdo      : out   std_logic;                                        -- sdo
+--		epcs_data0    : in    std_logic                     := 'X'             -- data0
 	);
 end entity device;
 
@@ -93,7 +93,12 @@ architecture dev_bhv of device is
 			eeprom_sda_in : in    std_logic                     := 'X';             -- sda_in
 			eeprom_scl_in : in    std_logic                     := 'X';             -- scl_in
 			eeprom_sda_oe : out   std_logic;                                        -- sda_oe
-			eeprom_scl_oe : out   std_logic                                        -- scl_oe
+			eeprom_scl_oe : out   std_logic                                       -- scl_oe
+			
+--			epcs_dclk     : out   std_logic;                                        -- dclk
+--			epcs_sce      : out   std_logic;                                        -- sce
+--			epcs_sdo      : out   std_logic;                                        -- sdo
+--			epcs_data0    : in    std_logic                     := 'X'            -- data0
 --
 --			sdcard_MISO   : in    std_logic                     := 'X';             -- MISO
 --			sdcard_MOSI   : out   std_logic;                                        -- MOSI
@@ -111,6 +116,14 @@ architecture dev_bhv of device is
 			cs:      out std_logic_vector(3 downto 0)
 		);
 	end component disp_7_seg;
+
+	component pll_50_25
+	PORT
+	(
+		inclk0		: IN STD_LOGIC  := '0';
+		c0		: OUT STD_LOGIC 
+	);
+end component;
 	
 	signal s_num_7seg : std_logic_vector(15 downto 0) := (others => '0'); -- 11...0  numbers
 																								 -- 15...12 points
@@ -127,7 +140,10 @@ architecture dev_bhv of device is
 	signal s_eeprom_scl_in : std_logic                     := 'X';             -- scl_in
 	signal s_eeprom_sda_oe : std_logic;                                        -- sda_oe
 	signal s_eeprom_scl_oe : std_logic;                                        -- scl_oe
+
+	signal s_pll_25 : std_logic := '0';
 begin
+
 
 	led(3 downto 0) <= s_led(3 downto 0);
 	--enc_spi_SS_n <= s_led(0);
@@ -152,7 +168,7 @@ begin
 
 	qsys_unit : qsys
 		port map(
-            clk_clk                 => clock,
+            clk_clk                 => s_pll_25,
             reset_reset_n           => reset,
             
             ram_addr      => ram_addr,
@@ -185,10 +201,10 @@ begin
 			eeprom_sda_oe => s_eeprom_sda_oe,
 			eeprom_scl_oe => s_eeprom_scl_oe
 
---			sdcard_MISO   => '0',
---			sdcard_MOSI   => open,
---			sdcard_SCLK   => open,
---			sdcard_SS_n   => open
+--			epcs_dclk     => epcs_dclk,
+--			epcs_sce      => epcs_sce,
+--			epcs_sdo      => epcs_sdo,
+--			epcs_data0    => epcs_data0
         );
 		  
 	disp_7_seg_unit : disp_7_seg		
@@ -199,4 +215,11 @@ begin
 			num_out => dt_seg,
 			cs      => dt_dig
 		);
+
+	pll_unit : pll_50_25
+	PORT map(
+		inclk0	=> clock,
+		c0			=> s_pll_25
+	);
+
 end architecture;

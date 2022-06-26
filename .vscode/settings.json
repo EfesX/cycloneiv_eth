@@ -6,6 +6,17 @@
         "alt_irq.h": "c",
         "alt_legacy_irq.h": "c",
         "altera_avalon_i2c.h": "c",
-        "altera_avalon_i2c_regs.h": "c"
+        "altera_avalon_i2c_regs.h": "c",
+        "at24c08.h": "c",
+        "epcs_commands.h": "c",
+        "altera_avalon_epcs_flash_controller.h": "c",
+        "altera_avalon_spi.h": "c",
+        "alt_types.h": "c",
+        "altera_avalon_spi_regs.h": "c",
+        "altera_epcq_controller.h": "c",
+        "altera_avalon_timer.h": "c",
+        "altera_avalon_timer_regs.h": "c",
+        "stack_macros.h": "c",
+        "system.h": "c"
     }
 }

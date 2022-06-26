@@ -8,13 +8,14 @@
             "type": "gdb",
             "name": "GDB NIOSII",
             "request": "attach",
-            "executable": "${workspaceFolder}/software/civ_001/civ_001.elf",
+            "executable": "${workspaceFolder}/software/civ_002/civ_002.elf",
             "target": "192.168.1.166:2342",
+           // "target": "localhost:2342",
            // "preLaunchTask": "launchNIOSIICommandShell",
             "gdbpath": "nios2-elf-gdb",
             "remote": true,
             "autorun": [
-                "load"
+             //   "load"
             ],
             "cwd": "${workspaceRoot}"
         }

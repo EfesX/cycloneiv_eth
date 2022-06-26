@@ -27,7 +27,7 @@
  -- VCCINT        : Dedicated power pin, which MUST be connected to VCC  (1.2V).
  -- VCCIO         : Dedicated power pin, which MUST be connected to VCC
  --                 of its bank.
- --                  Bank 1:       3.3V
+ --                  Bank 1:       2.5V
  --                  Bank 2:       2.5V
  --                  Bank 3:       2.5V
  --                  Bank 4:       2.5V
@@ -71,24 +71,24 @@ Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage 
 -------------------------------------------------------------------------------------------------------------
 enc_irq                      : 1         : input  : 3.3-V LVTTL       :         : 1         : Y              
 enc_spi_MISO                 : 2         : input  : 3.3-V LVTTL       :         : 1         : Y              
-enc_spi_SCLK                 : 3         : output : 3.3-V LVTTL       :         : 1         : Y              
+enc_spi_SCLK                 : 3         : output : 2.5 V             :         : 1         : Y              
 GND                          : 4         : gnd    :                   :         :           :                
 VCCINT                       : 5         : power  :                   : 1.2V    :           :                
-~ALTERA_ASDO_DATA1~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 6         : input  : 3.3-V LVTTL       :         : 1         : N              
-enc_rst                      : 7         : output : 3.3-V LVTTL       :         : 1         : Y              
-~ALTERA_FLASH_nCE_nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 8         : input  : 3.3-V LVTTL       :         : 1         : N              
+~ALTERA_ASDO_DATA1~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 6         : input  : 2.5 V             :         : 1         : N              
+enc_rst                      : 7         : output : 2.5 V             :         : 1         : Y              
+~ALTERA_FLASH_nCE_nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 8         : input  : 2.5 V             :         : 1         : N              
 nSTATUS                      : 9         :        :                   :         : 1         :                
-enc_spi_SS_n                 : 10        : output : 3.3-V LVTTL       :         : 1         : Y              
-enc_spi_MOSI                 : 11        : output : 3.3-V LVTTL       :         : 1         : Y              
-~ALTERA_DCLK~                : 12        : output : 3.3-V LVTTL       :         : 1         : N              
-~ALTERA_DATA0~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 13        : input  : 3.3-V LVTTL       :         : 1         : N              
+enc_spi_SS_n                 : 10        : output : 2.5 V             :         : 1         : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 11        :        :                   :         : 1         :                
+~ALTERA_DCLK~                : 12        : output : 2.5 V             :         : 1         : N              
+~ALTERA_DATA0~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 13        : input  : 2.5 V             :         : 1         : N              
 nCONFIG                      : 14        :        :                   :         : 1         :                
-altera_reserved_tdi          : 15        : input  : 3.3-V LVTTL       :         : 1         : N              
-altera_reserved_tck          : 16        : input  : 3.3-V LVTTL       :         : 1         : N              
-VCCIO1                       : 17        : power  :                   : 3.3V    : 1         :                
-altera_reserved_tms          : 18        : input  : 3.3-V LVTTL       :         : 1         : N              
+altera_reserved_tdi          : 15        : input  : 2.5 V             :         : 1         : N              
+altera_reserved_tck          : 16        : input  : 2.5 V             :         : 1         : N              
+VCCIO1                       : 17        : power  :                   : 2.5V    : 1         :                
+altera_reserved_tms          : 18        : input  : 2.5 V             :         : 1         : N              
 GND                          : 19        : gnd    :                   :         :           :                
-altera_reserved_tdo          : 20        : output : 3.3-V LVTTL       :         : 1         : N              
+altera_reserved_tdo          : 20        : output : 2.5 V             :         : 1         : N              
 nCE                          : 21        :        :                   :         : 1         :                
 GND                          : 22        : gnd    :                   :         :           :                
 clock                        : 23        : input  : 2.5 V             :         : 1         : Y              
@@ -171,24 +171,24 @@ i2c_scl                      : 99        : bidir  : 3.3-V LVTTL       :         
 ir                           : 100       : input  : 2.5 V             :         : 6         : Y              
 ~ALTERA_nCEO~ / RESERVED_OUTPUT_OPEN_DRAIN : 101       : output : 3.3-V LVTTL       :         : 6         : N              
 VCCINT                       : 102       : power  :                   : 1.2V    :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 103       :        :                   :         : 6         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 104       :        :                   :         : 6         :                
-sw[0]                        : 105       : input  : 2.5 V             :         : 6         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : 106       :        :                   :         : 6         :                
+uart_tx                      : 103       : output : 3.3-V LVTTL       :         : 6         : N              
+vga_vsync                    : 104       : output : 3.3-V LVTTL       :         : 6         : N              
+vga_r                        : 105       : output : 3.3-V LVTTL       :         : 6         : N              
+uart_rx                      : 106       : input  : 3.3-V LVTTL       :         : 6         : N              
 VCCA2                        : 107       : power  :                   : 2.5V    :           :                
 GNDA2                        : 108       : gnd    :                   :         :           :                
 VCCD_PLL2                    : 109       : power  :                   : 1.2V    :           :                
 buzzer                       : 110       : output : 3.3-V LVTTL       :         : 7         : Y              
-sw[3]                        : 111       : input  : 2.5 V             :         : 7         : N              
+enc_spi_MOSI                 : 111       : output : 3.3-V LVTTL       :         : 7         : Y              
 scl                          : 112       : bidir  : 3.3-V LVTTL       :         : 7         : Y              
 sda                          : 113       : bidir  : 3.3-V LVTTL       :         : 7         : Y              
-uart_tx                      : 114       : output : 3.3-V LVTTL       :         : 7         : Y              
-uart_rx                      : 115       : input  : 3.3-V LVTTL       :         : 7         : Y              
+vga_g                        : 114       : output : 3.3-V LVTTL       :         : 7         : N              
+vga_b                        : 115       : output : 3.3-V LVTTL       :         : 7         : N              
 VCCINT                       : 116       : power  :                   : 1.2V    :           :                
 VCCIO7                       : 117       : power  :                   : 3.3V    : 7         :                
 GND                          : 118       : gnd    :                   :         :           :                
-sw[1]                        : 119       : input  : 2.5 V             :         : 7         : N              
-sw[2]                        : 120       : input  : 2.5 V             :         : 7         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 119       :        :                   :         : 7         :                
+vga_hsync                    : 120       : output : 3.3-V LVTTL       :         : 7         : N              
 dt_seg[1]                    : 121       : output : 3.3-V LVTTL       :         : 7         : Y              
 VCCIO7                       : 122       : power  :                   : 3.3V    : 7         :                
 GND                          : 123       : gnd    :                   :         :           :                
@@ -206,11 +206,11 @@ VCCINT                       : 134       : power  :                   : 1.2V    
 dt_dig[1]                    : 135       : output : 2.5 V             :         : 8         : Y              
 dt_dig[2]                    : 136       : output : 2.5 V             :         : 8         : Y              
 dt_dig[3]                    : 137       : output : 2.5 V             :         : 8         : Y              
-vga_r                        : 138       : output : 2.5 V             :         : 8         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 138       :        :                   :         : 8         :                
 VCCIO8                       : 139       : power  :                   : 2.5V    : 8         :                
 GND                          : 140       : gnd    :                   :         :           :                
-vga_g                        : 141       : output : 2.5 V             :         : 8         : N              
-vga_hsync                    : 142       : output : 2.5 V             :         : 8         : N              
-vga_b                        : 143       : output : 2.5 V             :         : 8         : N              
-vga_vsync                    : 144       : output : 2.5 V             :         : 8         : N              
+sw[0]                        : 141       : input  : 2.5 V             :         : 8         : N              
+sw[1]                        : 142       : input  : 2.5 V             :         : 8         : N              
+sw[2]                        : 143       : input  : 2.5 V             :         : 8         : N              
+sw[3]                        : 144       : input  : 2.5 V             :         : 8         : N              
 GND                          : EPAD      :        :                   :         :           :                

@@ -2,6 +2,10 @@
 		.btn_export    (<connected-to-btn_export>),    //     btn.export
 		.clk_clk       (<connected-to-clk_clk>),       //     clk.clk
 		.d7seg_export  (<connected-to-d7seg_export>),  //   d7seg.export
+		.eeprom_sda_in (<connected-to-eeprom_sda_in>), //  eeprom.sda_in
+		.eeprom_scl_in (<connected-to-eeprom_scl_in>), //        .scl_in
+		.eeprom_sda_oe (<connected-to-eeprom_sda_oe>), //        .sda_oe
+		.eeprom_scl_oe (<connected-to-eeprom_scl_oe>), //        .scl_oe
 		.enc_spi_MISO  (<connected-to-enc_spi_MISO>),  // enc_spi.MISO
 		.enc_spi_MOSI  (<connected-to-enc_spi_MOSI>),  //        .MOSI
 		.enc_spi_SCLK  (<connected-to-enc_spi_SCLK>),  //        .SCLK
@@ -20,10 +24,6 @@
 		.temp_sda_in   (<connected-to-temp_sda_in>),   //    temp.sda_in
 		.temp_scl_in   (<connected-to-temp_scl_in>),   //        .scl_in
 		.temp_sda_oe   (<connected-to-temp_sda_oe>),   //        .sda_oe
-		.temp_scl_oe   (<connected-to-temp_scl_oe>),   //        .scl_oe
-		.eeprom_sda_in (<connected-to-eeprom_sda_in>), //  eeprom.sda_in
-		.eeprom_scl_in (<connected-to-eeprom_scl_in>), //        .scl_in
-		.eeprom_sda_oe (<connected-to-eeprom_sda_oe>), //        .sda_oe
-		.eeprom_scl_oe (<connected-to-eeprom_scl_oe>)  //        .scl_oe
+		.temp_scl_oe   (<connected-to-temp_scl_oe>)    //        .scl_oe
 	);
 

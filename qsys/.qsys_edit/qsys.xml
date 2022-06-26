@@ -991,7 +991,7 @@
 												</leaf>
 											</node>
 											<node nodeId="1372710005725" orientation="VERTICAL" divider="0.75">
-												<node nodeId="1372710005727" orientation="HORIZONTAL" divider="0.6183193900785428">
+												<node nodeId="1372710005727" orientation="HORIZONTAL" divider="0.654913728432108">
 													<node nodeId="1372710005733" orientation="VERTICAL" divider="0.75">
 														<node nodeId="1632565185633" orientation="VERTICAL" divider="0.6360759493670886">
 															<leaf id="-1" nodeId="1632565185631">
@@ -1289,16 +1289,12 @@
 								<property factory="SplitDockPlaceholderProperty">
 									<placeholder>dock.single.Details</placeholder>
 									<backup-path>
-										<node location="RIGHT" size="0.7781885397412199" id="1372710005721"/>
+										<node location="RIGHT" size="0.7389347336834209" id="1372710005721"/>
 										<node location="TOP" size="0.75" id="1372710005725"/>
-										<node location="RIGHT" size="0.38168060992145725" id="1372710005727"/>
+										<node location="RIGHT" size="0.34508627156789196" id="1372710005727"/>
 										<node location="TOP" size="0.6704331450094162" id="1389812802503"/>
 										<leaf id="1389812800464"/>
 									</backup-path>
-								</property>
-								<property factory="StackDockPropertyFactory">
-									<index>1</index>
-									<placeholder>dock.single.Details</placeholder>
 								</property>
 							</location>
 							<layout>

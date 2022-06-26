@@ -27,7 +27,7 @@
 //4         reserved
 //5         slave-enable  r/w
 //6         end-of-packet-value r/w
-//INPUT_CLOCK: 50000000
+//INPUT_CLOCK: 25000000
 //ISMASTER: 1
 //DATABITS: 8
 //TARGETCLOCK: 20000000
@@ -81,7 +81,6 @@ module qsys_SPI_MASTER (
 
 wire             E;
 reg              EOP;
-reg              MISO_reg;
 wire             MOSI;
 reg              ROE;
 reg              RRDY;
@@ -115,7 +114,6 @@ wire             p1_data_rd_strobe;
 wire    [ 15: 0] p1_data_to_cpu;
 wire             p1_data_wr_strobe;
 wire             p1_rd_strobe;
-wire    [  1: 0] p1_slowcount;
 wire             p1_wr_strobe;
 reg              rd_strobe;
 wire             readyfordata;
@@ -123,7 +121,6 @@ reg     [  7: 0] rx_holding_reg;
 reg     [  7: 0] shift_reg;
 wire             slaveselect_wr_strobe;
 wire             slowclock;
-reg     [  1: 0] slowcount;
 wire    [ 10: 0] spi_control;
 reg     [ 15: 0] spi_slave_select_holding_reg;
 reg     [ 15: 0] spi_slave_select_reg;
@@ -255,21 +252,8 @@ wire             write_tx_holding;
     end
 
 
-  // slowclock is active once every 2 system clock pulses.
-  assign slowclock = slowcount == 2'h1;
-
-  assign p1_slowcount = ({2 {(transmitting && !slowclock)}} & (slowcount + 1)) |
-    ({2 {(~((transmitting && !slowclock)))}} & 0);
-
-  // Divide counter for SPI clock.
-  always @(posedge clk or negedge reset_n)
-    begin
-      if (reset_n == 0)
-          slowcount <= 0;
-      else 
-        slowcount <= p1_slowcount;
-    end
-
+  // SPI clock is sys_clk/2.
+  assign slowclock = 1;
 
   // End-of-packet value register.
   always @(posedge clk or negedge reset_n)
@@ -345,7 +329,6 @@ wire             write_tx_holding;
           tx_holding_primed <= 0;
           transmitting <= 0;
           SCLK_reg <= 0;
-          MISO_reg <= 0;
         end
       else 
         begin
@@ -398,12 +381,8 @@ wire             write_tx_holding;
                   if (transmitting)
                       SCLK_reg <= ~SCLK_reg;
               if (SCLK_reg ^ 0 ^ 0)
-                begin
                   if (1)
-                      shift_reg <= {shift_reg[6 : 0], MISO_reg};
-                end
-              else 
-                MISO_reg <= ds_MISO;
+                      shift_reg <= {shift_reg[6 : 0], ds_MISO};
             end
         end
     end

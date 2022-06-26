@@ -252,7 +252,7 @@ reg              oe /* synthesis ALTERA_ATTRIBUTE = "FAST_OUTPUT_ENABLE_REGISTER
 wire             pending;
 wire             rd_strobe;
 reg     [  1: 0] rd_valid;
-reg     [ 12: 0] refresh_counter;
+reg     [ 11: 0] refresh_counter;
 reg              refresh_request;
 wire             rnw_match;
 wire             row_match;
@@ -302,9 +302,9 @@ wire             zs_we_n;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          refresh_counter <= 5000;
+          refresh_counter <= 2500;
       else if (refresh_counter == 0)
-          refresh_counter <= 1562;
+          refresh_counter <= 781;
       else 
         refresh_counter <= refresh_counter - 1'b1;
     end
@@ -375,7 +375,7 @@ wire             zs_we_n;
                   i_cmd <= {{1{1'b0}},3'h1};
                   i_refs <= i_refs + 1'b1;
                   i_state <= 3'b011;
-                  i_count <= 3;
+                  i_count <= 1;
                   // Count up init_refresh_commands
                   if (i_refs == 3'h1)
                       i_next <= 3'b111;
@@ -604,7 +604,7 @@ wire             zs_we_n;
                   ack_refresh_request <= 1'b1;
                   m_state <= 9'b000000100;
                   m_cmd <= {{1{1'b0}},3'h1};
-                  m_count <= 3;
+                  m_count <= 1;
                   m_next <= 9'b000000001;
               end // 9'b010000000 
           

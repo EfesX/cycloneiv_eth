@@ -5,12 +5,12 @@
   <columns>
    <connections preferredWidth="143" />
    <irq preferredWidth="34" />
-   <name preferredWidth="225" />
+   <name preferredWidth="209" />
    <inputclock preferredWidth="189" />
+   <description preferredWidth="284" />
   </columns>
  </systemtable>
- <library
-   expandedCategories="Library/Processors and Peripherals,Library/Processors and Peripherals/Peripherals,Library,Project,Library/Basic Functions,Library/Basic Functions/On Chip Memory,Library/Interface Protocols/Serial,Library/Interface Protocols" />
+ <library expandedCategories="Library,Project" />
  <window width="1366" height="740" x="0" y="0" />
  <generation synthesis="VHDL" block_symbol_file="0" />
 </preferences>
